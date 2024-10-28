@@ -1,7 +1,8 @@
-git config --global user.email "gawaranlouiseanne@gmail.com"
-
-
 <?php 
+//Mag assign pako -Kyle
+//Take note front features palang toh ah
+
+
 
 ?>
 

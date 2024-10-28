@@ -1,17 +1,15 @@
-git config --global user.email "gawaranlouiseanne@gmail.com"
-
-
 <?php 
+//Mag aassign pako -Kyle
+//Take note front features palang toh ah
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Log in & Sign up</title>
 </head>
 <body>
     
