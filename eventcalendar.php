@@ -1,7 +1,8 @@
 <?php 
 //Mag assign pako -Kyle
 //Take note front features palang toh ah
-
+/*Include a calendar of local events related to biodiversity, such as clean-up days, tree planting, 
+or educational workshops basta calendar toh */ 
 
 
 ?>

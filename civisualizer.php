@@ -1,6 +1,9 @@
 <?php 
 //Mag aassign pako -Kyle
 //Take note front features palang toh ah
+/*So basically guide to ng ma assign dito : 
+visualizes the potential impacts of climate change on local ecosystems, helping users understand the urgency of conservation efforts*/
+
 
 ?>
 
