@@ -3,6 +3,7 @@
 //Take note front features palang toh ah
 /* Basically log in sign up XD make sure na naka **** ganto ung password pag tinype ng user
 also don't forget the error handling*/
+
 ?>
 
 <!DOCTYPE html>
