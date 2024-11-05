@@ -1,8 +1,7 @@
 <?php
-
 //Kyle part
 //Code in development - Kyle
-//Bless this code XD
+
 
 $practices = [
     "Composting" => [

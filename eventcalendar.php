@@ -1,5 +1,8 @@
 <?php
-// Sample array of events with additional details including time
+//Kyle Part
+//Under development - Kyle
+
+
 $events = [
     [
         'date' => '2024-11-15',
@@ -15,14 +18,14 @@ $events = [
         'description' => 'Help us clean up the beach and protect marine biodiversity.',
         'details' => 'Location: Sunny Beach<br>Supplies provided.',
     ],
-    // More events... saka na natin dagdagan
+    // Saka na mag dagdag ng events
 ];
 
 // Get current month and year
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
-// Create an array of event dates for easy checking
+// Create an array of event dates
 $eventDates = array_map(function($event) {
     return date('j', strtotime($event['date']));
 }, $events);
@@ -34,6 +37,20 @@ function getPreviousMonth($month, $year) {
 
 function getNextMonth($month, $year) {
     return $month == 12 ? [1, $year + 1] : [$month + 1, $year];
+}
+
+// Function to calculate remaining days until the event
+function getRemainingDays($eventDate) {
+    $currentDate = new DateTime(); 
+    $eventDate = new DateTime($eventDate); 
+    $interval = $currentDate->diff($eventDate); 
+
+    // If event is in the past, return 0
+    if ($interval->invert == 1) {
+        return 0;
+    }
+
+    return $interval->days; // Return number of days left
 }
 ?>
 
@@ -98,25 +115,13 @@ function getNextMonth($month, $year) {
         <div class="event-table">
             <h2 style="text-align: center;">Upcoming Events</h2>
             <?php foreach ($events as $event): ?>
+                <?php $remainingDays = getRemainingDays($event['date']); ?>
                 <div class="event-card" style="border: 1px solid #ccc; margin: 10px; padding: 15px;">
                     <h3><?php echo htmlspecialchars($event['title']); ?></h3>
                     <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?></p>
                     <p><strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
                     <p><?php echo htmlspecialchars($event['description']); ?></p>
-                    <div id="countdown-<?php echo date('Ymd', strtotime($event['date'])); ?>"></div>
-                    <script>
-                        const eventDate = new Date("<?php echo $event['date']; ?>").getTime();
-                        const countdownElement = document.getElementById("countdown-<?php echo date('Ymd', strtotime($event['date'])); ?>");
-                        setInterval(function() {
-                            const now = new Date().getTime();
-                            const distance = eventDate - now;
-                            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                        }, 1000);
-                    </script>
+                    <p><strong>Remaining Days:</strong> <?php echo $remainingDays; ?> days</p>
                     <button onclick="openModal('<?php echo htmlspecialchars($event['details']); ?>')">More Details</button>
                 </div>
             <?php endforeach; ?>
