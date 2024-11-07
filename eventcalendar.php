@@ -9,7 +9,7 @@ $events = [
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
-// Extract event days (just the day of the month)
+// Extract event days
 $eventDays = array_map(function($event) {
     return date('j', strtotime($event['date']));
 }, $events);
@@ -21,12 +21,6 @@ function adjustMonth($month, $year, $direction) {
     } else {
         return [$month == 12 ? 1 : $month + 1, $month == 12 ? $year + 1 : $year];
     }
-}
-
-// Calculate remaining days to an event
-function getRemainingDays($eventDate) {
-    $interval = (new DateTime())->diff(new DateTime($eventDate));
-    return $interval->invert ? 0 : $interval->days;
 }
 ?>
 
@@ -50,59 +44,54 @@ function getRemainingDays($eventDate) {
 
     <header><h1>Biodiversity Events Calendar</h1></header>
 
-    <main>
-        <!-- Calendar Navigation -->
-        <div class="calendar-nav">
-            <a href="?month=<?php echo adjustMonth($month, $year, 'prev')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'prev')[1]; ?>">&#9664; Previous</a>
-            <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
-            <a href="?month=<?php echo adjustMonth($month, $year, 'next')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'next')[1]; ?>">Next &#9654;</a>
-        </div>
+    <!-- Calendar Navigation -->
+    <div class="calendar-nav">
+        <a href="?month=<?php echo adjustMonth($month, $year, 'prev')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'prev')[1]; ?>">&#9664; Previous</a>
+        <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
+        <a href="?month=<?php echo adjustMonth($month, $year, 'next')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'next')[1]; ?>">Next &#9654;</a>
+    </div>
 
-        <!-- Calendar Table -->
-        <table border="1">
-            <thead>
-                <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
-            </thead>
-            <tbody>
-                <?php
-                $firstDay = strtotime("$year-$month-01");
-                $totalDays = date('t', $firstDay);
-                $startingDay = date('w', $firstDay);
-                $day = 1;
+    <!-- Calendar Table -->
+    <table border="1">
+        <thead>
+            <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+        </thead>
+        <tbody>
+            <?php
+            $firstDay = strtotime("$year-$month-01");
+            $totalDays = date('t', $firstDay);
+            $startingDay = date('w', $firstDay);
+            $day = 1;
 
-                for ($row = 0; $row < 6; $row++) {
-                    echo '<tr>';
-                    for ($col = 0; $col < 7; $col++) {
-                        if ($row === 0 && $col < $startingDay || $day > $totalDays) {
-                            echo '<td></td>';
-                        } else {
-                            $class = in_array($day, $eventDays) ? 'event-day' : '';
-                            echo "<td class='$class' onclick='showEvent($day)'>$day</td>";
-                            $day++;
-                        }
+            for ($row = 0; $row < 6; $row++) {
+                echo '<tr>';
+                for ($col = 0; $col < 7; $col++) {
+                    if ($row === 0 && $col < $startingDay || $day > $totalDays) {
+                        echo '<td></td>';
+                    } else {
+                        $class = in_array($day, $eventDays) ? 'event-day' : '';
+                        echo "<td class='$class' onclick='showEvent($day)'>$day</td>";
+                        $day++;
                     }
-                    echo '</tr>';
                 }
-                ?>
-            </tbody>
-        </table>
+                echo '</tr>';
+            }
+            ?>
+        </tbody>
+    </table>
 
-        <!-- Upcoming Events -->
-        <section>
-            <h2>Upcoming Events</h2>
-            <?php foreach ($events as $event): ?>
-                <?php $remainingDays = getRemainingDays($event['date']); ?>
-                <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
-                    <h3><?php echo htmlspecialchars($event['title']); ?></h3>
-                    <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?></p>
-                    <p><strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
-                    <p><?php echo htmlspecialchars($event['description']); ?></p>
-                    <p><strong>Remaining Days:</strong> <?php echo $remainingDays; ?> days</p>
-                    <button onclick="showDetails('<?php echo htmlspecialchars($event['description']); ?>')">More Details</button>
-                </div>
-            <?php endforeach; ?>
-        </section>
-    </main>
+    <!-- Upcoming Events -->
+    <section>
+        <h2>Upcoming Events</h2>
+        <?php foreach ($events as $event): ?>
+            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                <h3><?php echo htmlspecialchars($event['title']); ?></h3>
+                <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?></p>
+                <p><strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
+                <p><?php echo htmlspecialchars($event['description']); ?></p>
+            </div>
+        <?php endforeach; ?>
+    </section>
 
     <!-- Modal for Event Details -->
     <div id="eventModal" class="modal">
@@ -114,17 +103,12 @@ function getRemainingDays($eventDate) {
     </div>
 
     <script>
-        function showDetails(details) {
-            document.getElementById('modalDetails').innerText = details;
-            document.getElementById('eventModal').style.display = "block";
+        function showEvent(day) {
+            alert("Event on " + day);
         }
 
         function closeModal() {
             document.getElementById('eventModal').style.display = "none";
-        }
-
-        function showEvent(day) {
-            alert("Event on " + day);
         }
     </script>
 </body>
