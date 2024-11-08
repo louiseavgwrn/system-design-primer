@@ -1,25 +1,39 @@
 <?php
-// Event data
+// Code still under development - Kyle
+// Note: The style I use for design are internet base - Kyle 
+// If you are viewing this feel free to consult me with your concern - Kyle
+
+
 $events = [
     ['date' => '2024-11-15', 'time' => '9 AM - 12 PM', 'title' => 'Tree Planting Day', 'description' => 'Join us for a community tree planting event at Green Park.'],
     ['date' => '2024-11-22', 'time' => '10 AM - 2 PM', 'title' => 'Beach Clean-Up', 'description' => 'Help us clean up the beach and protect marine biodiversity.'],
 ];
 
-// Get current month and year
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
+$dayClicked = isset($_GET['day']) ? (int)$_GET['day'] : null;
 
-// Extract event days
 $eventDays = array_map(function($event) {
     return date('j', strtotime($event['date']));
 }, $events);
 
-// Calculate previous and next month
 function adjustMonth($month, $year, $direction) {
     if ($direction == 'prev') {
         return [$month == 1 ? 12 : $month - 1, $month == 1 ? $year - 1 : $year];
     } else {
         return [$month == 12 ? 1 : $month + 1, $month == 12 ? $year + 1 : $year];
+    }
+}
+
+$eventForDay = null;
+if ($dayClicked) {
+    // Find the event for the clicked day
+    foreach ($events as $event) {
+        $eventDay = (int)date('j', strtotime($event['date']));
+        if ($eventDay === $dayClicked) {
+            $eventForDay = $event;
+            break;
+        }
     }
 }
 ?>
@@ -36,80 +50,69 @@ function adjustMonth($month, $year, $direction) {
         td { padding: 10px; text-align: center; cursor: pointer; }
         .event-day { background-color: #f0f0f0; }
         .calendar-nav { text-align: center; margin: 20px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
-        .modal-content { background-color: white; margin: 20% auto; padding: 20px; width: 40%; }
+        .event-details { margin-top: 20px; }
+        .event-details h2 { color: #2d6a4f; }
+        .event-details p { color: #555; }
     </style>
 </head>
 <body>
 
-    <header><h1>Biodiversity Events Calendar</h1></header>
+<header><h1>Biodiversity Events Calendar</h1></header>
 
-    <!-- Calendar Navigation -->
-    <div class="calendar-nav">
-        <a href="?month=<?php echo adjustMonth($month, $year, 'prev')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'prev')[1]; ?>">&#9664; Previous</a>
-        <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
-        <a href="?month=<?php echo adjustMonth($month, $year, 'next')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'next')[1]; ?>">Next &#9654;</a>
-    </div>
+<div class="calendar-nav">
+    <a href="?month=<?php echo adjustMonth($month, $year, 'prev')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'prev')[1]; ?>">&#9664; Previous</a>
+    <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
+    <a href="?month=<?php echo adjustMonth($month, $year, 'next')[0]; ?>&year=<?php echo adjustMonth($month, $year, 'next')[1]; ?>">Next &#9654;</a>
+</div>
 
-    <!-- Calendar Table -->
-    <table border="1">
-        <thead>
-            <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
-        </thead>
-        <tbody>
-            <?php
-            $firstDay = strtotime("$year-$month-01");
-            $totalDays = date('t', $firstDay);
-            $startingDay = date('w', $firstDay);
-            $day = 1;
+<table border="1">
+    <thead>
+        <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+    </thead>
+    <tbody>
+        <?php
+        $firstDay = strtotime("$year-$month-01");
+        $totalDays = date('t', $firstDay);
+        $startingDay = date('w', $firstDay);
+        $day = 1;
 
-            for ($row = 0; $row < 6; $row++) {
-                echo '<tr>';
-                for ($col = 0; $col < 7; $col++) {
-                    if ($row === 0 && $col < $startingDay || $day > $totalDays) {
-                        echo '<td></td>';
-                    } else {
-                        $class = in_array($day, $eventDays) ? 'event-day' : '';
-                        echo "<td class='$class' onclick='showEvent($day)'>$day</td>";
-                        $day++;
-                    }
+        for ($row = 0; $row < 6; $row++) {
+            echo '<tr>';
+            for ($col = 0; $col < 7; $col++) {
+                if ($row === 0 && $col < $startingDay || $day > $totalDays) {
+                    echo '<td></td>';
+                } else {
+                    $class = in_array($day, $eventDays) ? 'event-day' : '';
+                    echo "<td class='$class'>
+                            <a href='?month=$month&year=$year&day=$day'>$day</a>
+                          </td>";
+                    $day++;
                 }
-                echo '</tr>';
             }
-            ?>
-        </tbody>
-    </table>
+            echo '</tr>';
+        }
+        ?>
+    </tbody>
+</table>
 
-    <!-- Upcoming Events -->
-    <section>
-        <h2>Upcoming Events</h2>
-        <?php foreach ($events as $event): ?>
-            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
-                <h3><?php echo htmlspecialchars($event['title']); ?></h3>
-                <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?></p>
-                <p><strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
-                <p><?php echo htmlspecialchars($event['description']); ?></p>
-            </div>
-        <?php endforeach; ?>
-    </section>
-
-    <!-- Modal for Event Details -->
-    <div id="eventModal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal()" style="cursor: pointer; font-size: 28px; font-weight: bold;">&times;</span>
-            <h2>Event Details</h2>
-            <p id="modalDetails"></p>
-        </div>
+<?php 
+if ($eventForDay): ?>
+    <div class="event-details">
+        <h2>Event on <?php echo $eventForDay['date']; ?></h2>
+        <p><strong>Title:</strong> <?php echo htmlspecialchars($eventForDay['title']); ?></p>
+        <p><strong>Time:</strong> <?php echo htmlspecialchars($eventForDay['time']); ?></p>
+        <p><strong>Description:</strong> <?php echo htmlspecialchars($eventForDay['description']); 
+        ?></p>
     </div>
 
-    <script>
-        function showEvent(day) {
-            alert("Event on " + day);
-        }
+<?php 
+elseif 
+($dayClicked): 
+?>
+ <p>No event scheduled for this day.</p>
+<?php 
+endif; 
+?>
 
-        function closeModal() {
-            document.getElementById('eventModal').style.display = "none";
-        }
-    </script>
 </body>
 </html>

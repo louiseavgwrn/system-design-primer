@@ -1,9 +1,9 @@
 <?php
-//Under development - Kyle
+// Code still under development - Kyle
+// Note: Script for design are internet base - Kyle 
+// If you are viewing this feel free to consult me with your concern - Kyle
 
 
-
-// Sustainable practices data
 $practices = [
     "Composting" => [
         "description" => "Reduces waste and creates nutrient-rich soil by breaking down organic materials.",
@@ -70,7 +70,7 @@ $practices = [
     <title>Sustainable Practices Guide</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        button { margin: 5px; padding: 10px; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
         .practice-content { display: none; margin-top: 10px; }
     </style>
 </head>
@@ -83,17 +83,18 @@ $practices = [
     <main>
         <div>
             <?php foreach ($practices as $title => $practice): ?>
-                <button onclick="toggleContent('<?php echo strtolower(str_replace(' ', '-', $title)); ?>')">
+                <button class="toggle-button" data-practice-id="<?php echo strtolower(str_replace(' ', '-', $title)); ?>">
                     <?php echo $title; ?>
                 </button>
             <?php endforeach; ?>
         </div>
         
-        <div>
+
+        <div id="practice-details">
             <?php foreach ($practices as $title => $practice): ?>
                 <div id="<?php echo strtolower(str_replace(' ', '-', $title)); ?>" class="practice-content">
                     <h3><?php echo $title; ?></h3>
-                    <img src="<?php echo $practice['image']; ?>" alt="<?php echo $title; ?>" width="300">
+                    <img src="<?php echo $practice['image']; ?>" alt="<?php echo $title . ' practice'; ?>" width="300">
                     <p><strong>Description:</strong> <?php echo $practice['description']; ?></p>
                     <p><strong>Benefits:</strong> <?php echo $practice['benefits']; ?></p>
                     <p><strong>Tips:</strong></p>
@@ -114,14 +115,33 @@ $practices = [
     </main>
 
     <footer>
-        <p>&copy; 2024 Sustainable Practices Guide Gawaran_Libera_Aying</p>
+        <p>&copy; 2024 Sustainable Practices Guide</p>
     </footer>
 
+
+
     <script>
-        function toggleContent(id) {
-            var content = document.getElementById(id);
-            content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
-        }
+        // Add event listeners for toggling content visibility
+        document.querySelectorAll('.toggle-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const practiceId = this.getAttribute('data-practice-id');
+                const content = document.getElementById(practiceId);
+                
+                // Hide all content sections
+                const allContent = document.querySelectorAll('.practice-content');
+                allContent.forEach(item => item.style.display = 'none');
+                
+                // Toggle the clicked content
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                } else {
+                    content.style.display = "none";
+                }
+            });
+        });
     </script>
+
+
+
 </body>
 </html>
