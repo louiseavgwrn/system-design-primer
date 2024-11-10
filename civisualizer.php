@@ -2,16 +2,6 @@
 
 $currentYear = date("Y");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        
-        file_put_contents("subscribers.txt", $email . "\n", FILE_APPEND);
-        $message = "Thank you for subscribing!";
-    } else {
-        $message = "Please enter a valid email address.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -98,25 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
         <li><strong>Share Knowledge:</strong> Spread the word about the importance of sustainability and biodiversity conservation.</li>
     </ul>
     <a href="https://www.globalconservation.org" target="_blank">Learn More & Get Involved</a>
-</section>
-
-<section class="form-container">
-    <h2>Sign Up for Our Newsletter</h2>
-    <p>Stay updated with the latest news and tips on sustainability and biodiversity conservation!</p>
-    
-    <form method="POST" action="">
-        <input type="email" name="email" placeholder="Enter your email" required>
-        <input type="submit" value="Subscribe">
-    </form>
+</section> 
     
     <?php
     if (isset($message)) {
         echo "<p>$message</p>";
     }
     ?>
-</section>
 
 <footer>
+    <p>Stay updated with the latest news and tips on sustainability and biodiversity conservation!</p>
     <p>&copy; <?php echo $currentYear; ?> Sustainable Future Organization | All Rights Reserved</p>
 </footer>
 
