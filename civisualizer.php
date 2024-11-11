@@ -88,13 +88,13 @@ $currentYear = date("Y");
         <li><strong>Share Knowledge:</strong> Spread the word about the importance of sustainability and biodiversity conservation.</li>
     </ul>
     <a href="https://www.globalconservation.org" target="_blank">Learn More & Get Involved</a>
-</section>
+</section> 
+    
     <?php
     if (isset($message)) {
         echo "<p>$message</p>";
     }
     ?>
-</section>
 
 <footer>
     <p>Stay updated with the latest news and tips on sustainability and biodiversity conservation!</p>
