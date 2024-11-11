@@ -111,7 +111,7 @@ $practices = [
                         }
                         ?>
                     </ul>
-                    
+
                     <p><strong>Resources:</strong></p>
                     <ul>
                         <?php 
