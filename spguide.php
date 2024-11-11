@@ -1,7 +1,6 @@
 <?php
-// Code still under development - Kyle
-// Note: Script for design are internet base - Kyle 
-// If you are viewing this feel free to consult me with your concern - Kyle
+//Code still under development - Kyle
+//Note: Script are internet base, please dm me for your concern - Kyle
 
 
 $practices = [
@@ -82,16 +81,21 @@ $practices = [
 
     <main>
         <div>
-            <?php foreach ($practices as $title => $practice): ?>
+            <?php 
+            foreach ($practices as $title => $practice) {
+            ?>
                 <button class="toggle-button" data-practice-id="<?php echo strtolower(str_replace(' ', '-', $title)); ?>">
                     <?php echo $title; ?>
                 </button>
-            <?php endforeach; ?>
+            <?php 
+            }
+            ?>
         </div>
-        
 
         <div id="practice-details">
-            <?php foreach ($practices as $title => $practice): ?>
+            <?php 
+            foreach ($practices as $title => $practice) {
+            ?>
                 <div id="<?php echo strtolower(str_replace(' ', '-', $title)); ?>" class="practice-content">
                     <h3><?php echo $title; ?></h3>
                     <img src="<?php echo $practice['image']; ?>" alt="<?php echo $title . ' practice'; ?>" width="300">
@@ -99,18 +103,29 @@ $practices = [
                     <p><strong>Benefits:</strong> <?php echo $practice['benefits']; ?></p>
                     <p><strong>Tips:</strong></p>
                     <ul>
-                        <?php foreach ($practice['tips'] as $tip): ?>
+                        <?php 
+                        foreach ($practice['tips'] as $tip) {
+                        ?>
                             <li><?php echo $tip; ?></li>
-                        <?php endforeach; ?>
+                        <?php 
+                        }
+                        ?>
                     </ul>
+                    
                     <p><strong>Resources:</strong></p>
                     <ul>
-                        <?php foreach ($practice['resources'] as $name => $link): ?>
+                        <?php 
+                        foreach ($practice['resources'] as $name => $link) {
+                        ?>
                             <li><a href="<?php echo $link; ?>" target="_blank"><?php echo $name; ?></a></li>
-                        <?php endforeach; ?>
+                        <?php 
+                        }
+                        ?>
                     </ul>
                 </div>
-            <?php endforeach; ?>
+            <?php 
+            }
+            ?>
         </div>
     </main>
 
@@ -118,20 +133,15 @@ $practices = [
         <p>&copy; 2024 Sustainable Practices Guide</p>
     </footer>
 
-
-
     <script>
-        // Add event listeners for toggling content visibility
         document.querySelectorAll('.toggle-button').forEach(button => {
             button.addEventListener('click', function() {
                 const practiceId = this.getAttribute('data-practice-id');
                 const content = document.getElementById(practiceId);
                 
-                // Hide all content sections
                 const allContent = document.querySelectorAll('.practice-content');
                 allContent.forEach(item => item.style.display = 'none');
                 
-                // Toggle the clicked content
                 if (content.style.display === "none" || content.style.display === "") {
                     content.style.display = "block";
                 } else {
@@ -140,8 +150,6 @@ $practices = [
             });
         });
     </script>
-
-
 
 </body>
 </html>
