@@ -1,8 +1,4 @@
 <?php
-//Code still under development - Kyle
-//Note: Script are internet base, please dm me for your concern - Kyle
-
-
 $practices = [
     "Composting" => [
         "description" => "Reduces waste and creates nutrient-rich soil by breaking down organic materials.",
