@@ -15,6 +15,7 @@
         <div>
             <button onclick="window.location.href='spguide.php'">Sustainable Practices Guide</button>
             <button onclick="window.location.href='eventcalendar.php'">Event Calendar</button>
+            <button onclick="window.location.href='plantdata.php'">Land Section</button>
         </div>
     </main>
 
