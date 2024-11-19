@@ -1,3 +1,8 @@
+<?php
+//Script and style are internet based - Kyle
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -517,7 +522,7 @@
             }
         }
     </script>
-    
+
     <footer>
         <p>🌿 Protect and nurture our plants. Every leaf counts! 🌱</p>
     </footer>
