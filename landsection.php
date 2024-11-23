@@ -82,34 +82,27 @@
     </section>
 
 
-     <section>
+    
+    <section>
         <button class="toggle-button" onclick="toggleForm()">Create My Owned Plant</button>
-        
-     
         <div id="createPlantForm">
-            <h2>My Current Owned Plant</h2>
+            <h2>Create a New Plant</h2>
             <form method="POST" action="plantdata.php">
                 <label for="name">Plant Name:</label>
                 <input type="text" name="name" required>
-                
+
                 <label for="scientific_name">Scientific Name:</label>
                 <input type="text" name="scientific_name" required>
-                
+
                 <label for="region">Region:</label>
                 <input type="text" name="region" required>
-                
+
                 <label for="type">Type:</label>
                 <input type="text" name="type" required>
-                
-                <label for="latitude">Latitude:</label>
-                <input type="number" name="latitude" step="any" required>
-                
-                <label for="longitude">Longitude:</label>
-                <input type="number" name="longitude" step="any" required>
-                
+
                 <label for="description">Description:</label>
                 <textarea name="description" required></textarea>
-                
+
                 <input type="submit" value="Create Plant">
             </form>
         </div>
@@ -126,66 +119,59 @@
                     <th>Scientific Name</th>
                     <th>Region</th>
                     <th>Type</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
                     <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    require_once 'dbConnect.php';
-                    require_once 'plantcrud.php';
+                require_once 'dbConnect.php';
+                require_once 'plantcrud.php';
 
-                    $database = new Database();
-                    $db = $database->getConnect();
+                $database = new Database();
+                $db = $database->getConnect();
 
-                    $plant = new Plant($db);
+                $plant = new Plant($db);
 
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $plant->name = $_POST['name'];
-                        $plant->scientific_name = $_POST['scientific_name'];
-                        $plant->region = $_POST['region'];
-                        $plant->type = $_POST['type'];
-                        $plant->latitude = $_POST['latitude'];
-                        $plant->longitude = $_POST['longitude'];
-                        $plant->description = $_POST['description'];
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $plant->name = $_POST['name'];
+                    $plant->scientific_name = $_POST['scientific_name'];
+                    $plant->region = $_POST['region'];
+                    $plant->type = $_POST['type'];
+                    $plant->description = $_POST['description'];
 
-                        if ($plant->create()) {
-                            echo "<div class='floating-plant'>🌿</div>";
-                            echo "Plant created successfully!";
-                        } else {
-                            echo "Error creating plant.";
-                        }
+                    if ($plant->create()) {
+                        echo "<div class='floating-plant'>🌿 Plant created successfully!</div>";
+                    } else {
+                        echo "<div>Error creating plant.</div>";
                     }
+                }
 
-                    if (isset($_GET['delete_id'])) {
-                        $plant->id = $_GET['delete_id'];
-                        if ($plant->delete()) {
-                            echo "Plant deleted successfully!";
-                        } else {
-                            echo "Error deleting plant.";
-                        }
+                if (isset($_GET['delete_id'])) {
+                    $plant->id = $_GET['delete_id'];
+                    if ($plant->delete()) {
+                        echo "<div>Plant deleted successfully!</div>";
+                    } else {
+                        echo "<div>Error deleting plant.</div>";
                     }
+                }
 
-                    $stmt = $plant->read();
-                    $num = $stmt->rowCount();
-
-                    if ($num > 0) {
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['scientific_name']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['region']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['type']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['latitude']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['longitude']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                            echo "<td><a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a></td>";
-                            echo "</tr>";
-                        }
+                $stmt = $plant->read();
+                if ($stmt && $stmt->rowCount() > 0) {
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['scientific_name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['region']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['description']) . "</td>";
+                        echo "<td><a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a></td>";
+                        echo "</tr>";
                     }
+                } else {
+                    echo "<tr><td colspan='7'>No plants found.</td></tr>";
+                }
                 ?>
             </tbody>
         </table>
@@ -349,30 +335,23 @@
     </table>
 </section>
 
-
 <script>
-    $(document).ready(function() {
-        $('#plantInfoTable').DataTable();
-    });
-</script>
-
-    <script>
         $(document).ready(function() {
             $('#plantTable').DataTable();
         });
 
+        $(document).ready(function() {
+            $('#plantInfoTable').DataTable();
+        });
+
         function toggleForm() {
             const form = document.getElementById('createPlantForm');
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
+            form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
         }
     </script>
 
     <footer>
-        <p>🌿 Protect and nurture our plants. Every leaf counts! 🌱</p>
+        <p>Protect and nurture our plants. Every leaf counts!</p>
     </footer>
 
 </body>

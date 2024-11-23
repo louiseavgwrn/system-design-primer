@@ -9,8 +9,6 @@ class Plant {
     public $scientific_name;
     public $region;
     public $type;
-    public $latitude;
-    public $longitude;
     public $description;
     
     public function __construct($db) {
@@ -18,15 +16,13 @@ class Plant {
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (name, scientific_name, region, type, latitude, longitude, description)
-                  VALUES (:name, :scientific_name, :region, :type, :latitude, :longitude, :description)";
+        $query = "INSERT INTO " . $this->table_name . " (name, scientific_name, region, type, description)
+                  VALUES (:name, :scientific_name, :region, :type, :description)";
         $stmt = $this->connect->prepare($query);
         $stmt->bindParam(':name', $this->name);
         $stmt->bindParam(':scientific_name', $this->scientific_name);
         $stmt->bindParam(':region', $this->region);
         $stmt->bindParam(':type', $this->type);
-        $stmt->bindParam(':latitude', $this->latitude);
-        $stmt->bindParam(':longitude', $this->longitude);
         $stmt->bindParam(':description', $this->description);
 
         if ($stmt->execute()) {
@@ -36,7 +32,7 @@ class Plant {
     }
 
     public function read() {
-        $query = "SELECT id, name, scientific_name, region, type, latitude, longitude, description FROM " . $this->table_name;
+        $query = "SELECT id, name, scientific_name, region, type, description FROM " . $this->table_name;
         $stmt = $this->connect->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -48,8 +44,6 @@ class Plant {
                   scientific_name = :scientific_name,
                   region = :region,
                   type = :type,
-                  latitude = :latitude,
-                  longitude = :longitude,
                   description = :description 
                   WHERE id = :id";
 
@@ -58,8 +52,6 @@ class Plant {
         $stmt->bindParam(':scientific_name', $this->scientific_name);
         $stmt->bindParam(':region', $this->region);
         $stmt->bindParam(':type', $this->type);
-        $stmt->bindParam(':latitude', $this->latitude);
-        $stmt->bindParam(':longitude', $this->longitude);
         $stmt->bindParam(':description', $this->description);
         $stmt->bindParam(':id', $this->id);
 
