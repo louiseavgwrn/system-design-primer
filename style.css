@@ -1,0 +1,103 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e9f7e7; /* Light green background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header Section */
+h1 {
+    font-size: 3em;
+    color: #4CAF50; /* Dark Green for title */
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+/* Form and Container Styles */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    border: 2px solid #4CAF50;
+}
+
+/* Labels and Inputs */
+label {
+    font-size: 1.2em;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Button */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #45a049;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    font-size: 1em;
+    color: #4CAF50;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

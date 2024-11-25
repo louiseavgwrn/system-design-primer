@@ -1,0 +1,54 @@
+<?php
+session_start();
+require 'db.php'; // Include the database connection
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Check if the user exists in the database
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        // Set session variables
+        $_SESSION['username'] = $user['username'];
+        header("Location: profile.php"); // Redirect to the profile page
+        exit;
+    } else {
+        $error = "Invalid username or password.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Green Guardians</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Login to Green Guardians</h1>
+    <?php if (isset($error)): ?>
+        <div class="error"><?php echo $error; ?></div>
+    <?php endif; ?>
+
+    <form method="post" action="login.php">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
+    </footer>
+</body>
+</html>
