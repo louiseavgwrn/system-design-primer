@@ -1,6 +1,4 @@
 <?php
-//Still under development - Kyle
-
 
 $events = [
     [
