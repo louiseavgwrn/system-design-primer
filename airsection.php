@@ -135,6 +135,12 @@ session_start();
         <p>Test your knowledge about air purification and environmental care.</p>
         <a href="airquiz.php" class="btn">Start Air Quality Quiz</a>
     </section>
+
+    <section>
+        <h2>Majestic Trees!</h2>
+        <p>Meet some known trees and plant them!.</p>
+        <a href="aircity.php" class="btn">Plant Me!</a>
+    </section>
 </div>
 
 </body>
