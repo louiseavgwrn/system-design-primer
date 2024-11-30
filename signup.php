@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - Green Guardians</title>
+    <title>Sign up - Green Guardians</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="form-container">
-        <h1>Signup for Green Guardians</h1>
+        <h1>Sign up for Green Guardians</h1>
         <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
         
         <form method="post" action="signup.php">
