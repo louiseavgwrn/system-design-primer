@@ -2,6 +2,7 @@
 <?php
 
 $currentYear = date("Y");
+?>
 
 
 <!DOCTYPE html>
@@ -48,7 +49,7 @@ $currentYear = date("Y");
     </div>
 </main>
 
-<section id="introduction">
+
     <h2>Why Sustainability and Biodiversity Matter</h2>
     <p>Our planet is home to a rich and intricate web of life, where every organism—whether plant, animal, or microorganism—plays a vital role in the stability and health of ecosystems. Biodiversity, which refers to the variety of life on Earth, encompasses much more than just the millions of different species we share the planet with. It includes the genetic variations within species, the different types of ecosystems (marine and terrestrial), and the interdependent relationships between all forms of life.</p>
     <p>From the diversity of crop varieties that provide our food, to the unique ecosystems such as forests, wetlands, coastal areas, and deserts that support life, biodiversity is essential for the stability of the natural world. These ecosystems are the foundation of the resources we rely on every day, such as clean water, air, and fertile land.</p>
@@ -56,7 +57,7 @@ $currentYear = date("Y");
     <p>Embracing sustainability means recognizing that our actions today must not compromise the ability of future generations to meet their needs. By protecting biodiversity, we safeguard the stability of ecosystems that provide us with food, clean water, and air, as well as the ecological services that maintain our climate and natural balance. To ensure a sustainable future, we must strive to live in harmony with nature, preserving both the species and ecosystems that are essential for our survival and well-being.</p>
 </section>
 
-<section id="sustainable-practices">
+
     <h2>Sustainable Practices You Can Adopt</h2>
     <ul>
         <li><strong>Reduce, Reuse, Recycle:</strong> Minimize waste by reusing items and recycling materials.</li>
@@ -78,7 +79,7 @@ $currentYear = date("Y");
     </ul>
 </section>
 
-<section id="get-involved">
+
     <h2>How You Can Help</h2>
     <p>Join the movement to protect biodiversity and promote sustainability. Here are a few simple ways to get started:</p>
     <ul>
@@ -87,7 +88,7 @@ $currentYear = date("Y");
         <li><strong>Volunteer:</strong> Get involved with local environmental groups and conservation projects.</li>
         <li><strong>Share Knowledge:</strong> Spread the word about the importance of sustainability and biodiversity conservation.</li>
     </ul>
-    <a href="https://www.globalconservation.org" target="_blank">Learn More & Get Involved</a>
+  
 </section> 
     
     <?php
