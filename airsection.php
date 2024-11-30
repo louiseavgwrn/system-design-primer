@@ -9,6 +9,19 @@ session_start();
     <title>Air Purification Tips</title>
 </head>
 <body>
+
+
+<main>
+    <div class="section-container">
+
+        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='landsection.php'">Land Section</button>
+        <button onclick="window.location.href='watersection.php'">Water Section</button>
+        <button onclick="window.location.href='lifesection.php'">Living Section</button>
+
+    </div>
+</main>
+
 <header>
     <h1>Air Purification Tips</h1>
 </header>
