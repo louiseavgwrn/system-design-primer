@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 
@@ -41,7 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+=======
+<?php 
+//Yanz Part
+//Take note front features palang toh ah
+/* Basically log in sign up feature make it more functional
+also don't forget the error handling*/
+//If possible wag muna mag lagay design para d kau ma stress XD
+//Message sa Gc if may katanongan - Kyle
+>>>>>>> 0bfec16eb8cea4cff387ba3ebb7cdd84b23681ba
 ?>
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">

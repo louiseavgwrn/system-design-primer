@@ -1,40 +1,81 @@
 <?php
-// Sample array of events with additional details including time
+
 $events = [
     [
         'date' => '2024-11-15',
         'time' => '9 AM - 12 PM',
         'title' => 'Tree Planting Day',
-        'description' => 'Join us for a community tree planting event at Green Park.',
-        'details' => 'Location: Green Park<br>Bring gloves and water.',
+        'description' => 'Join us for a hands-on community tree planting event at Green Park. We’ll be planting native trees to help improve local air quality, provide habitat for wildlife, and enhance the park’s beauty. No prior gardening experience is necessary—just bring your enthusiasm and willingness to contribute to a greener future. All tools, gloves, and refreshments will be provided, but feel free to bring your own. Let’s make our community greener together!'
     ],
     [
         'date' => '2024-11-22',
         'time' => '10 AM - 2 PM',
         'title' => 'Beach Clean-Up',
-        'description' => 'Help us clean up the beach and protect marine biodiversity.',
-        'details' => 'Location: Sunny Beach<br>Supplies provided.',
+        'description' => 'Help protect our beautiful coastline by joining us for a beach clean-up event at Oceanview Beach. We’ll be collecting litter, plastic waste, and other debris to prevent pollution from reaching our oceans and harming marine life. Volunteers of all ages are welcome! Bags and gloves will be provided, but feel free to bring your own reusable containers or gloves. Afterward, enjoy a free beachside picnic to celebrate our efforts in preserving marine biodiversity.'
     ],
-    // More events... saka na natin dagdagan
+    [
+        'date' => '2024-12-05',
+        'time' => '6 PM - 9 PM',
+        'title' => 'Holiday Fundraiser Gala',
+        'description' => 'Celebrate the holiday season while supporting local charities at our annual Holiday Fundraiser Gala. Enjoy an elegant evening of gourmet dining, live entertainment, and silent auctions featuring exclusive items and experiences. Proceeds from the event will go to support community projects, including food banks, shelters, and youth programs. This is a great opportunity to give back and make a positive impact in our community while celebrating the spirit of the season with friends and colleagues.'
+    ],
+    [
+        'date' => '2024-12-10',
+        'time' => '2 PM - 5 PM',
+        'title' => 'Winter Clothing Drive',
+        'description' => 'As the cold weather sets in, we are collecting gently used winter coats, hats, scarves, gloves, and other cold-weather clothing to distribute to individuals and families in need. Join us at the Winter Clothing Drive at the Community Center, where we will sort and organize donations. Your contributions will help those in our community who struggle to stay warm during the winter months. Donations can be dropped off throughout the event, and volunteers are welcome to help with collection and sorting. Together, we can make sure no one is left out in the cold this winter.'
+    ],
+    [
+        'date' => '2024-12-20',
+        'time' => '11 AM - 3 PM',
+        'title' => 'Christmas Market',
+        'description' => 'Get into the holiday spirit at our community Christmas Market, where you’ll find unique gifts from local artisans, handmade crafts, festive foods, and holiday decorations. In addition to shopping, enjoy live entertainment, a visit from Santa Claus, and a hot cocoa bar. This family-friendly event offers something for everyone, from holiday-themed games and activities for children to a cozy atmosphere perfect for getting into the holiday mood. Support small businesses and local makers while enjoying a fun and festive day with your loved ones.'
+    ],
+    [
+        'date' => '2025-01-10',
+        'time' => '9 AM - 4 PM',
+        'title' => 'New Year Health Workshop',
+        'description' => 'Kickstart the new year with our comprehensive health and wellness workshop designed to help you achieve your personal health goals. The day will feature expert speakers covering topics such as nutrition, fitness, mental wellness, and stress management. Join interactive sessions on meal planning, exercise routines, and mindfulness practices. Whether you’re looking to adopt healthier eating habits, improve your fitness, or learn how to manage stress, this workshop provides practical tips and resources to get you on the right track for a healthier, happier year ahead.'
+    ]
 ];
 
-// Get current month and year
-$month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
-$year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
+$month = (int)($_GET['month'] ?? date('n'));
+$year = (int)($_GET['year'] ?? date('Y'));
+$dayClicked = (int)($_GET['day'] ?? null);
+$view = $_GET['view'] ?? 'calendar';
+$eventDays = [];
+$filteredEvents = [];
 
-// Create an array of event dates for easy checking
-$eventDates = array_map(function($event) {
-    return date('j', strtotime($event['date']));
-}, $events);
+foreach ($events as $event) {
+    $eventDate = strtotime($event['date']);
+    $eventMonth = (int)date('n', $eventDate);
+    $eventYear = (int)date('Y', $eventDate);
 
-// Navigation functions
-function getPreviousMonth($month, $year) {
-    return $month == 1 ? [12, $year - 1] : [$month - 1, $year];
+    if ($eventMonth === $month && $eventYear === $year) {
+        $eventDays[] = (int)date('j', $eventDate);
+        $filteredEvents[] = $event;
+    }
 }
 
-function getNextMonth($month, $year) {
-    return $month == 12 ? [1, $year + 1] : [$month + 1, $year];
+function adjustMonth($month, $year, $direction) {
+    if ($direction == 'prev') {
+        return [$month == 1 ? 12 : $month - 1, $month == 1 ? $year - 1 : $year];
+    } else {
+        return [$month == 12 ? 1 : $month + 1, $month == 12 ? $year + 1 : $year];
+    }
 }
+
+$eventForDay = null;
+if ($dayClicked) {
+    foreach ($filteredEvents as $event) {
+        $eventDay = (int)date('j', strtotime($event['date']));
+        if ($eventDay === $dayClicked) {
+            $eventForDay = $event;
+            break;
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,111 +84,106 @@ function getNextMonth($month, $year) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biodiversity Events Calendar</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        td { padding: 10px; text-align: center; cursor: pointer; }
+        .event-day { background-color: #f0f0f0; }
+        .calendar-nav { text-align: center; margin: 20px; }
+        .event-details { margin-top: 20px; }
+        .event-details h2 { color: #2d6a4f; }
+        .event-details p { color: #555; }
+        .tab { padding: 10px; cursor: pointer; display: inline-block; margin: 5px; }
+        .active { background-color: #2d6a4f; color: white; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Biodiversity Events Calendar</h1>
-    </header>
-    <main>
-        <div>
-            <h2 style="text-align: center;">Calendar</h2>
-            <div class="calendar-controls" style="text-align: center; margin: 20px;">
-                <a href="?month=<?php echo getPreviousMonth($month, $year)[0]; ?>&year=<?php echo getPreviousMonth($month, $year)[1]; ?>">&#9664; Previous</a>
-                <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
-                <a href="?month=<?php echo getNextMonth($month, $year)[0]; ?>&year=<?php echo getNextMonth($month, $year)[1]; ?>">Next &#9654;</a>
-            </div>
-            <table border="1" style="width: 100%; text-align: center;">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $firstDay = strtotime("first day of this month", strtotime("$year-$month-01"));
-                    $totalDays = date('t', $firstDay);
-                    $startingDay = date('w', $firstDay);
-                    $day = 1;
 
-                    for ($row = 0; $row < 6; $row++):
-                        echo '<tr>';
-                        for ($col = 0; $col < 7; $col++):
-                            if ($row === 0 && $col < $startingDay) {
-                                echo '<td></td>'; // Empty cell before first day
-                            } elseif ($day > $totalDays) {
-                                echo '<td></td>'; // Empty cell after last day
-                            } else {
-                                $class = in_array($day, $eventDates) ? 'event-day' : '';
-                                echo "<td class='$class' onclick='alert(\"Event on $year-$month-$day\")'>$day</td>";
-                                $day++;
-                            }
-                        endfor;
-                        echo '</tr>';
-                    endfor;
-                    ?>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="event-table">
-            <h2 style="text-align: center;">Upcoming Events</h2>
-            <?php foreach ($events as $event): ?>
-                <div class="event-card" style="border: 1px solid #ccc; margin: 10px; padding: 15px;">
-                    <h3><?php echo htmlspecialchars($event['title']); ?></h3>
-                    <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?></p>
-                    <p><strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
-                    <p><?php echo htmlspecialchars($event['description']); ?></p>
-                    <div id="countdown-<?php echo date('Ymd', strtotime($event['date'])); ?>"></div>
-                    <script>
-                        const eventDate = new Date("<?php echo $event['date']; ?>").getTime();
-                        const countdownElement = document.getElementById("countdown-<?php echo date('Ymd', strtotime($event['date'])); ?>");
-                        setInterval(function() {
-                            const now = new Date().getTime();
-                            const distance = eventDate - now;
-                            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                        }, 1000);
-                    </script>
-                    <button onclick="openModal('<?php echo htmlspecialchars($event['details']); ?>')">More Details</button>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </main>
+<header><h1>Biodiversity Events Calendar</h1></header>
 
-    <!-- Modal for Event Details -->
-    <div id="eventModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
-            <span onclick="closeModal()" style="float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
-            <h2>Event Details</h2>
-            <p id="modalDetails"></p>
-        </div>
-    </div>
+<div class="calendar-nav">
+    <?php 
+        $prevMonth = adjustMonth($month, $year, 'prev');
+        $nextMonth = adjustMonth($month, $year, 'next');
+    ?>
+    <a href="?view=calendar&month=<?php echo $prevMonth[0]; ?>&year=<?php echo $prevMonth[1]; ?>">&#9664; Previous</a>
+    <span><?php echo date('F Y', strtotime("$year-$month-01")); ?></span>
+    <a href="?view=calendar&month=<?php echo $nextMonth[0]; ?>&year=<?php echo $nextMonth[1]; ?>">Next &#9654;</a>
+</div>
 
-    <script>
-        function openModal(details) {
-            document.getElementById('modalDetails').innerHTML = details;
-            document.getElementById('eventModal').style.display = "block";
-        }
+<div>
+    <a href="?view=calendar&month=<?php echo $month; ?>&year=<?php echo $year; ?>" class="tab <?php echo $view === 'calendar' ? 'active' : ''; ?>">Calendar</a>
+    <a href="?view=list" class="tab <?php echo $view === 'list' ? 'active' : ''; ?>">All Events</a>
+</div>
 
-        function closeModal() {
-            document.getElementById('eventModal').style.display = "none";
-        }
+<?php if ($view === 'calendar') { ?>
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('eventModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        $firstDay = strtotime("$year-$month-01");
+        $totalDays = date('t', $firstDay);
+        $startingDay = date('w', $firstDay);
+        $day = 1;
+
+        for ($i = 0; $i < 6; $i++) {
+            echo '<tr>';
+            for ($j = 0; $j < 7; $j++) {
+                if ($i === 0 && $j < $startingDay || $day > $totalDays) {
+                    echo '<td></td>';
+                } else {
+                    echo "<td class='" . (in_array($day, $eventDays) ? 'event-day' : '') . "'><a href='?view=calendar&month=$month&year=$year&day=$day'>$day</a></td>";
+                    if (++$day > $totalDays) break;
+                }
             }
+            echo '</tr>';
+            if ($day > $totalDays) break;
         }
-    </script>
+        ?>
+        </tbody>
+    </table>
+
+
+
+<?php } elseif ($view === 'list') { ?>
+
+    <h2>All Events</h2>
+    <?php if (count($events) > 0) { ?>
+        <ul>
+        <?php foreach ($events as $event) { ?>
+            <li>
+                <h3><?php echo htmlspecialchars($event['title']); ?></h3>
+                <p><strong>Date:</strong> <?php echo htmlspecialchars($event['date']); ?> <br>
+                   <strong>Time:</strong> <?php echo htmlspecialchars($event['time']); ?></p>
+                <p><strong>Description:</strong> <?php echo htmlspecialchars($event['description']); ?></p>
+            </li>
+        <?php } ?>
+        </ul>
+    <?php } else { ?>
+        <p>No events available.</p>
+    <?php } ?>
+
+<?php } ?>
+
+
+
+<?php 
+if ($eventForDay) { ?>
+    <div class="event-details">
+        <h2>Event on <?php echo $eventForDay['date']; ?></h2>
+        <p><strong>Title:</strong> <?php echo htmlspecialchars($eventForDay['title']); ?></p>
+        <p><strong>Time:</strong> <?php echo htmlspecialchars($eventForDay['time']); ?></p>
+        <p><strong>Description:</strong> <?php echo htmlspecialchars($eventForDay['description']); ?></p>
+    </div>
+<?php } elseif ($dayClicked) { ?>
+    <p>No event scheduled for this day.</p>
+<?php } ?>
+
 </body>
 </html>

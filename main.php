@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -7,11 +8,14 @@ if (!isset($_SESSION['username'])) {
 }
 ?>
 
+=======
+>>>>>>> 0bfec16eb8cea4cff387ba3ebb7cdd84b23681ba
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Green Guardians - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -49,5 +53,31 @@ if (!isset($_SESSION['username'])) {
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
     </footer>
+=======
+    <title>Welcome Dashboard</title>
+
+</head>
+<body>
+
+    <header>
+        <h1>Welcome Our Beloved Partners</h1>
+    </header>
+
+    <main>
+        <div class="main-container">
+            <button onclick="window.location.href='spguide.php'">Sustainable Practices Guide</button>
+            <button onclick="window.location.href='eventcalendar.php'">Event Calendar</button>
+            <button onclick="window.location.href='landsection.php'">Land Section</button>
+            <button onclick="window.location.href='watersection.php'">Water Section</button>
+            <button onclick="window.location.href='airsection.php'">Air Section</button>
+            <button onclick="window.location.href='lifesection.php'">Living Section</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>The Guardians</p>
+    </footer>
+
+>>>>>>> 0bfec16eb8cea4cff387ba3ebb7cdd84b23681ba
 </body>
 </html>
