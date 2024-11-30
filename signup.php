@@ -1,25 +1,25 @@
 <?php
 session_start();
-require 'db.php'; // Include the database connection
+require 'db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $password_hashed = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+    $password_hashed = password_hash($password, PASSWORD_DEFAULT); 
 
-    // Check if the username already exists
+    
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
         $error = "Username already exists.";
     } else {
-        // Insert the new user into the database
+        
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password_hashed);
         $stmt->execute();
-        header("Location: login.php"); // Redirect to login page after successful signup
+        header("Location: login.php"); 
         exit;
     }
 }
@@ -34,17 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Signup for Green Guardians</h1>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="post" action="signup.php">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+    <div class="form-container">
+        <h1>Signup for Green Guardians</h1>
+        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+        
+        <form method="post" action="signup.php">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
 
-        <button type="submit">Signup</button>
-    </form>
+            <button type="submit">Signup</button>
+        </form>
+
+        <p>Already have an account? <a href="login.php">Login here</a>.</p>
+    </div>
 
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>

@@ -1,11 +1,9 @@
 <?php
-$host = 'localhost'; // Database host
-$dbname = 'green_guardians'; // Database name
-$user = 'root'; // Your MySQL username
-$pass = ''; // Your MySQL password
-
+$host = 'localhost'; 
+$dbname = 'green_guardians'; 
+$user = 'root'; 
+$pass = ''; 
 try {
-    // Establish connection to the database
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

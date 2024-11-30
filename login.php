@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         // Set session variables
         $_SESSION['username'] = $user['username'];
-        header("Location: profile.php"); // Redirect to the profile page
+        header("Location: main.php"); // Redirect to the main page after successful login
         exit;
     } else {
         $error = "Invalid username or password.";
@@ -46,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Login</button>
     </form>
+
+    <p>Don't have an account? <a href="signup.php">Sign up here</a>.</p>
 
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
