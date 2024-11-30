@@ -63,16 +63,14 @@ $practices = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustainable Practices Guide</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        button { margin: 5px; padding: 10px; cursor: pointer; }
-        .practice-content { display: none; margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="Style/spguide.css">
 </head>
 <body>
 
     <header>
         <h1>Sustainable Practices Guide</h1>
+        <button class="home-button" onclick="window.location.href='main.php';">Home</button>
+
     </header>
 
     <main>

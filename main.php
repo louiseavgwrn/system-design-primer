@@ -3,29 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Dashboard</title>
-
+    <title>Main Dashboard</title>
+    <link rel="stylesheet" href="Style/main.css"> 
 </head>
 <body>
 
     <header>
-        <h1>Welcome Our Beloved Partners</h1>
+        <h1>Welcome to the Sustainable Practices Dashboard</h1>
     </header>
 
     <main>
         <div class="main-container">
-            <button onclick="window.location.href='spguide.php'">Sustainable Practices Guide</button>
-            <button onclick="window.location.href='eventcalendar.php'">Event Calendar</button>
-            <button onclick="window.location.href='landsection.php'">Land Section</button>
-            <button onclick="window.location.href='watersection.php'">Water Section</button>
-            <button onclick="window.location.href='airsection.php'">Air Section</button>
-            <button onclick="window.location.href='lifesection.php'">Living Section</button>
+            
+            <button onclick="slideOutAndRedirect('spguide.php')">Sustainable Practices Guide</button>
+            <button onclick="slideOutAndRedirect('eventcalendar.php')">Event Calendar</button>
+            <button onclick="slideOutAndRedirect('landsection.php')">Land Section</button>
+            <button onclick="slideOutAndRedirect('watersection.php')">Water Section</button>
+            <button onclick="slideOutAndRedirect('airsection.php')">Air Section</button>
+            <button onclick="slideOutAndRedirect('lifesection.php')">Living Section</button>
         </div>
     </main>
 
     <footer>
-        <p>The Guardians</p>
+        <p>&copy; 2024 The Guardians. All rights reserved.</p>
     </footer>
 
+    <script>
+    <?php
+    class SlideOutRedirect {
+        private $targetUrl;
+        private $animationClass;
+        private $delay;
+
+        public function __construct($animationClass = 'slide-out', $delay = 1000) {
+            $this->animationClass = $animationClass;
+            $this->delay = $delay;
+        }
+        public function renderScript() {
+            echo "
+            function slideOutAndRedirect(targetUrl) {
+                document.body.classList.add('$this->animationClass');
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, $this->delay); 
+            }
+            ";
+        }
+    }
+    $slideOutInstance = new SlideOutRedirect('slide-out', 1000);
+    $slideOutInstance->renderScript();
+    ?>
+
+    </script>
 </body>
 </html>
