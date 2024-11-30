@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240104/pngtree-scribbly-textured-vector-illustration-aesthetic-nature-landscape-of-abstract-green-fields-image_13891294.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #388e3c;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+header h1 {
+    font-size: 3em;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.home-button {
+    background-color: #0a9396;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+    background-color: #94d2bd;
+    transform: scale(1.05);
+}
+
+main {
+    padding: 50px 20px;
+    text-align: center;
+    color: #333;
+}
+
+.toggle-button {
+    background-color: #ee9b00;
+    color: white;
+    border: none;
+    margin: 15px;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #ca6702;
+    transform: scale(1.05);
+}
+
+#practice-details {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 20px 10px;
+    justify-content: center;
+}
+
+.practice-content {
+    display: none;
+    border-radius: 15px;
+    padding: 25px;
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+    scroll-snap-align: start;
+}
+
+.practice-content h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+#composting.practice-content {
+    background: linear-gradient(to bottom, #fefbe9, #f5f5dc);
+    border-color: #a6b91a;
+    box-shadow: 0 6px 20px rgba(166, 185, 26, 0.4);
+}
+
+#composting img {
+    border: 3px dashed #a6b91a;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+#composting h3 {
+    color: #6c8508;
+}
+
+#native-planting.practice-content {
+    background: linear-gradient(to bottom, #d8f3dc, #b7e4c7);
+    border-color: #4caf50;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+#native-planting img {
+    border: 3px solid #4caf50;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+#native-planting h3 {
+    color: #2a773a;
+}
+
+#water-conservation.practice-content {
+    background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+    border-color: #2196f3;
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+#water-conservation img {
+    border: 3px solid #2196f3;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+#water-conservation h3 {
+    color: #0d47a1;
+}
+
+#urban-gardening.practice-content {
+    background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
+    border-color: #e91e63;
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+}
+
+#urban-gardening img {
+    border: 3px solid #e91e63;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+#urban-gardening h3 {
+    color: #880e4f;
+}
+
+.practice-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.practice-content p {
+    line-height: 1.8;
+    margin: 15px 0;
+    color: #555;
+}
+
+.practice-content ul {
+    padding-left: 20px;
+}
+
+.practice-content ul li {
+    margin: 10px 0;
+    list-style-type: disc;
+}
+
+.practice-content a {
+    color: #005f73;
+    text-decoration: none;
+}
+
+.practice-content a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #388e3c;
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 1.1em;
+}
+
+footer p {
+    margin: 0;
+}

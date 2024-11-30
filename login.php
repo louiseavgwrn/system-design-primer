@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php'; // Include the database connection
+require 'userdatabase.php'; // Include the database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
