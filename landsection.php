@@ -15,7 +15,16 @@
  
 </head>
 
-<body>
+<main>
+    <div class="section-container">
+
+        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='watersection.php'">Water Section</button>
+        <button onclick="window.location.href='airsection.php'">Air Section</button>
+        <button onclick="window.location.href='lifesection.php'">Living Section</button>
+
+    </div>
+</main>
 
  
     <header>
@@ -125,7 +134,7 @@
             </thead>
             <tbody>
                 <?php
-                require_once 'dbConnect.php';
+                require_once 'spgdatabase.php';
                 require_once 'plantcrud.php';
 
                 $database = new Database();

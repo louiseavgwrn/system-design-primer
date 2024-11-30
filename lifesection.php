@@ -6,6 +6,19 @@
     <title>Life Section - Living Animals</title>
 </head>
 <body>
+<body>
+
+<main>
+    <div class="section-container">
+
+        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='landsection.php'">Land Section</button>
+        <button onclick="window.location.href='watersection.php'">Water Section</button>
+        <button onclick="window.location.href='airsection.php'">Air Section</button>
+
+    </div>
+</main>
+
     <header>
         <h1>Life Section: Living Animals</h1>
     </header>
