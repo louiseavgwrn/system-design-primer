@@ -1,19 +1,18 @@
-/* Base Styles */
+/* Global Styles */
 :root {
-    --primary-color: #388e3c; /* Deep green */
-    --secondary-color: #00bcd4; /* Sky blue */
-    --accent-color: #ff9800; /* Earthy orange */
-    --background-color: #f4f8f9; /* Light gray background */
-    --text-color: #333; /* Dark gray text */
+    --primary-color: #388e3c;  /* Green */
+    --secondary-color: #00bcd4; /* Blue */
+    --background-color: #f4f8f9; /* Light Gray */
+    --text-color: #333333;  /* Dark Gray */
     --font-family: 'Arial', sans-serif;
     --border-radius: 8px;
     --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Global Styles */
+/* Body */
 body {
-    margin: 0;
     font-family: var(--font-family);
+    margin: 0;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -57,15 +56,15 @@ nav ul li a {
     font-weight: bold;
     padding: 12px 25px;
     background-color: var(--secondary-color);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: var(--accent-color);
+    background-color: #ff9800; /* Earthy Orange */
 }
 
-/* Main Section */
+/* Main Content */
 main {
     padding: 40px 20px;
     text-align: center;
@@ -80,53 +79,16 @@ main {
     margin-bottom: 20px;
 }
 
-/* Login/Signup Box */
-#login-signup-box {
-    background-color: #ffffff;
-    padding: 30px;
-    max-width: 500px;
-    margin: 30px auto;
-    text-align: center;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
-
-#login-signup-box h2 {
+#about-us h2 {
     color: var(--primary-color);
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 
-.login-signup-buttons {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
-
-.btn {
-    padding: 12px 30px;
+#about-us p {
     font-size: 1.1rem;
-    text-decoration: none;
-    color: white;
-    border-radius: var(--border-radius);
-    transition: background-color 0.3s ease;
-    display: inline-block;
-}
-
-.login-btn {
-    background-color: var(--primary-color);
-}
-
-.login-btn:hover {
-    background-color: #2c6b2f; /* Darker green */
-}
-
-.signup-btn {
-    background-color: var(--secondary-color);
-}
-
-.signup-btn:hover {
-    background-color: #039be5; /* Darker blue */
+    line-height: 1.5;
+    color: #555;
 }
 
 /* Footer */
@@ -146,7 +108,7 @@ footer p {
     font-size: 1rem;
 }
 
-/* Responsive Design */
+/* Mobile Styles */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2.5rem;
@@ -161,20 +123,11 @@ footer p {
         gap: 15px;
     }
 
-    section {
-        padding: 20px;
+    #about-us h2 {
+        font-size: 1.8rem;
     }
 
-    footer {
+    footer p {
         font-size: 0.9rem;
-    }
-
-    .login-signup-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .btn {
-        width: 100%;
     }
 }
