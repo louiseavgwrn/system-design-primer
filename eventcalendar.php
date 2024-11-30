@@ -1,6 +1,4 @@
 <?php
-//Still under development - Kyle
-
 
 $events = [
     [
@@ -77,7 +75,6 @@ if ($dayClicked) {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -86,22 +83,17 @@ if ($dayClicked) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biodiversity Events Calendar</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        td { padding: 10px; text-align: center; cursor: pointer; }
-        .event-day { background-color: #f0f0f0; }
-        .calendar-nav { text-align: center; margin: 20px; }
-        .event-details { margin-top: 20px; }
-        .event-details h2 { color: #2d6a4f; }
-        .event-details p { color: #555; }
-        .tab { padding: 10px; cursor: pointer; display: inline-block; margin: 5px; }
-        .active { background-color: #2d6a4f; color: white; }
-    </style>
+    <link rel="stylesheet" href="Style/calendar.css">
 </head>
 <body>
 
 <header><h1>Biodiversity Events Calendar</h1></header>
+
+<div class="home-button">
+    <a href="main.php">
+        <button>Home</button>
+    </a>
+</div>
 
 <div class="calendar-nav">
     <?php 
@@ -119,8 +111,6 @@ if ($dayClicked) {
 </div>
 
 <?php if ($view === 'calendar') { ?>
-
-
     <table border="1">
         <thead>
             <tr>
@@ -151,10 +141,7 @@ if ($dayClicked) {
         </tbody>
     </table>
 
-
-
 <?php } elseif ($view === 'list') { ?>
-
     <h2>All Events</h2>
     <?php if (count($events) > 0) { ?>
         <ul>
@@ -173,10 +160,7 @@ if ($dayClicked) {
 
 <?php } ?>
 
-
-
-<?php 
-if ($eventForDay) { ?>
+<?php if ($eventForDay) { ?>
     <div class="event-details">
         <h2>Event on <?php echo $eventForDay['date']; ?></h2>
         <p><strong>Title:</strong> <?php echo htmlspecialchars($eventForDay['title']); ?></p>
@@ -189,3 +173,4 @@ if ($eventForDay) { ?>
 
 </body>
 </html>
+
