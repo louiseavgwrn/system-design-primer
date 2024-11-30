@@ -27,17 +27,6 @@ session_start();
             <h2>About Us</h2>
             <p>Green Guardians is committed to protecting our planet by promoting sustainable practices. Join our community!</p>
         </section>
-
-        <section id="featured">
-            <h2>Explore Our Sections</h2>
-            <ul>
-                <li><a href="sustainable-practices.php">Sustainable Practices Guide</a></li>
-                <li><a href="event-calendar.php">Event Calendar</a></li>
-                <li><a href="land-section.php">Land Section</a></li>
-                <li><a href="water-section.php">Water Section</a></li>
-                <li><a href="living-section.php">Living Section</a></li>
-            </ul>
-        </section>
     </main>
 
     <footer>

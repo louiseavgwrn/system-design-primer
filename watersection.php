@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<body>
+
+<main>
+    <div class="section-container">
+
+        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='landsection.php'">Land Section</button>
+        <button onclick="window.location.href='airsection.php'">Air Section</button>
+        <button onclick="window.location.href='lifesection.php'">Living Section</button>
+
+    </div>
+</main>
+
 <header>
         <h1>💧 Water Usage & Savings Calculator 💧</h1>
         <p>Track your water consumption and discover ways to conserve water for a better tomorrow.</p>
