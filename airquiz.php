@@ -11,6 +11,7 @@ if (!isset($_SESSION['questions_pool'])) {
     ];
 }
 
+//leaderboard
 $botScores = [
     ["name" => "Doraemon", "score" => 4],
     ["name" => "Nobita", "score" => 3],
