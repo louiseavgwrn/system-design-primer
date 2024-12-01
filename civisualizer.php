@@ -1,10 +1,15 @@
-
 <?php
 
 $currentYear = date("Y");
+
+$practices = [
+    ['title' => 'Reduce, Reuse, Recycle', 'description' => 'Minimize waste by reusing items and recycling materials.'],
+    ['title' => 'Support Sustainable Agriculture', 'description' => 'Buy locally-grown, organic, and fair-trade products.'],
+    ['title' => 'Save Water', 'description' => 'Use water-efficient appliances and fix leaks to conserve this vital resource.'],
+    ['title' => 'Use Renewable Energy', 'description' => 'Opt for solar, wind, or other renewable sources of energy for your home or business.'],
+    ['title' => 'Plant Trees and Green Spaces', 'description' => 'Trees help to absorb CO2, provide habitats, and improve air quality.']
+];
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +24,9 @@ $currentYear = date("Y");
     <h1>Promote Sustainable Practices & Biodiversity</h1>
 </header>
 
-<nav>
-    <a href="#introduction">Introduction</a>
-    <a href="#sustainable-practices">Sustainable Practices</a>
-    <a href="#biodiversity-benefits">Biodiversity Benefits</a>
-    <a href="#get-involved">Get Involved</a>
-</nav>
-
 <main>
     <div class="image-container">
-        <img src="images/forest.jpg" alt="A lush green forest">
+        <img src="images/forest.jpg" >
     </div>
     <div class="text-container">
         <h1>Green Guardians</h1>
