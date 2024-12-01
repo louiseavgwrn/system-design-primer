@@ -12,11 +12,11 @@ if (!isset($_SESSION['questions_pool'])) {
 }
 
 $botScores = [
-    ["name" => "Imagine Losing", "score" => 4],
-    ["name" => "Pipay", "score" => 3],
-    ["name" => "Bornok", "score" => 5],
+    ["name" => "Doraemon", "score" => 4],
+    ["name" => "Nobita", "score" => 3],
+    ["name" => "Guko", "score" => 5],
     ["name" => "Majin Buu", "score" => 2],
-    ["name" => "Frieza", "score" => 1],
+    ["name" => "Awit", "score" => 1],
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_quiz'])) {
