@@ -5,7 +5,6 @@ $db = new Database();
 $conn = $db->getConnect();
 
 try {
-    // Query to fetch all data from the history table
     $query = "SELECT * FROM history";
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -21,34 +20,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planting History</title>
-    <?php //Simple DESIGN to make it align?>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        table {
-            margin: 0 auto;
-            border-collapse: collapse;
-            width: 90%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
+
 </head>
 <body>
     <h1>Planting History</h1>
