@@ -1,21 +1,21 @@
 <?php
 session_start();
-require 'userdatabase.php'; // Include the database connection
+require 'userdatabase.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if the user exists in the database
+    
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
-        // Set session variables
+       
         $_SESSION['username'] = $user['username'];
-        header("Location: main.php"); // Redirect to the main page after successful login
+        header("Location: main.php"); 
         exit;
     } else {
         $error = "Invalid username or password.";
