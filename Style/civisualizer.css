@@ -1,7 +1,7 @@
 
  body {
     font-family: Arial, sans-serif;
-    background: url('images/forest.jpg') no-repeat center center fixed;
+    background: url(https://asset.gecdesigns.com/img/wallpapers/beautiful-fantasy-lush-green-forest-with-river-and-mountain-ai-generated-wallpaper-sr03072417-cover.webp) no-repeat center center fixed;
     background-size: cover; 
     color: #333;
     height: 100%;
@@ -65,7 +65,7 @@ footer {
     text-align: center;
     margin-top: 30px;
     font-size: 1rem;
-    color: white;
+    color: black;
     width: 100%;
     padding: 10px;
     border-radius: 10px;
