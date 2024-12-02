@@ -1,0 +1,215 @@
+/* General styles */
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://images7.alphacoders.com/135/1357231.jpeg);
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    color: rgb(255, 255, 255); /* Dark text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Header styling */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: rgba(121, 163, 202, 0.521);
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds readability to the text */
+    border-radius: 10px; /* Optional: Gives rounded corners */
+}
+
+header p {
+    font-size: 1.2rem;
+}
+
+/* Section styles */
+section {
+    width: 95%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(95, 122, 155, 0.644);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #0e3555;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+}
+
+section ul li {
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+section ul li::before {
+    content: "\1F4A7"; /* Water drop emoji */
+    position: absolute;
+    left: 0;
+    color: #2196f3;
+}
+
+/* Tabs styling */
+.tabs {
+    position: fixed;
+    top: 50%; /* Centers the tabs vertically */
+    right: 20px; /* Slight padding from the right edge */
+    transform: translateY(-50%); /* Adjusts for perfect vertical centering */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.tabs button {
+    margin: 10px 0; /* Consistent spacing between buttons */
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #2196f3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left; /* Centers text inside the button */
+    min-width: 100px; /* Ensures a consistent button width */
+}
+
+.tabs button:hover {
+    background-color: #1976d2;
+}
+
+
+/* Button styles */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    background-color: #2196f3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1976d2;
+}
+
+/* Form styles */
+form {
+    margin-top: 20px;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #3e587a;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input[type="submit"], form button {
+    width: auto;
+    background-color: #2196f3;
+    color: rgba(255, 255, 255, 0.438);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover, form button:hover {
+    background-color: #1976d2;
+}
+
+/* Fact box styling */
+.fact-box {
+    background: #e3f2fd94; /* Light blue */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #bbdefb;
+}
+
+.fact-box p {
+    font-weight: bold;
+    color: #0d47a1; /* Deep blue */
+    margin: 0;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: rgba(121, 163, 202, 0.521);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    section {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .tabs {
+        top: 10px;
+        right: 0;
+    }
+
+    .tabs button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}
