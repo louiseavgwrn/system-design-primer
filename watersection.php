@@ -13,7 +13,7 @@
 <main>
     <div class="section-container">
 
-        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='useracc.php'">Home</button>
         <button onclick="window.location.href='landsection.php'">Land Section</button>
         <button onclick="window.location.href='airsection.php'">Air Section</button>
         <button onclick="window.location.href='lifesection.php'">Living Section</button>

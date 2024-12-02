@@ -1,0 +1,459 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    line-height: 1.8;
+    color: #444;
+    background: url(https://png.pngtree.com/background/20230827/original/pngtree-contemporary-3d-landscape-mural-wallpaper-featuring-jungle-forest-deers-and-christmas-picture-image_4839275.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+
+header h1 {
+    color: #2ecc71;
+    margin: 0;
+    font-size: 3rem;
+    text-align: left;
+    letter-spacing: 1.5px;
+}
+
+
+.textbox {
+    background: rgba(255, 255, 255, 0.9);
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.textbox h2 {
+    color: #1a252f;
+    margin-top: 0;
+    border-bottom: 3px solid #1a252f;
+    padding-bottom: 8px;
+    font-size: 1.8rem;
+}
+
+.textbox p {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+ul {
+    padding-left: 25px;
+}
+
+ul li {
+    margin-bottom: 15px;
+    list-style: disc;
+}
+
+
+footer {
+    background: url(https://png.pngtree.com/background/20230827/original/pngtree-contemporary-3d-landscape-mural-wallpaper-featuring-jungle-forest-deers-and-christmas-picture-image_4839275.jpg) no-repeat bottom center;
+    background-size: cover; 
+    color: #f4f4f4;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    border-top: 2px solid #2c3e50;
+}
+
+
+/* Image Gallery */
+.image-gallery {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.image-gallery .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.image-gallery figure {
+    margin: 0;
+    text-align: center;
+}
+
+.image-gallery img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid #1a252f;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.image-gallery figcaption {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #1a252f;
+}
+
+/* General Styling for "What We Do" Section */
+.we-do {
+    background: url("https://img.freepik.com/premium-photo/theme-background-rendering-geometric-shapes-green-plants-3d_919910-21.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 60px 30px;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.we-do h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 10px;
+}
+
+/* Style for the list items */
+.we-do ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.we-do li {
+    background-color:darkgreen;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.we-do li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Item layout: Icon and content */
+.practice-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.practice-item:hover .icon {
+    transform: scale(1.2);
+}
+
+.practice-content {
+    text-align: left;
+}
+
+.practice-content strong {
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.practice-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .we-do h2 {
+        font-size: 2rem;
+    }
+
+    .we-do li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .practice-item {
+        text-align: center;
+    }
+
+    .icon {
+        margin-bottom: 10px;
+    }
+}
+
+
+/* Meet Our Team Section */
+.image-gallery {
+    background: url("https://i.pinimg.com/564x/38/bf/fd/38bffd858c8e3e0c2568835e338dcc92.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    margin: 40px auto;
+    max-width: 900px;
+    text-align: center;
+    color: #fff;
+}
+
+.image-gallery h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #f9f9f9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.image-gallery .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.image-gallery figure {
+    margin: 0;
+    text-align: center;
+}
+
+.image-gallery img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.image-gallery figcaption {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .image-gallery .gallery {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .textbox {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Who We Are Section */
+.who-we-are {
+    background: url("https://static.vecteezy.com/system/resources/thumbnails/010/942/126/small/abstract-background-with-paper-cut-shape-vector.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.who-we-are h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.who-we-are p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+    margin-bottom: 20px;
+    text-align: justify;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Our Vision Section */
+.our-vision {
+    background: url(https://i.pinimg.com/736x/98/6d/7d/986d7db886d1b1b0be55f9def5e35c9d.jpg) repeat, linear-gradient(120deg, #2c3e50, #34495e);
+    color: #ecf0f1;
+}
+
+.our-vision h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f4f4f4;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.our-vision p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* Our Mission Section */
+.our-mission {
+    background: url("https://img.freepik.com/premium-photo/minimal-3d-world-wildlife-day-poster-design_950002-644228.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 60px 30px;
+    color: #fff;
+    text-align: center;
+}
+
+.our-mission h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f4f4f4;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.our-mission p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #dcdcdc;
+    text-align: justify;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.our-mission ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.our-mission li {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 25px;
+}
+
+.our-mission li::before {
+    content: "✓";
+    color: #2ecc71;
+    margin-right: 10px;
+}
+
+.our-mission button {
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: poin
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: flex-end; /* Aligns the buttons to the right */
+    position: absolute; /* To keep it on top */
+    right: 20px; /* Distance from the right edge */
+    top: 20px; /* Distance from the top */
+}
+
+.nav-links button, .dropdown-btn {
+    background-color: rgba(102, 187, 106, 0.7); /* Transparent green background */
+    color: white;
+    border: 1px solid rgba(102, 187, 106, 0.7); /* Border matches the background */
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links button:hover, .dropdown-btn:hover {
+    background-color: rgba(56, 142, 60, 0.8); /* Darker transparent green for hover */
+    border-color: rgba(56, 142, 60, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    background-color: rgba(129, 199, 132, 0.7); /* Lighter transparent green for dropdown button */
+    border-color: rgba(129, 199, 132, 0.7);
+    border-radius: 50px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(102, 187, 106, 0.9); /* Transparent green background */
+    border-radius: 8px;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    margin-top: 10px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    border-bottom: 1px solid #555;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(56, 142, 60, 0.8); /* Darker transparent green hover effect */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

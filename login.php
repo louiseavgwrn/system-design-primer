@@ -2,23 +2,29 @@
 session_start();
 require 'userdatabase.php';
 
+$redirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : 'useracc.php'; 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
 
-    
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $username);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user['password'])) {
-       
-        $_SESSION['username'] = $user['username'];
-        header("Location: main.php"); 
-        exit;
-    } else {
-        $error = "Invalid username or password.";
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $user['username'];
+
+            header("Location: $redirectUrl");
+            exit;
+        } else {
+            $error = "Invalid username or password.";
+        }
+    } catch (PDOException $e) {
+        $error = "Database error: " . $e->getMessage();
     }
 }
 ?>
@@ -29,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Green Guardians</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <h1>Login to Green Guardians</h1>

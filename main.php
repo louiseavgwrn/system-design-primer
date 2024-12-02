@@ -4,56 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Dashboard</title>
-    <link rel="stylesheet" href="Style/main.css"> 
+    <link rel="Stylesheet" href="Style/main.css">
 </head>
 <body>
-
     <header>
-        <h1>Welcome to the Sustainable Practices Dashboard</h1>
+        <nav>
+            <div class="logo">
+                <h1>Green Guardians</h1>
+                <img src="https://p7.hiclipart.com/preview/845/955/587/earth-ecology-illustration-cartoon-fresh-green-earth.jpg" alt="Logo">
+            </div>
+
+            <div class="nav-links">
+                <button onclick="window.location.href='main.php'">Home</button>
+                <button onclick="window.location.href='aboutus.php'">About Us</button>
+                <button onclick="window.location.href='contactus.php'">Contact Us</button>
+                <div class="dropdown">
+                    <button class="dropdown-btn">Sections</button>
+                    <div class="dropdown-content">
+                        <a href="login.php?redirect_to=landsection.php">Land Section</a>
+                        <a href="login.php?redirect_to=watersection.php">Water Section</a>
+                        <a href="login.php?redirect_to=airsection.php">Air Section</a>
+                        <a href="login.php?redirect_to=lifesection.php">Life Section</a>
+                    </div>
+                </div>
+                <button onclick="window.location.href='login.php'">Login</button>
+                <button onclick="window.location.href='signup.php'">Sign Up</button>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <div class="main-container">
-            
-            <button onclick="slideOutAndRedirect('spguide.php')">Sustainable Practices Guide</button>
-            <button onclick="slideOutAndRedirect('eventcalendar.php')">Event Calendar</button>
-            <button onclick="slideOutAndRedirect('landsection.php')">Land Section</button>
-            <button onclick="slideOutAndRedirect('watersection.php')">Water Section</button>
-            <button onclick="slideOutAndRedirect('airsection.php')">Air Section</button>
-            <button onclick="slideOutAndRedirect('lifesection.php')">Living Section</button>
-        </div>
+        <h2>Fall in Love with Biodiversity</h2>
+        <p>Biodiversity refers to the variety of life forms on Earth, including plants, animals, and microorganisms, and their ecosystems. It is the foundation of life, supporting ecosystem health and stability. By preserving biodiversity, we ensure the survival of species, the health of our environment, and the resilience of ecosystems to challenges like climate change. Explore how you can contribute to the protection of this invaluable resource.</p>
     </main>
-
-    <footer>
-        <p>&copy; 2024 The Guardians. All rights reserved.</p>
-    </footer>
-
-    <script>
-    <?php
-    class SlideOutRedirect {
-        private $targetUrl;
-        private $animationClass;
-        private $delay;
-
-        public function __construct($animationClass = 'slide-out', $delay = 1000) {
-            $this->animationClass = $animationClass;
-            $this->delay = $delay;
-        }
-        public function renderScript() {
-            echo "
-            function slideOutAndRedirect(targetUrl) {
-                document.body.classList.add('$this->animationClass');
-                setTimeout(function() {
-                    window.location.href = targetUrl;
-                }, $this->delay); 
-            }
-            ";
-        }
-    }
-    $slideOutInstance = new SlideOutRedirect('slide-out', 1000);
-    $slideOutInstance->renderScript();
-    ?>
-
-    </script>
 </body>
 </html>
