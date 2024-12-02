@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +11,7 @@ session_start();
 <main>
     <div class="section-container">
 
-        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='useracc.php'">Home</button>
         <button onclick="window.location.href='landsection.php'">Land Section</button>
         <button onclick="window.location.href='watersection.php'">Water Section</button>
         <button onclick="window.location.href='lifesection.php'">Living Section</button>
