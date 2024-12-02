@@ -28,10 +28,10 @@ $practices = [
                 <div class="dropdown">
                     <button class="dropdown-btn">Sections</button>
                     <div class="dropdown-content">
-                        <a href="landsection.php">Land Section</a>
-                        <a href="watersection.php">Water Section</a>
-                        <a href="airsection.php">Air Section</a>
-                        <a href="lifesection.php">Life Section</a>
+                        <a href="login.php?redirect_to=landsection.php">Land Section</a>
+                        <a href="login.php?redirect_to=watersection.php">Water Section</a>
+                        <a href="login.php?redirect_to=airsection.php">Air Section</a>
+                        <a href="login.php?redirect_to=lifesection.php">Life Section</a>
                     </div>
                 </div>
                 <button onclick="window.location.href='login.php'">Login</button>
