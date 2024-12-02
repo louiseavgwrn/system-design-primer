@@ -1,15 +1,14 @@
-/* General styles */
-/* General styles */
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-image: url(https://images7.alphacoders.com/135/1357231.jpeg);
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    color: rgb(255, 255, 255); /* Dark text */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    color: rgb(255, 255, 255); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,8 +24,8 @@ header {
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background: rgba(121, 163, 202, 0.521);
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image */
+    background-size: cover; 
+    background-position: center; 
 }
 
 header h1 {
@@ -34,8 +33,8 @@ header h1 {
     margin: 0;
     padding: 20px;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds readability to the text */
-    border-radius: 10px; /* Optional: Gives rounded corners */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
+    border-radius: 10px; 
 }
 
 header p {
@@ -71,7 +70,7 @@ section ul li {
 }
 
 section ul li::before {
-    content: "\1F4A7"; /* Water drop emoji */
+    content: "\1F4A7"; 
     position: absolute;
     left: 0;
     color: #2196f3;
@@ -80,16 +79,16 @@ section ul li::before {
 /* Tabs styling */
 .tabs {
     position: fixed;
-    top: 50%; /* Centers the tabs vertically */
-    right: 20px; /* Slight padding from the right edge */
-    transform: translateY(-50%); /* Adjusts for perfect vertical centering */
+    top: 50%; 
+    right: 20px; 
+    transform: translateY(-50%); 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
 .tabs button {
-    margin: 10px 0; /* Consistent spacing between buttons */
+    margin: 10px 0; 
     padding: 10px 20px;
     font-size: 1rem;
     color: white;
@@ -98,8 +97,8 @@ section ul li::before {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-align: left; /* Centers text inside the button */
-    min-width: 100px; /* Ensures a consistent button width */
+    text-align: left; 
+    min-width: 100px; 
 }
 
 .tabs button:hover {
@@ -162,7 +161,7 @@ form input[type="submit"]:hover, form button:hover {
 
 /* Fact box styling */
 .fact-box {
-    background: #e3f2fd94; /* Light blue */
+    background: #e3f2fd94; 
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -171,7 +170,7 @@ form input[type="submit"]:hover, form button:hover {
 
 .fact-box p {
     font-weight: bold;
-    color: #0d47a1; /* Deep blue */
+    color: #0d47a1; 
     margin: 0;
 }
 
@@ -186,7 +185,6 @@ footer {
     background: rgba(121, 163, 202, 0.521);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
