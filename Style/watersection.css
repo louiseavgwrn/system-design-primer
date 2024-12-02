@@ -15,8 +15,6 @@ body {
     justify-content: center;
 }
 
-
-/* Header styling */
 header {
     width: 100%;
     text-align: center;
@@ -41,7 +39,6 @@ header p {
     font-size: 1.2rem;
 }
 
-/* Section styles */
 section {
     width: 95%;
     max-width: 900px;
@@ -76,7 +73,6 @@ section ul li::before {
     color: #2196f3;
 }
 
-/* Tabs styling */
 .tabs {
     position: fixed;
     top: 50%; 
@@ -105,8 +101,6 @@ section ul li::before {
     background-color: #1976d2;
 }
 
-
-/* Button styles */
 button {
     margin: 10px;
     padding: 10px 20px;
@@ -123,7 +117,7 @@ button:hover {
     background-color: #1976d2;
 }
 
-/* Form styles */
+
 form {
     margin-top: 20px;
 }
@@ -145,8 +139,8 @@ form input, form select {
 
 form input[type="submit"], form button {
     width: auto;
-    background-color: #2196f3;
-    color: rgba(255, 255, 255, 0.438);
+    background-color: #124670;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
@@ -159,7 +153,54 @@ form input[type="submit"]:hover, form button:hover {
     background-color: #1976d2;
 }
 
-/* Fact box styling */
+.form-box {
+    background: rgba(95, 122, 155, 0.301);
+    border-radius: 10px; 
+    padding: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 800px; 
+    margin: 20px auto; 
+    text-align: center;
+    color: #0e3555;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.form-box label {
+    font-weight: bold; 
+    margin-bottom: 5px; 
+}
+
+.form-box input,
+.form-box select {
+    padding: 10px;
+    border-radius: 5px; 
+    font-size: 1rem;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.form-box button,
+.form-box input[type="submit"] {
+    background-color: #007bff; 
+    color: rgb(255, 255, 255); 
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.form-box button:hover,
+.form-box input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 .fact-box {
     background: #e3f2fd94; 
     padding: 15px;
@@ -174,7 +215,6 @@ form input[type="submit"]:hover, form button:hover {
     margin: 0;
 }
 
-/* Footer styling */
 footer {
     text-align: center;
     padding: 20px;
@@ -210,4 +250,16 @@ footer {
         font-size: 0.8rem;
         padding: 8px 12px;
     }
+    
+    .form-box {
+        padding: 15px;
+    }
+
+    .form-box button,
+    .form-box input[type="submit"] {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
 }
+
+

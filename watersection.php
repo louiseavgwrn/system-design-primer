@@ -77,27 +77,26 @@ if (isset($_SESSION['water_results'])) {
     unset($_SESSION['water_results']);
 }
 ?>
-
-    
+<div class="form-box">
     <form action="waterprocess.php" method="POST">
-    <label for="calculator_type">Select Calculator:</label>
-    <select name="calculator_type" id="calculator_type" required onchange="showCalculatorForm()">
-        <option value="">--Select--</option>
-        <option value="personal_usage">Personal Water Usage</option>
-        <option value="household_usage">Household Water Usage</option>
-        <option value="water_consumption_per_person">Water Consumption per Person</option>
-        <option value="annual_water_consumption">Annual Water Consumption</option>
-        <option value="water_savings_appliances">Water Savings from Water-Efficient Appliances</option>
-        <option value="industrial_usage">Industrial Water Usage</option>
-        <option value="water_usage_per_unit">Water Usage per Unit of Production (for Industries)</option>
-        <option value="agricultural_usage">Agricultural Water Usage</option>
-        <option value="evapotranspiration">Evapotranspiration (ET) for Agriculture</option>
-        <option value="water_efficiency">Water Efficiency</option>
-        <option value="rainwater_harvesting">Rainwater Harvesting Potential</option>
-    </select>
-    
-    <div id="form_container"></div> 
-</form>
+        <label for="calculator_type">Select Calculator:</label>
+        <select name="calculator_type" id="calculator_type" required onchange="showCalculatorForm()">
+            <option value="">--Select--</option>
+            <option value="personal_usage">Personal Water Usage</option>
+            <option value="household_usage">Household Water Usage</option>
+            <option value="water_consumption_per_person">Water Consumption per Person</option>
+            <option value="annual_water_consumption">Annual Water Consumption</option>
+            <option value="water_savings_appliances">Water Savings from Water-Efficient Appliances</option>
+            <option value="industrial_usage">Industrial Water Usage</option>
+            <option value="water_usage_per_unit">Water Usage per Unit of Production (for Industries)</option>
+            <option value="agricultural_usage">Agricultural Water Usage</option>
+            <option value="evapotranspiration">Evapotranspiration (ET) for Agriculture</option>
+            <option value="water_efficiency">Water Efficiency</option>
+            <option value="rainwater_harvesting">Rainwater Harvesting Potential</option>
+        </select>
+        <div id="form_container"></div>
+    </form>
+</div>
 
 <script>
     function showCalculatorForm() {
