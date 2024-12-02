@@ -1,8 +1,3 @@
-<?php
-//Script and style are internet based - Kyle
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +13,7 @@
 <main>
     <div class="section-container">
 
-        <button onclick="window.location.href='main.php'">Home</button>
+        <button onclick="window.location.href='useracc.php'">Home</button>
         <button onclick="window.location.href='watersection.php'">Water Section</button>
         <button onclick="window.location.href='airsection.php'">Air Section</button>
         <button onclick="window.location.href='lifesection.php'">Living Section</button>

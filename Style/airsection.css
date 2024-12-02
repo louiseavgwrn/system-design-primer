@@ -1,0 +1,77 @@
+/* Reset some styles */
+body, h1, h2, h3, h4, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+/* Container and card layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.tips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Styling individual tips */
+.tip {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.33% - 20px); /* Three items per row */
+    box-sizing: border-box;
+}
+
+.tip h3 {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.tip p {
+    font-size: 1em;
+    color: #666;
+}
+
+.pros-cons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pros-cons div {
+    width: 48%;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    font-size: 0.9em;
+    color: #555;
+}
+
+ul li strong {
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .tip {
+        flex: 1 1 100%;
+    }
+}
