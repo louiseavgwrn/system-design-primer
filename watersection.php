@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Usage & Savings Calculator</title>
-    <link rel="stylesheet" href="Style/watersection.css">
+    <link rel="stylesheet" href="Style/water_section.css">
 </head>
 <body>
 
@@ -42,7 +42,7 @@
         <p>Small actions can lead to significant water savings. Here are some tips:</p>
         <ul>
             <li>Turn off the tap while brushing your teeth – save up to 8 liters per minute!</li>
-            <li>Switch to low-flow water fixtures to conserve water without compromising comfort.</li>git session_status
+            <li>Switch to low-flow water fixtures to conserve water without compromising comfort.</li>
             <li>Use a bucket to wash your car instead of a hose to save up to 500 liters per wash.</li>
             <li>Check for leaks and repair them promptly to avoid wasting hundreds of liters a month.</li>
         </ul>
