@@ -19,10 +19,21 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Stylesheet" href="Style/airhistory.css">
     <title>Planting History</title>
 
 </head>
 <body>
+
+<main>
+    <div class="section-container">
+        <button class="btn-home" onclick="window.location.href='useracc.php'">Home</button>
+        <button class="btn-air-section" onclick="window.location.href='airsection.php'">Air Section</button>
+        <button class="btn-view-table" onclick="window.location.href='aircity.php'">View Tree Table</button>
+    </div>
+</main>
+
+
     <h1>Planting History</h1>
     <table>
         <thead>

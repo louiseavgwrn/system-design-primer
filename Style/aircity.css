@@ -1,0 +1,141 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(https://media.istockphoto.com/id/1029783828/vector/forest-background-nature-landscape-evergreen-coniferous-trees-pine-spruce-christmas-tree.jpg?s=612x612&w=0&k=20&c=jf15FZzd0tsotrp9YaR6x01DfEsfZlHhe7p5iQ46dg8=);
+    color: #333;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    color: #2a7f62;
+    margin-top: 50px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+td:hover {
+    background-color: #f1f1f1;
+}
+
+.form-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.form-container button {
+    background-color: #2a7f62;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-container button:hover {
+    background-color: #218c4c;
+    transform: scale(1.05);
+}
+
+.dataTables_wrapper {
+    padding: 20px;
+    background-color: #a8e6cf; /* Light green color */
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Slightly smaller on mobile */
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 1rem;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+.section-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.section-container button {
+    background-color: #2a7f62;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.section-container button:hover {
+    background-color: #218c4c;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .section-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .section-container button {
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+}
+
+
