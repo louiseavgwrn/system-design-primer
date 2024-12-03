@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Usage & Savings Calculator</title>
-    <link rel="stylesheet" href="Style/git addwatersection.css">
+    <link rel="stylesheet" href="Style/watersection.css">
 </head>
 <body>
 
