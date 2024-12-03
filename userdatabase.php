@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; 
-$dbname = 'import_green_guardian'; 
+$dbname = 'green_guardians'; 
 $user = 'root'; 
 $pass = ''; 
 try {

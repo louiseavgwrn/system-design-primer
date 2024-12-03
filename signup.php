@@ -20,11 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
         // Check if username already exists
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
         $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
+        
+        // If either username or email already exists
         if ($stmt->rowCount() > 0) {
-            $error = "Username already exists.";
+            $error = "Username or Email already exists.";
         } else {
             // Insert the new user into the database
             $stmt = $conn->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
@@ -46,13 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up - Green Guardians</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style/signup.css">
 </head>
 <body>
     <div class="form-container">
@@ -61,35 +65,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form method="post" action="signup.php">
             <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required><br><br>
+            <input type="text" id="fullname" name="fullname" required>
 
             <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required><br><br>
+            <input type="email" id="email" name="email" required>
 
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
+            <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input type="password" id="password" name="password" required>
 
             <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+            <input type="password" id="confirm_password" name="confirm_password" required>
 
             <label for="phone">Phone Number (Optional):</label>
-            <input type="text" id="phone" name="phone"><br><br>
+            <input type="text" id="phone" name="phone">
 
             <label for="date">Date of Birth:</label>
-            <input type="date" id="date" name="date" required><br><br>
+            <input type="date" id="date" name="date" required>
 
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
-            </select><br><br>
+            </select>
 
             <label for="address">Address:</label>
-            <textarea id="address" name="address" required></textarea><br><br>
+            <textarea id="address" name="address" required></textarea>
 
             <button type="submit">Signup</button>
         </form>
