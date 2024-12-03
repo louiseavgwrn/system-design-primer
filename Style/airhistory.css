@@ -1,26 +1,107 @@
-
-body {
+/* Apply a global reset for consistent styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
 }
+
+/* Set the background image and style */
+body {
+    background: url('https://png.pngtree.com/background/20230612/original/pngtree-picture-of-something-calm-and-peaceful-and-with-green-grass-and-picture-image_3185523.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Style the main section and buttons */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+.section-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: rgba(0, 128, 0, 0.8);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(0, 100, 0, 0.9);
+}
+
+/* Style the table */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 36px;
+}
+
 table {
-    margin: 0 auto;
-    border-collapse: collapse;
     width: 90%;
+    margin: 0 auto 50px;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
 }
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+thead th {
+    padding: 15px;
+    background-color: rgba(34, 139, 34, 0.9);
+    color: #fff;
+    font-size: 18px;
+    border: 1px solid #ffffff;
+}
+
+tbody td {
+    padding: 12px;
     text-align: center;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    color: #ffffff;
 }
-th {
-    background-color: #4CAF50;
-    color: white;
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
 }
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+
+tbody tr:hover {
+    background-color: rgba(0, 128, 0, 0.7);
 }
-tr:hover {
-    background-color: #ddd;
+
+/* Style for the message when no data is available */
+tbody td[colspan="10"] {
+    font-style: italic;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
 }

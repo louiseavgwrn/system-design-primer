@@ -1,0 +1,141 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url(https://static.vecteezy.com/system/resources/previews/004/639/004/non_2x/wildlife-silhouette-background-free-vector.jpg) no-repeat center center/cover;
+    background-color: #F39C12; 
+    color: #333;
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.section-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.section-container button {
+    background-color: #E67E22; 
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.section-container button:hover {
+    background-color: #D35400; 
+    transform: scale(1.1);
+}
+
+#sections-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#introduction, #importance, #tips, #facts {
+    background-color: rgba(255, 255, 255, 0.85); 
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 48%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#introduction:hover, #importance:hover, #tips:hover, #facts:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+section h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    color: #D35400; 
+}
+
+section p, section ul {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.8;
+}
+
+
+#animal-sound {
+    background: linear-gradient(to right, #F39C12, #E67E22); 
+    color: white;
+    padding: 50px 20px;
+    border-radius: 15px;
+    margin-top: 40px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+#animal-sound button {
+    background-color: #D35400; 
+    font-size: 18px;
+    padding: 20px 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#animal-sound button:hover {
+    background-color: #E67E22; 
+    transform: scale(1.1);
+}
+
+
+footer {
+    text-align: center;
+    background-color: #F39C12; 
+    color: white;
+    padding: 30px 20px;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+footer p {
+    margin-top: 10px;
+    font-size: 1.3em;
+}
+
+
+@media (max-width: 768px) {
+    #sections-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #introduction, #importance, #tips, #facts {
+        width: 100%;
+    }
+
+    .section-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .section-container button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+    }
+}
