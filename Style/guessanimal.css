@@ -1,0 +1,54 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/037/981/143/small_2x/ai-generated-world-animal-day-green-earth-concept-ai-generated-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+strong {
+    color: #FFD700; /* gold color for emphasis */
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+}

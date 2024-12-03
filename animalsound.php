@@ -25,9 +25,18 @@ $random_sound = $animal_sounds[array_rand($animal_sounds)];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Stylesheet" href="Style/animalsound.css">
     <title>Animal Sound Guessing Game</title>
 </head>
 <body>
+
+<main>
+    <div class="section-container">
+        <button onclick="window.location.href='useracc.php'">Home</button>
+        <button onclick="window.location.href='lifesection.php'">Life Section</button>
+    </div>
+</main>
+
     <h1>Animal Sound Guessing Game</h1>
     <p>Listen to the sound and guess which animal it belongs to!</p>
 
