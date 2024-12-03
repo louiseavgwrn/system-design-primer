@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Usage & Savings Calculator</title>
-    <link rel="stylesheet" href="Style/watersection.css">
+    <link rel="stylesheet" href="watersection.css">
 </head>
 <body>
 
@@ -26,7 +26,8 @@
         <p>Track your water consumption and discover ways to conserve water for a better tomorrow.</p>
     </header>
 
-    <section>
+<div class="container">
+    <div class="section-box">
         <h2>Why Water Matters</h2>
         <p>Water is one of the most precious resources on Earth. Here’s why we need to protect it:</p>
         <ul>
@@ -34,20 +35,20 @@
             <li>By 2025, half of the world’s population will face water shortages.</li>
             <li>Water scarcity already affects 1.1 billion people globally.</li>
         </ul>
-    </section>
+</div>
 
-    <section>
+<div class="section-box">
         <h2>🌱 Smart Water-Saving Tips</h2>
         <p>Small actions can lead to significant water savings. Here are some tips:</p>
         <ul>
             <li>Turn off the tap while brushing your teeth – save up to 8 liters per minute!</li>
-            <li>Switch to low-flow water fixtures to conserve water without compromising comfort.</li>
+            <li>Switch to low-flow water fixtures to conserve water without compromising comfort.</li>git session_status
             <li>Use a bucket to wash your car instead of a hose to save up to 500 liters per wash.</li>
             <li>Check for leaks and repair them promptly to avoid wasting hundreds of liters a month.</li>
         </ul>
-    </section>
+</div>
 
-    <section>
+<div class="section-box">
         <h2>⚠️ Global Water Challenges</h2>
         <p>Water scarcity is a pressing global issue. Here are some of the key challenges:</p>
         <ul>
@@ -55,9 +56,9 @@
             <li><strong>Climate Change:</strong> Extreme weather events such as droughts and floods impact water availability.</li>
             <li><strong>Overuse:</strong> Unsustainable agricultural and industrial practices that deplete water resources.</li>
         </ul>
-    </section>
+</div>
 
-    <section>
+    <div class="section-box">
         <h2>🌊 Fun Water Facts</h2>
         <div class="fact-box">
             <p>Did you know? It takes 2,700 liters of water to produce just one cotton shirt!</p>
@@ -66,7 +67,8 @@
             <li>Water regulates Earth's climate and supports all life.</li>
             <li>Only 0.007% of Earth's water is available for human use.</li>
         </ul>
-    </section>
+    </div>
+</div>
     
 <?php
 session_start();
@@ -77,7 +79,8 @@ if (isset($_SESSION['water_results'])) {
     unset($_SESSION['water_results']);
 }
 ?>
-<div class="form-box">
+
+<div class="form-box">    
     <form action="waterprocess.php" method="POST">
         <label for="calculator_type">Select Calculator:</label>
         <select name="calculator_type" id="calculator_type" required onchange="showCalculatorForm()">
@@ -416,7 +419,7 @@ case "water_efficiency":
 </script>
 
     <footer>
-        <p><strong>💧 Every drop counts. Together, we can make a difference. </strong>💧</p>
+        <p>💧 Every drop counts. Together, we can make a difference.💧</p>
     </footer>
 
 </body>
