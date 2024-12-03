@@ -1,0 +1,174 @@
+/* General page setup */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://img.freepik.com/premium-vector/drawing-forest-with-trees-forest-trees_1138841-33615.jpg?semt=ais_hybrid') 
+                no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Header styles */
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin: 50px auto 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Form container */
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Form labels and inputs */
+label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold;
+}
+
+select, input[type="number"], button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Form input elements when focused */
+select:focus, input[type="number"]:focus {
+    outline: none;
+    border: 2px solid #4CAF50;
+}
+
+/* Results section */
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* History link button in the top-right corner */
+.button-link {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    background-color: #008CBA;
+    color: #ffffff;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 10; /* Ensure it's above other content */
+}
+
+.button-link:hover {
+    background-color: #005f6b;
+    transform: scale(1.05);
+}
+
+
+/* Ensure adequate spacing between form elements */
+form > * {
+    margin-top: 15px;
+}
+
+/* General button container styling */
+.section-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 30px;
+}
+
+/* Home button styling */
+.btn-home {
+    background-color: #008CBA;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-home:hover {
+    background-color: #005f6b;
+    transform: scale(1.05);
+}
+
+/* Air Section button styling */
+.btn-air-section {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-air-section:hover {
+    background-color: #3e8e41;
+    transform: scale(1.05);
+}
+
+/* View Tree Table button styling */
+.btn-view-table {
+    background-color: #FF9800;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-view-table:hover {
+    background-color: #e68900;
+    transform: scale(1.05);
+}
+
+

@@ -4,43 +4,100 @@ body, h1, h2, h3, h4, p, ul {
     padding: 0;
 }
 
+/* Basic body styling */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f9f9f9;
+    background-size: cover;
+    background: url(https://applescoop.org/image/wallpapers/mac/apple-macbook-pro-macbookpro-wallpapers-hd-4k-anime-mountain-landscape-29-10-2024-1730269542-hd-wallpaper.jpeg);
+    background-position: center;
+    color: #333;
 }
 
-/* Container and card layout */
+/* Container layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.6); 
+    border-radius: 15px;
 }
 
-.card {
+/* Section container with navigation */
+.section-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Header styling */
+header h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Section styling */
+section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+section p {
+    font-size: 1.1em;
+    color: #666;
     margin-bottom: 20px;
 }
 
+/* Tips container styling */
 .tips-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
-/* Styling individual tips */
+/* Individual tip styling */
 .tip {
-    background-color: #fff;
+    background-color: rgba(135, 206, 235, 0.8); 
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(33.33% - 20px); /* Three items per row */
+    flex: 1 1 calc(33.33% - 20px);
     box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tip:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .tip h3 {
     font-size: 1.2em;
-    color: #333;
+    color: white;
 }
 
 .tip p {
@@ -48,30 +105,63 @@ body {
     color: #666;
 }
 
+/* Pros and cons section inside each tip */
 .pros-cons {
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 .pros-cons div {
     width: 48%;
 }
 
-ul {
-    list-style: none;
-}
-
-ul li {
-    font-size: 0.9em;
-    color: #555;
-}
-
-ul li strong {
+.pros-cons h4 {
     color: #333;
+    font-size: 1em;
 }
 
+.pros-cons ul {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Button for action links */
+.btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
+    /* Stack the tips on small screens */
     .tip {
         flex: 1 1 100%;
+    }
+
+    /* Stack pros and cons in a single column */
+    .pros-cons {
+        flex-direction: column;
+    }
+
+    .pros-cons div {
+        width: 100%;
+    }
+
+    /* Buttons for navigation section */
+    .section-container {
+        flex-direction: column;
+        gap: 15px;
     }
 }

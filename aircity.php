@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree CO₂ Absorption</title>
+    <link rel="Stylesheet" href="Style/aircity.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -14,6 +15,13 @@
     </script>
 </head>
 <body>
+<main>
+    <div class="section-container">
+        <button onclick="window.location.href='useracc.php'">Home</button>
+        <button onclick="window.location.href='airsection.php'">Air Section</button>
+    </div>
+</main>
+
     <h1>Tree Species CO₂ Absorption and Oxygen Production</h1>
 
     <table id="plantInfoTable" class="display">

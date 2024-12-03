@@ -283,7 +283,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $species = $_POST['species'] ?? null;
     $years = $_POST['years'] ?? null;
     $weather_condition = $_POST['weather_condition'] ?? null;
-    $number_of_trees = $_POST['number_of_trees'] ?? 1; // Get the number of trees, default to 1
+    $number_of_trees = $_POST['number_of_trees'] ?? 1; 
 
   
     if ($weather_condition) {
@@ -293,23 +293,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($species && $years !== null) {
-        // Ensure the selected species exists in the tree data
+        
         if (array_key_exists($species, $tree_data)) {
             $tree = $tree_data[$species];
             $co2_absorption = $tree['co2_absorption'] * $number_of_trees;  
             $oxygen_production = $co2_absorption * $oxygen_conversion_factor;
 
-            // Calculate growth in feet over time for a single tree
+        
             $growth_in_meters = $tree['growth_rate'] * $years;  
 
-            // Convert growth from meters to feet (1 meter = 3.28084 feet)
+           
             $growth = $growth_in_meters * 3.28084;  
 
-            // Calculate space required (assuming each tree needs space based on its average size)
+        
             $size_in_feet = $tree['average_size'] * 3.28084; 
             $space_required = $size_in_feet * $number_of_trees; 
 
-            // Calculate pollutant absorption (e.g., NO2, PM)
+         
             $pollutant_absorption = $tree['pollutant_absorption'] * $number_of_trees; 
 
             
@@ -338,15 +338,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant a Tree</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-    </style>
+    <link rel="Stylesheet" href="Style/airtrees.css">
+   
 </head>
 <body>
+
+<main>
+    <div class="section-container">
+        <button class="btn-home" onclick="window.location.href='useracc.php'">Home</button>
+        <button class="btn-air-section" onclick="window.location.href='airsection.php'">Air Section</button>
+        <button class="btn-view-table" onclick="window.location.href='aircity.php'">View Tree Table</button>
+    </div>
+</main>
+
+
     <h1>Plant a Tree</h1>
 
     <form method="POST">
@@ -395,8 +400,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
 
-
 <br><br>
 <a href="airhistory.php" class="button-link">View Planting History</a>
+
 </body>
 </html>
