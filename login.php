@@ -35,28 +35,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Green Guardians</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="Style/login.css">
 </head>
 <body>
-    <h1>Login to Green Guardians</h1>
-    <?php if (isset($error)): ?>
-        <div class="error"><?php echo $error; ?></div>
-    <?php endif; ?>
-
     <form method="post" action="login.php">
+        <h1>Login to Green Guardians</h1>
+        <?php if (isset($error)): ?>
+            <div class="error"><?php echo $error; ?></div>
+        <?php endif; ?>
+
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="username" name="username" required>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <input type="password" id="password" name="password" required>
 
         <button type="submit">Login</button>
+        <p>Don't have an account? <a href="signup.php" style="color: #2c5f2d;">Sign up here</a>.</p>
     </form>
-
-    <p>Don't have an account? <a href="signup.php">Sign up here</a>.</p>
 
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
     </footer>
 </body>
 </html>
+
+
+
