@@ -104,18 +104,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $animalInfo = getAnimalInfo($correctAnswer);
 
     if ($userGuess === $correctAnswer) {
+        echo "<div class = 'incorrect-answer-box'>";
         echo "<h1>Correct!</h1>";
         echo "<p>You guessed it right. The sound belongs to a <strong>$correctAnswer</strong>.</p>";
-        
-        // Displaying fun fact and description
-        echo "<h2>Fun Fact:</h2><p>{$animalInfo['fact']}</p>";
-        echo "<h3>Description:</h3><p>{$animalInfo['description']}</p>";
-        echo "<img src='images/{$animalInfo['image']}' alt='$correctAnswer' width='300'>";
-        
     } else {
         echo "<h1>Wrong Answer!</h1>";
         echo "<p>Sorry, that's incorrect. The correct answer is <strong>$correctAnswer</strong>.</p>";
     }
+
+    // Displaying fun fact and description with new classes
+    echo "<div class='fun-fact'>";
+    echo "<h2>Fun Fact:</h2><p>{$animalInfo['fact']}</p>";
+    echo "</div>";
+
+    echo "<div class='description'>";
+    echo "<h3>Description:</h3><p>{$animalInfo['description']}</p>";
+    echo "<img src='images/{$animalInfo['image']}' alt='$correctAnswer' width='300'>";
+    echo "</div>";
 
     echo '<br><a href="animalsound.php">Try Again</a>';
 } else {
