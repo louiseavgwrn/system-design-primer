@@ -91,7 +91,7 @@
         <button class="toggle-button" onclick="toggleForm()">Create My Owned Plant</button>
         <div id="createPlantForm">
             <h2>Create a New Plant</h2>
-            <form method="POST" action="plantdata.php">
+            <form method="POST" action="plantcreate.php">
                 <label for="name">Plant Name:</label>
                 <input type="text" name="name" required>
 
@@ -129,37 +129,13 @@
             </thead>
             <tbody>
                 <?php
-                require_once 'spgdatabase.php';
+                require_once 'plantdatabase.php';
                 require_once 'plantcrud.php';
 
                 $database = new Database();
                 $db = $database->getConnect();
 
                 $plant = new Plant($db);
-
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $plant->name = $_POST['name'];
-                    $plant->scientific_name = $_POST['scientific_name'];
-                    $plant->region = $_POST['region'];
-                    $plant->type = $_POST['type'];
-                    $plant->description = $_POST['description'];
-
-                    if ($plant->create()) {
-                        echo "<div class='floating-plant'>🌿 Plant created successfully!</div>";
-                    } else {
-                        echo "<div>Error creating plant.</div>";
-                    }
-                }
-
-                if (isset($_GET['delete_id'])) {
-                    $plant->id = $_GET['delete_id'];
-                    if ($plant->delete()) {
-                        echo "<div>Plant deleted successfully!</div>";
-                    } else {
-                        echo "<div>Error deleting plant.</div>";
-                    }
-                }
-
                 $stmt = $plant->read();
                 if ($stmt && $stmt->rowCount() > 0) {
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -170,7 +146,13 @@
                         echo "<td>" . htmlspecialchars($row['region']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                        echo "<td><a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a></td>";
+                        echo "<td class='actions'>
+                        <form method='POST' action='plantdelete.php' style='display:inline;'>
+                            <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
+                            <input type='submit' value='Delete'>
+                        </form>
+                        </td> ";
+            
                         echo "</tr>";
                     }
                 } else {
