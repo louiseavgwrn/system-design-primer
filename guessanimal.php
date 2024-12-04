@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $random_sound = $_POST['sound'];  
     $correctAnswer = $animal_sounds[$random_sound];
 
-    // Function to get the fun fact and image for the animal
     function getAnimalInfo($animal) {
         $info = [
             'loon' => [
@@ -100,7 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $info[$animal] ?? null;
     }
 
-    // Get the information for the correct animal
     $animalInfo = getAnimalInfo($correctAnswer);
 
     if ($userGuess === $correctAnswer) {
@@ -112,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p>Sorry, that's incorrect. The correct answer is <strong>$correctAnswer</strong>.</p>";
     }
 
-    // Displaying fun fact and description with new classes
     echo "<div class='fun-fact'>";
     echo "<h2>Fun Fact:</h2><p>{$animalInfo['fact']}</p>";
     echo "</div>";
@@ -139,5 +136,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     
+<main>
+        <div class="section-container">
+            <button onclick="window.location.href='useracc.php'" class="nav-button">Home</button>
+            <button onclick="window.location.href='lifesection.php'" class="nav-button">Life Section</button>
+        </div>
+    </main>
+
+
 </body>
 </html>

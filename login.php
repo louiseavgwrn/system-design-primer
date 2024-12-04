@@ -1,6 +1,9 @@
 <?php
 session_start();
-require 'userdatabase.php';
+require 'dbuser.php';
+
+$database = new Database();
+$connect = $database->getConnect(); 
 
 $redirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : 'useracc.php'; 
 
@@ -9,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars($_POST['password']);
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

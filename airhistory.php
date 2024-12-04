@@ -1,5 +1,5 @@
 <?php
-require 'airdbconnect.php'; 
+require 'dbair.php'; 
 
 $db = new Database();
 $conn = $db->getConnect();

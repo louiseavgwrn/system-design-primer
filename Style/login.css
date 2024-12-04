@@ -1,59 +1,65 @@
 /* General Body Styling */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background: url('https://png.pngtree.com/background/20230412/original/pngtree-natural-forest-with-beautiful-mountains-and-clear-waters-picture-image_2396850.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: white;
+    color: #2c5f2d;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
 }
 
 /* Form Container Styling */
 form {
-    width: 100%; /* Ensure responsiveness on all screen sizes */
-    max-width: 500px; /* Max width for the form */
-    padding: 30px; /* Slightly more padding for spacing */
-    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
-    border-radius: 10px; /* Slightly more rounded corners */
-    box-shadow: 0 4px 12px rgba(14, 80, 5, 0.5);
+    width: 100%;
+    max-width: 400px;  /* More compact form */
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for softer look */
+    border-radius: 8px;  /* Softer corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
     text-align: center;
 }
 
 /* Header Styling */
 form h1 {
     margin-bottom: 20px;
-    font-size: 26px;
-    color: #333; /* Slightly dark color for the header */
-    font-weight: 600; /* Make the title bold */
+    font-size: 24px;
+    color: #2c5f2d;
+    font-weight: 600;
 }
 
 /* Form Label and Input Styling */
 form label {
     display: block;
-    margin-bottom: 5px;
-    text-align: left; /* Align labels to the left */
-    color: #333; /* Slightly darker color for labels */
+    margin-bottom: 8px;
+    text-align: left;
+    color: #2c5f2d;
     font-weight: bold;
 }
 
 form input {
-    width: 100%; /* Full width for consistency */
-    padding: 12px; /* Increased padding for inputs */
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #fff;
+    background-color: #e8f5e9;  /* Softer background color */
     color: #333;
+    transition: border-color 0.3s;
+}
+
+form input:focus {
+    border-color: #2c5f2d;  /* Green border on focus */
+    outline: none;
 }
 
 /* Button Styling */
 form button {
-    width: 100%; /* Full width */
-    padding: 12px; /* Larger button size */
+    width: 100%;
+    padding: 12px;
     background-color: #2c5f2d;
     color: white;
     font-size: 16px;
@@ -68,14 +74,24 @@ form button:hover {
     background-color: #3a7b34;
 }
 
+/* Link Styling */
+form p a {
+    color: #2c5f2d;
+    text-decoration: none;
+}
+
+form p a:hover {
+    text-decoration: underline;
+}
+
 /* Footer Styling */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    margin-top: 20px;
-    text-align: center;
-    color: white;
     padding: 10px 0;
-    background-color: #2c5f2d; /* Matching color to form button */
+    text-align: center;
+    background-color: #2c5f2d;
+    color: white;
+    font-size: 14px;
 }

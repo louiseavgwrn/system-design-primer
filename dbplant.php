@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "tree_history"; 
+    private $db_name = "green_guardians"; 
     private $username = "root";
     private $password = "";
     public $connect;
