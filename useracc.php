@@ -46,7 +46,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <div id="sidebar" class="sidebar">
         <button onclick="window.location.href='profile.php'">View Profile</button>
-        <button onclick="window.location.href='switch.php'">Switch account</button>
+        <button onclick="window.location.href='switchacc.php'">Switch account</button>
         <button onclick="window.location.href='signup.php'">Sign up another account</button>
         <button onclick="window.location.href='logout.php'">Log out</button>
         <button class="close-btn" onclick="toggleSidebar()">Close</button>

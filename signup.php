@@ -2,35 +2,38 @@
 session_start();
 require 'dbuser.php'; 
 
+$database = new Database();
+$connect = $database->getConnect(); 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password']; // Get confirm password
+    $confirm_password = $_POST['confirm_password'];
     $phone = $_POST['phone'];
-    $date = $_POST['date'];  // 'date' instead of 'dob'
+    $date = $_POST['date'];  
     $gender = $_POST['gender'];
     $address = $_POST['address'];
 
-    // Check if the password and confirm password match
+
     if ($password !== $confirm_password) {
         $error = "Passwords do not match.";
     } else {
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        // Check if username already exists
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
+        
+        $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         
-        // If either username or email already exists
+    
         if ($stmt->rowCount() > 0) {
             $error = "Username or Email already exists.";
         } else {
-            // Insert the new user into the database
-            $stmt = $conn->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
+    
+            $stmt = $connect->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
                                     VALUES (:fullname, :email, :username, :password, :phone, :date, :gender, :address)");
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':email', $email);
