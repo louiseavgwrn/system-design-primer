@@ -2,6 +2,9 @@
 session_start();
 require 'dbuser.php'; 
 
+$database = new Database();
+$connect = $database->getConnect(); 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
@@ -20,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
         
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
+        $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -30,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Username or Email already exists.";
         } else {
     
-            $stmt = $conn->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
+            $stmt = $connect->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
                                     VALUES (:fullname, :email, :username, :password, :phone, :date, :gender, :address)");
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':email', $email);
