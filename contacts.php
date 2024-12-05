@@ -8,18 +8,20 @@
 </head>
 <body>
     <div class="navbar">
-        <button class="nav-button" onclick="window.location.href='useracc.php'">Home</button>
-        <button class="nav-button" onclick="window.location.href='useraboutus.php'">About Us</button>
-        <button class="nav-button" onclick="window.location.href='usercontactus.php'">Contact Us</button>
+        <button class="nav-button" onclick="window.location.href='main.php'">Home</button>
+        <button class="nav-button" onclick="window.location.href='aboutus.php'">About Us</button>
+        <button class="nav-button" onclick="window.location.href='contacts.php'">Contact Us</button>
         <div class="dropdown">
             <button class="dropdown-button">Sections</button>
             <div class="dropdown-content">
-                <a class="dropdown-link" href="landsection.php">Land Section</a>
-                <a class="dropdown-link" href="watersection.php">Water Section</a>
-                <a class="dropdown-link" href="airsection.php">Air Section</a>
-                <a class="dropdown-link" href="lifesection.php">Life Section</a>
+                <a class="dropdown-link" href="login.php?redirect_to=landsection.php">Land Section</a>
+                <a class="dropdown-link" href="login.php?redirect_to=watersection.php">Water Section</a>
+                <a class="dropdown-link" href="login.php?redirect_to=airsection.php">Air Section</a>
+                <a class="dropdown-link" href="login.php?redirect_to=lifesection.php">Life Section</a>
             </div>
         </div>
+        <button class="nav-button" onclick="window.location.href='login.php'">Login</button>
+        <button class="nav-button" onclick="window.location.href='signup.php'">Sign Up</button>
     </div>
 
     <section class="contact-section">
