@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'userdatabase.php';
+require 'dbuser.php';
 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -8,9 +8,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+$database = new Database();
+$connect = $database->getConnect();
 try {
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
     $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -41,7 +43,7 @@ try {
 </head>
 <body>
     <header>
-        <button class="home-btn" onclick="window.location.href='main.php'">Home</button>
+        <button class="home-btn" onclick="window.location.href='useracc.php'">Home</button>
         <button class="profile-btn" onclick="toggleSidebar()">Profile Account</button>
     </header>
 
