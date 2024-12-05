@@ -16,42 +16,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender = $_POST['gender'];
     $address = $_POST['address'];
 
-
     if ($password !== $confirm_password) {
         $error = "Passwords do not match.";
     } else {
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        
+        // Check if username or email already exists
         $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        
-    
+
         if ($stmt->rowCount() > 0) {
             $error = "Username or Email already exists.";
         } else {
-    
-            $stmt = $connect->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
-                                    VALUES (:fullname, :email, :username, :password, :phone, :date, :gender, :address)");
-            $stmt->bindParam(':fullname', $fullname);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $password_hashed);
-            $stmt->bindParam(':phone', $phone);
-            $stmt->bindParam(':date', $date);
-            $stmt->bindParam(':gender', $gender);
-            $stmt->bindParam(':address', $address);
-            $stmt->execute();
+            // Insert new user into the database
+            try {
+                $stmt = $connect->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
+                                            VALUES (:fullname, :email, :username, :password, :phone, :date, :gender, :address)");
+                $stmt->bindParam(':fullname', $fullname);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':password', $password_hashed);
+                $stmt->bindParam(':phone', $phone);
+                $stmt->bindParam(':date', $date);
+                $stmt->bindParam(':gender', $gender);
+                $stmt->bindParam(':address', $address);
+                $stmt->execute();
 
-            header("Location: login.php");
-            exit;
+                // Get the newly inserted user's account_id
+                $account_id = $connect->lastInsertId(); // Fetch the last inserted ID (assuming account_id is auto-incremented)
+
+                // Set session variables
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $username;
+                $_SESSION['account_id'] = $account_id; // Store account_id in session
+
+                // Redirect to login page or user dashboard
+                header("Location: login.php");
+                exit;
+            } catch (PDOException $e) {
+                $error = "Database error: " . $e->getMessage();
+            }
         }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

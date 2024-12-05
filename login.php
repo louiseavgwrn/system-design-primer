@@ -12,21 +12,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars($_POST['password']);
 
     try {
+        // Fetch user from the database based on username
         $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
+            // Store user session data
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $user['username'];
-
+            $_SESSION['account_id'] = $user['id'];  // Store the account_id in session
+        
+            // Redirect to the desired page
             header("Location: $redirectUrl");
             exit;
         } else {
             $error = "Invalid username or password.";
         }
+        
     } catch (PDOException $e) {
+        // Handle any database errors
         $error = "Database error: " . $e->getMessage();
     }
 }
@@ -62,6 +68,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 </body>
 </html>
-
-
-
