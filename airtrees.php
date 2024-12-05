@@ -348,8 +348,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button class="btn-home" onclick="window.location.href='useracc.php'">Home</button>
         <button class="btn-air-section" onclick="window.location.href='airsection.php'">Air Section</button>
         <button class="btn-view-table" onclick="window.location.href='aircity.php'">View Tree Table</button>
+        <button class="btn-track-trees" onclick="window.location.href='airtrack.php'">Track Planted Trees</button>
     </div>
 </main>
+
 
 
     <h1>Plant a Tree</h1>
@@ -401,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
 
 <br><br>
-<a href="airhistory.php" class="button-link">View Planting History</a>
+    <a href="airhistory.php" class="button-link">View Planting History</a>
 
 </body>
 </html>
