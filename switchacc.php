@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Back Button -->
         <div class="back-button">
-            <a href="main.php">Back to Main</a>
+            <a href="useracc.php">Back to Main</a>
         </div>
     </div>
 </body>
