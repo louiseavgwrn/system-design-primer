@@ -8,12 +8,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+if (isset($_SESSION['current_account'])) {
+    $current_username = $_SESSION['current_account'];
+} else {
+    
+    $current_username = $_SESSION['username'];
+}
+
 $database = new Database();
 $connect = $database->getConnect();
-try {
 
+try {
+    
     $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
+    $stmt->bindParam(':username', $current_username, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -22,12 +30,11 @@ try {
         exit;
     }
 
+    
     if (empty($user['phone'])) {
         $user['phone'] = 'N/A';
     }
-    
 } catch (PDOException $e) {
-   
     die("Database error: " . htmlspecialchars($e->getMessage()));
 }
 ?>
@@ -39,7 +46,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Green Guardians</title>
     <link rel="stylesheet" href="Style/view_profile.css">
-    
 </head>
 <body>
     <header>

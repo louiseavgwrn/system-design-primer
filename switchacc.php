@@ -1,26 +1,17 @@
 <?php
 session_start();
+require 'dbswitch.php';
 
-// Database connection
-$host = 'localhost';
-$dbname = 'green_guardians';
-$user = 'root';
-$pass = '';
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
+$db = new Database();
+$conn = $db->getConnect();
 
-// Initialize session variables
+
 if (!isset($_SESSION['logged_in_accounts'])) {
     $_SESSION['logged_in_accounts'] = [];
     $_SESSION['current_account'] = null;
 }
 
-// Fetch an account from the database
 function fetchAccount($username)
 {
     global $conn;
@@ -30,7 +21,7 @@ function fetchAccount($username)
     return $stmt->fetchColumn();
 }
 
-// Add an existing account to the session
+
 function addAccount($username)
 {
     $account = fetchAccount($username);
@@ -39,14 +30,14 @@ function addAccount($username)
         if (!in_array($account, $_SESSION['logged_in_accounts'])) {
             $_SESSION['logged_in_accounts'][] = $account;
         }
-        $_SESSION['current_account'] = $account; // Set as current account
+        $_SESSION['current_account'] = $account; 
         return "Account added and set as current: $account";
     } else {
         return "Account not found: $username";
     }
 }
 
-// Switch to an account already in the session
+
 function switchAccount($username)
 {
     if (in_array($username, $_SESSION['logged_in_accounts'])) {
@@ -57,11 +48,11 @@ function switchAccount($username)
     }
 }
 
-// Handle POST requests
+
 $status_message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_account'])) {
-        $username = $_POST['username'] ?? '';
+        $username = trim($_POST['username'] ?? '');
         $status_message = addAccount($username);
     } elseif (isset($_POST['switch_account'])) {
         $username = $_POST['switch_account'];
@@ -81,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h1>Switch Accounts</h1>
 
-        <!-- Status Message -->
+        
         <?php if ($status_message): ?>
             <div class="status-message">
-                <p><?php echo $status_message; ?></p>
+                <p><?php echo htmlspecialchars($status_message); ?></p>
             </div>
         <?php endif; ?>
 
@@ -103,8 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="switch_account">Switch to Account:</label>
                 <select name="switch_account" id="switch_account" required>
                     <?php foreach ($_SESSION['logged_in_accounts'] as $account): ?>
-                        <option value="<?php echo $account; ?>" <?php echo ($_SESSION['current_account'] === $account) ? 'selected' : ''; ?>>
-                            <?php echo $account; ?>
+                        <option value="<?php echo htmlspecialchars($account); ?>" <?php echo ($_SESSION['current_account'] === $account) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($account); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -114,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="current-account-box">
             <h2>Current Account:</h2>
-            <p><?php echo $_SESSION['current_account'] ?? 'None'; ?></p>
+            <p><?php echo htmlspecialchars($_SESSION['current_account'] ?? 'None'); ?></p>
         </div>
 
-        <!-- Back Button -->
+      
         <div class="back-button">
             <a href="useracc.php">Back to Main</a>
         </div>
