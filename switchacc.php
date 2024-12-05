@@ -2,64 +2,77 @@
 session_start();
 require 'dbswitch.php';
 
-
 $db = new Database();
 $conn = $db->getConnect();
 
-
+// Initialize session variables if not already set
 if (!isset($_SESSION['logged_in_accounts'])) {
     $_SESSION['logged_in_accounts'] = [];
     $_SESSION['current_account'] = null;
+    $_SESSION['account_id'] = null;  // Initialize account_id
 }
 
 function fetchAccount($username)
 {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT username FROM users WHERE username = :username");
+    // Fetch account ID from the users table based on the username
+    $stmt = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
     $stmt->execute(['username' => $username]);
-    return $stmt->fetchColumn();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 
 function addAccount($username)
 {
     $account = fetchAccount($username);
 
     if ($account) {
-        if (!in_array($account, $_SESSION['logged_in_accounts'])) {
-            $_SESSION['logged_in_accounts'][] = $account;
+        // If the account exists and is not already in the logged-in accounts list
+        if (!in_array($account['username'], $_SESSION['logged_in_accounts'])) {
+            $_SESSION['logged_in_accounts'][] = $account['username'];
         }
-        $_SESSION['current_account'] = $account; 
-        return "Account added and set as current: $account";
+        // Set the current account and update account_id in the session
+        $_SESSION['current_account'] = $account['username'];
+        $_SESSION['account_id'] = $account['id'];
+        return "Account added and set as current: $account[username]";
     } else {
         return "Account not found: $username";
     }
 }
 
-
 function switchAccount($username)
 {
     if (in_array($username, $_SESSION['logged_in_accounts'])) {
-        $_SESSION['current_account'] = $username;
+        // Fetch account details to update session with the correct account ID
+        $account = fetchAccount($username);
+        $_SESSION['current_account'] = $account['username'];
+        $_SESSION['account_id'] = $account['id'];
         return "Switched to account: $username";
     } else {
         return "Account not logged in: $username";
     }
 }
 
-
 $status_message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_account'])) {
         $username = trim($_POST['username'] ?? '');
-        $status_message = addAccount($username);
+        if ($username) {
+            $status_message = addAccount($username);
+        } else {
+            $status_message = "Please enter a username.";
+        }
     } elseif (isset($_POST['switch_account'])) {
         $username = $_POST['switch_account'];
-        $status_message = switchAccount($username);
+        if ($username) {
+            $status_message = switchAccount($username);
+        } else {
+            $status_message = "Please select an account to switch to.";
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h1>Switch Accounts</h1>
 
-        
         <?php if ($status_message): ?>
             <div class="status-message">
                 <p><?php echo htmlspecialchars($status_message); ?></p>
@@ -93,11 +105,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="switchacc.php">
                 <label for="switch_account">Switch to Account:</label>
                 <select name="switch_account" id="switch_account" required>
-                    <?php foreach ($_SESSION['logged_in_accounts'] as $account): ?>
-                        <option value="<?php echo htmlspecialchars($account); ?>" <?php echo ($_SESSION['current_account'] === $account) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($account); ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <?php if (count($_SESSION['logged_in_accounts']) > 0): ?>
+                        <?php foreach ($_SESSION['logged_in_accounts'] as $account): ?>
+                            <option value="<?php echo htmlspecialchars($account); ?>" <?php echo ($_SESSION['current_account'] === $account) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($account); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No accounts available</option>
+                    <?php endif; ?>
                 </select>
                 <button type="submit">Switch Account</button>
             </form>
@@ -108,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><?php echo htmlspecialchars($_SESSION['current_account'] ?? 'None'); ?></p>
         </div>
 
-      
         <div class="back-button">
             <a href="useracc.php">Back to Main</a>
         </div>
