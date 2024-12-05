@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "landsectionuser"; 
+    private $db_name = "green_guardians"; 
     private $username = "root";
     private $password = "";
     public $connect;

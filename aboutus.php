@@ -24,7 +24,7 @@ $practices = [
 <div class="nav-links">
                 <button onclick="window.location.href='main.php'">Home</button>
                 <button onclick="window.location.href='aboutus.php'">About Us</button>
-                <button onclick="window.location.href='contactus.php'">Contact Us</button>
+                <button onclick="window.location.href='contacts.php'">Contact Us</button>
                 <div class="dropdown">
                     <button class="dropdown-btn">Sections</button>
                     <div class="dropdown-content">
