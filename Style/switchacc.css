@@ -1,0 +1,142 @@
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://png.pngtree.com/background/20230612/original/pngtree-picture-of-something-calm-and-peaceful-and-with-green-grass-and-picture-image_3185523.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px; /* Slightly more padding for a boxy effect */
+    border-radius: 10px;
+    width: 450px; /* Increased width for a more balanced look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Header Styling */
+.container h1 {
+    font-size: 26px; /* Adjusted to be slightly smaller */
+    margin-bottom: 20px;
+    color: #00ff99;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Box Styling for Forms */
+.form-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 25px; /* Adjusted padding for a more box-like feel */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Form Styling */
+.form-box h2 {
+    font-size: 18px; /* Slightly smaller font */
+    margin-bottom: 10px;
+    color: #00ff99;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid #00ff99;
+    padding-bottom: 5px;
+}
+
+/* Input and Select Styling */
+.form-box label {
+    font-size: 14px;
+    color: #cccccc;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-box select,
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #00ff99;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.form-box select:focus,
+.form-box input:focus {
+    border-color: #00ffcc;
+    outline: none;
+}
+
+/* Change the font color of select options to black */
+.form-box select {
+    color: black;
+}
+
+/* Button Styling */
+.form-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00ff99;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.form-box button:hover {
+    background-color: #00cc77;
+    color: white;
+}
+
+/* Current Account Section Styling */
+.current-account-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Status Message Styling */
+.status-message {
+    background-color: #333;
+    padding: 15px;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Back Button Styling */
+.back-button {
+    margin-top: 20px;
+}
+
+.back-button a {
+    color: #00ff99;
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid #00ff99;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.back-button a:hover {
+    background-color: #00ff99;
+    color: black;
+}
