@@ -38,7 +38,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Planting Tracking</title>
-    <link rel="stylesheet" href="Style/airtrack.css">
+    <link rel="stylesheet" href="Style/airtracks.css">
 </head>
 <body>
 
