@@ -1,14 +1,22 @@
 <?php
-require 'dbair.php'; 
+session_start();
+require 'dbair.php';
+
+$account_id = $_SESSION['account_id'] ?? null;
+
+if (!$account_id) {
+    die("Error: User is not logged in.");
+}
 
 $db = new Database();
 $conn = $db->getConnect();
 
 try {
-    $query = "SELECT * FROM history";
+    // Select only the data associated with the logged-in user's account
+    $query = "SELECT * FROM history WHERE account_id = :account_id";
     $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $history_data = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    $stmt->execute([':account_id' => $account_id]);
+    $history_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -19,9 +27,8 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Stylesheet" href="Style/airhistory.css">
+    <link rel="stylesheet" href="Style/airhistory.css">
     <title>Planting History</title>
-
 </head>
 <body>
 
@@ -33,45 +40,44 @@ try {
     </div>
 </main>
 
-
-    <h1>Planting History</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tree Name</th>
-                <th>Quantity</th>
-                <th>CO₂ Absorption (kg/year)</th>
-                <th>Growth Rate (m/year)</th>
-                <th>Climate</th>
-                <th>Average Size (m)</th>
-                <th>Pollutant Absorption (kg/year)</th>
-                <th>Oxygen Production (kg/year)</th>
-                <th>Date Added</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($history_data)): ?>
-                <?php foreach ($history_data as $row): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['tree_name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['quantity']); ?></td>
-                        <td><?php echo htmlspecialchars($row['carbon_absorption']); ?></td>
-                        <td><?php echo htmlspecialchars($row['growth_rate']); ?></td>
-                        <td><?php echo htmlspecialchars($row['climate']); ?></td>
-                        <td><?php echo htmlspecialchars($row['average_size']); ?></td>
-                        <td><?php echo htmlspecialchars($row['pollutant_absorption']); ?></td>
-                        <td><?php echo htmlspecialchars($row['oxygen_production']); ?></td>
-                        <td><?php echo htmlspecialchars($row['date_added']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+<h1>Planting History</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tree Name</th>
+            <th>Quantity</th>
+            <th>CO₂ Absorption (kg/year)</th>
+            <th>Growth Rate (m/year)</th>
+            <th>Climate</th>
+            <th>Average Size (m)</th>
+            <th>Pollutant Absorption (kg/year)</th>
+            <th>Oxygen Production (kg/year)</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($history_data)): ?>
+            <?php foreach ($history_data as $row): ?>
                 <tr>
-                    <td colspan="10">No planting history available.</td>
+                    <td><?php echo htmlspecialchars($row['id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['tree_name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['quantity']); ?></td>
+                    <td><?php echo htmlspecialchars($row['carbon_absorption']); ?></td>
+                    <td><?php echo htmlspecialchars($row['growth_rate']); ?></td>
+                    <td><?php echo htmlspecialchars($row['climate']); ?></td>
+                    <td><?php echo htmlspecialchars($row['average_size']); ?></td>
+                    <td><?php echo htmlspecialchars($row['pollutant_absorption']); ?></td>
+                    <td><?php echo htmlspecialchars($row['oxygen_production']); ?></td>
+                    <td><?php echo htmlspecialchars($row['date_added']); ?></td>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="10">No planting history available.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
 </body>
 </html>

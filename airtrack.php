@@ -1,6 +1,12 @@
 <?php
-// Include the database connection
+session_start();
 require_once 'dbair.php';
+
+// Check if user is logged in
+$account_id = $_SESSION['account_id'] ?? null;
+if (!$account_id) {
+    die("Error: User is not logged in.");
+}
 
 $db = new Database();
 $conn = $db->getConnect();
@@ -8,17 +14,23 @@ $conn = $db->getConnect();
 // Get the current date
 $currentDate = date('Y-m-d');
 
-// Query to get the total quantity of trees planted by date and calculate days since planting
-$dateQuery = "SELECT DATE(plant_date) AS plant_date, 
-              SUM(quantity) AS trees_planted, 
-              DATEDIFF(:current_date, DATE(plant_date)) AS days_since 
-              FROM history 
-              GROUP BY DATE(plant_date) 
-              ORDER BY plant_date";
-$dateStmt = $conn->prepare($dateQuery);
-$dateStmt->bindParam(':current_date', $currentDate, PDO::PARAM_STR);
-$dateStmt->execute();
-$dateData = $dateStmt->fetchAll();
+try {
+    // Query to get the total quantity of trees planted by date for the logged-in user
+    $dateQuery = "SELECT DATE(plant_date) AS plant_date, 
+                  SUM(quantity) AS trees_planted, 
+                  DATEDIFF(:current_date, DATE(plant_date)) AS days_since 
+                  FROM history 
+                  WHERE account_id = :account_id 
+                  GROUP BY DATE(plant_date) 
+                  ORDER BY plant_date";
+    $dateStmt = $conn->prepare($dateQuery);
+    $dateStmt->bindParam(':current_date', $currentDate, PDO::PARAM_STR);
+    $dateStmt->bindParam(':account_id', $account_id, PDO::PARAM_INT);
+    $dateStmt->execute();
+    $dateData = $dateStmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +52,6 @@ $dateData = $dateStmt->fetchAll();
     </div>
 </main>
 
-
 <div class="container">
     <h1>Tree Planting Tracking</h1>
 
@@ -53,13 +64,19 @@ $dateData = $dateStmt->fetchAll();
                 <th>Trees Planted</th>
                 <th>Days Since Planted</th>
             </tr>
-            <?php foreach ($dateData as $row): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($row['plant_date']); ?></td>
-                <td><?php echo htmlspecialchars($row['trees_planted']); ?></td>
-                <td><?php echo htmlspecialchars($row['days_since']); ?> days</td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (!empty($dateData)): ?>
+                <?php foreach ($dateData as $row): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['plant_date']); ?></td>
+                    <td><?php echo htmlspecialchars($row['trees_planted']); ?></td>
+                    <td><?php echo htmlspecialchars($row['days_since']); ?> days</td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="3">No data available for tracking.</td>
+                </tr>
+            <?php endif; ?>
         </table>
     </section>
 </div>

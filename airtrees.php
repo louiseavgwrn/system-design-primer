@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once 'dbair.php';
+
 $oxygen_conversion_factor = 1.3;
 $tree_data = [
     "Oak" => [
@@ -270,11 +273,15 @@ $tree_data = [
 ];
 
 
-require_once 'dbair.php';
-
 $co2_absorption = $growth = $oxygen_production = $space_required = $pollutant_absorption = null;
 $weather_condition = $filtered_trees = [];
-$number_of_trees = 1; // Default to 1 tree
+$number_of_trees = 1;
+
+$account_id = $_SESSION['account_id'] ?? null;
+
+if (!$account_id) {
+    die("Error: User is not logged in.");
+}
 
 $db = new Database();
 $conn = $db->getConnect();
@@ -283,9 +290,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $species = $_POST['species'] ?? null;
     $years = $_POST['years'] ?? null;
     $weather_condition = $_POST['weather_condition'] ?? null;
-    $number_of_trees = $_POST['number_of_trees'] ?? 1; 
+    $number_of_trees = $_POST['number_of_trees'] ?? 1;
 
-  
     if ($weather_condition) {
         $filtered_trees = array_filter($tree_data, function($tree) use ($weather_condition) {
             return $tree['climate'] === $weather_condition;
@@ -293,31 +299,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($species && $years !== null) {
-        
         if (array_key_exists($species, $tree_data)) {
             $tree = $tree_data[$species];
             $co2_absorption = $tree['co2_absorption'] * $number_of_trees;  
             $oxygen_production = $co2_absorption * $oxygen_conversion_factor;
-
-        
             $growth_in_meters = $tree['growth_rate'] * $years;  
-
-           
             $growth = $growth_in_meters * 3.28084;  
-
-        
             $size_in_feet = $tree['average_size'] * 3.28084; 
             $space_required = $size_in_feet * $number_of_trees; 
+            $pollutant_absorption = $tree['pollutant_absorption'] * $number_of_trees;
 
-         
-            $pollutant_absorption = $tree['pollutant_absorption'] * $number_of_trees; 
-
-            
-            $query = "INSERT INTO history (tree_name, quantity, carbon_absorption, growth_rate, climate, average_size, pollutant_absorption, oxygen_production) 
-                      VALUES (:tree_name, :quantity, :carbon_absorption, :growth_rate, :climate, :average_size, :pollutant_absorption, :oxygen_production)";
+            $query = "INSERT INTO history 
+                      (account_id, tree_name, quantity, carbon_absorption, growth_rate, climate, average_size, pollutant_absorption, oxygen_production) 
+                      VALUES (:account_id, :tree_name, :quantity, :carbon_absorption, :growth_rate, :climate, :average_size, :pollutant_absorption, :oxygen_production)";
             $stmt = $conn->prepare($query);
 
             $stmt->execute([
+                ':account_id' => $account_id,
                 ':tree_name' => $species,
                 ':quantity' => $number_of_trees, 
                 ':carbon_absorption' => $co2_absorption,
