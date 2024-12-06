@@ -124,7 +124,7 @@ table {
 
 table thead {
     background-color: #2e7d32;
-    color: rgb(211, 224, 210);
+    color: rgb(255, 255, 255);
 }
 
 table thead th {
@@ -137,7 +137,7 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody tr:hover {
-    background-color: #83bb85b9; 
+    background-color: #6a9b6cb9; 
 }
 
 table tbody td {
