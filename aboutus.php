@@ -67,15 +67,15 @@ $practices = [
         <h2>Meet Our Team</h2>
         <div class="gallery">
             <figure>
-                <img src="Images/Kyle.jpg" alt="Mr. Libera, Kyle Gian S. - Contributor">
+                <img src="Images/Libera.jpg" alt="Mr. Libera, Kyle Gian S. - Contributor">
                 <figcaption>Mr. Libera, Kyle Gian S.</figcaption>
             </figure>
             <figure>
-                <img src="Images/Louise.jpg" alt="Ms. Gawaran, Louise Anne - Contributor">
+                <img src="Images/Gawaran.jpg" alt="Ms. Gawaran, Louise Anne - Contributor">
                 <figcaption>Ms. Gawaran, Louise Anne</figcaption>
             </figure>
             <figure>
-                <img src="Images/Yancy.jpg" alt="Mr. Arligue, Yancy - Contributor">
+                <img src="Images/Arligue.jpg" alt="Mr. Arligue, Yancy - Contributor">
                 <figcaption>Mr. Arligue, Yancy</figcaption>
             </figure>
         </div>
