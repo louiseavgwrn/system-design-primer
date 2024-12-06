@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #b7e0babd;
+    background-color: #d5f1d7bd;
     color: #133816;
     background-image: url(https://images5.alphacoders.com/880/thumb-1920-880687.jpg);
     background-size: cover;
@@ -56,7 +56,7 @@ h2 {
     text-align: center; 
     font-size: 1.8rem; 
     color: #ffffff;
-    margin: 20px 0;
+    margin-top: 60px;
 }
 
 h3 {
@@ -119,6 +119,7 @@ table {
     background-color: rgba(39, 92, 57, 0.521);
     border-radius: 10px;
     overflow: hidden;
+    font-size: 1.2rem;
 }
 
 table thead {
@@ -154,7 +155,6 @@ table tbody td {
 .dataTables_length select {
     color: #ffffff; 
 }
-
 
 .dataTables_paginate a {
     color: #ffffff; 
@@ -201,6 +201,6 @@ footer {
     padding: 20px;
     color: white;
     width: 100%;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 
 }
