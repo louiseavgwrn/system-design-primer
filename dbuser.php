@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "green_guardians"; 
+    private $db_name = "green_guardian"; 
     private $username = "root";
     private $password = "";
     public $connect;
