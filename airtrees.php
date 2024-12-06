@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'dbair.php';
+require_once 'dbconnection.php';
 
 $oxygen_conversion_factor = 1.3;
 $tree_data = [
@@ -273,47 +273,66 @@ $tree_data = [
 ];
 
 
+// Initialize variables
 $co2_absorption = $growth = $oxygen_production = $space_required = $pollutant_absorption = null;
 $weather_condition = $filtered_trees = [];
 $number_of_trees = 1;
 
+// Check if the user is logged in by verifying account_id in session
 $account_id = $_SESSION['account_id'] ?? null;
 
 if (!$account_id) {
-    die("Error: User is not logged in.");
+    die("Error: User is not logged in.");  // Terminate if user is not logged in
 }
 
+// Create database connection
 $db = new Database();
 $conn = $db->getConnect();
 
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data
     $species = $_POST['species'] ?? null;
     $years = $_POST['years'] ?? null;
     $weather_condition = $_POST['weather_condition'] ?? null;
     $number_of_trees = $_POST['number_of_trees'] ?? 1;
 
+    // Filter trees based on weather condition, if provided
     if ($weather_condition) {
         $filtered_trees = array_filter($tree_data, function($tree) use ($weather_condition) {
             return $tree['climate'] === $weather_condition;
         });
     }
 
+    // Calculate environmental benefits if species and years are provided
     if ($species && $years !== null) {
         if (array_key_exists($species, $tree_data)) {
             $tree = $tree_data[$species];
+            
+            // Calculate CO2 absorption for the given number of trees
             $co2_absorption = $tree['co2_absorption'] * $number_of_trees;  
+            
+            // Calculate oxygen production from CO2 absorption (assumed conversion factor)
             $oxygen_production = $co2_absorption * $oxygen_conversion_factor;
+            
+            // Calculate growth in meters, then convert to feet
             $growth_in_meters = $tree['growth_rate'] * $years;  
             $growth = $growth_in_meters * 3.28084;  
+            
+            // Calculate space required in feet for the given number of trees
             $size_in_feet = $tree['average_size'] * 3.28084; 
             $space_required = $size_in_feet * $number_of_trees; 
+            
+            // Calculate pollutant absorption for the given number of trees
             $pollutant_absorption = $tree['pollutant_absorption'] * $number_of_trees;
 
+            // Prepare SQL query to insert tree data into history table
             $query = "INSERT INTO history 
                       (account_id, tree_name, quantity, carbon_absorption, growth_rate, climate, average_size, pollutant_absorption, oxygen_production) 
                       VALUES (:account_id, :tree_name, :quantity, :carbon_absorption, :growth_rate, :climate, :average_size, :pollutant_absorption, :oxygen_production)";
             $stmt = $conn->prepare($query);
 
+            // Execute the prepared statement with the data
             $stmt->execute([
                 ':account_id' => $account_id,
                 ':tree_name' => $species,

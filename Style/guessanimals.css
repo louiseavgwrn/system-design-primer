@@ -10,20 +10,23 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
-/* Title and General Header Styling */
+/* Header Styling */
 h1, h2, h3 {
     font-family: 'Georgia', serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Main Title */
 h1 {
     font-size: 2.5em;
     margin-top: 20px;
     color: #ffd700;
 }
 
+/* Subtitles */
 h2 {
     font-size: 2em;
     margin-bottom: 10px;
@@ -35,49 +38,44 @@ h3 {
     color: #4caf50;
 }
 
-/* Fun Fact Section */
-.fun-fact {
-    background: rgba(0, 0, 0, 0.75);
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 15px;
+/* Section Styling */
+section {
     width: 85%;
     max-width: 600px;
+    margin: 20px auto;
+}
+
+/* Fun Fact and Description Sections */
+.fun-fact, .description {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Fun Fact Title */
 .fun-fact h2 {
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
+/* Fun Fact Paragraph */
 .fun-fact p {
     font-size: 1.2em;
     line-height: 1.8;
-    margin: 0;
     color: #fbc02d;
 }
 
-/* Description Section */
-.description {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 25px;
-    margin: 20px 0;
-    border-radius: 15px;
-    width: 85%;
-    max-width: 600px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 1.5s ease-in-out;
-}
-
+/* Description Title */
 .description h3 {
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
+/* Description Paragraph */
 .description p {
     font-size: 1.1em;
     line-height: 1.8;
@@ -85,6 +83,7 @@ h3 {
     margin-bottom: 20px;
 }
 
+/* Description Image */
 .description img {
     border-radius: 10px;
     max-width: 100%;
@@ -93,12 +92,37 @@ h3 {
     transition: transform 0.3s ease, border 0.3s ease;
 }
 
+/* Hover Effect on Image */
 .description img:hover {
     transform: scale(1.05);
     border-color: #ffd700;
 }
 
-/* Button Styling */
+/* Navigation Buttons */
+.section-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+/* Navigation Button Styling */
+.nav-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #45a049;
+}
+
+/* Button Styling (for Try Again Link) */
 a {
     display: inline-block;
     margin-top: 20px;
@@ -113,6 +137,7 @@ a {
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover Effect on Try Again Button */
 a:hover {
     background: linear-gradient(90deg, #ff9800, #ffd700);
     transform: scale(1.1);
@@ -130,31 +155,7 @@ a:hover {
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .fun-fact, .description {
-        width: 95%;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    h2, h3 {
-        font-size: 1.4em;
-    }
-
-    p {
-        font-size: 1em;
-    }
-}
-
-/* Incorrect Answer Box Styling */
+/* Incorrect Answer Box */
 .incorrect-answer-box {
     background: rgba(255, 0, 0, 0.85);
     color: #fff;
@@ -166,9 +167,9 @@ a:hover {
     text-align: center;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-in-out;
-    font-family: 'Arial', sans-serif;
 }
 
+/* Incorrect Answer Heading */
 .incorrect-answer-box h1 {
     font-size: 2em;
     margin-bottom: 10px;
@@ -176,12 +177,13 @@ a:hover {
     letter-spacing: 1px;
 }
 
+/* Incorrect Answer Paragraph */
 .incorrect-answer-box p {
     font-size: 1.2em;
     line-height: 1.5;
 }
 
-/* Try Again Link */
+/* Try Again Link in Incorrect Answer Box */
 .incorrect-answer-box a {
     display: inline-block;
     margin-top: 15px;
@@ -196,7 +198,36 @@ a:hover {
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover Effect on Try Again Link in Incorrect Answer Box */
 .incorrect-answer-box a:hover {
     background: linear-gradient(90deg, #ff9800, #ffd700);
     transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    section {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .fun-fact, .description {
+        width: 100%;
+        padding: 15px;
+    }
 }

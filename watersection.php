@@ -71,15 +71,17 @@
 </div>
     
 <?php
+// Start the session to access session variables (e.g., result messages after processing)
 session_start();
 
-
+// Check if there are any water results stored in the session and display them
 if (isset($_SESSION['water_results'])) {
-    echo $_SESSION['water_results']; 
-    unset($_SESSION['water_results']);
+    echo $_SESSION['water_results']; // Display the water results message
+    unset($_SESSION['water_results']); // Clear the session data for water results after displaying
 }
 ?>
 
+<!-- Form Box: Contains the form for selecting a water usage calculator -->
 <div class="form-box">    
     <form action="waterprocess.php" method="POST">
         <label for="calculator_type">Select Calculator:</label>
@@ -97,80 +99,81 @@ if (isset($_SESSION['water_results'])) {
             <option value="water_efficiency">Water Efficiency</option>
             <option value="rainwater_harvesting">Rainwater Harvesting Potential</option>
         </select>
+        <!-- Container where the specific form for the selected calculator will be shown -->
         <div id="form_container"></div>
     </form>
 </div>
 
 <script>
+    // Function to dynamically load the correct form based on the selected calculator type
     function showCalculatorForm() {
-        const formContainer = document.getElementById("form_container");
-        const calculatorType = document.getElementById("calculator_type").value;
-        formContainer.innerHTML = "";
+        const formContainer = document.getElementById("form_container"); // Get the container to display the form
+        const calculatorType = document.getElementById("calculator_type").value; // Get the selected calculator type
+        formContainer.innerHTML = ""; // Clear the previous form content
 
+        // If no calculator type is selected, exit the function
         if (calculatorType === "") return;
 
-        let formHtml = '';
+        let formHtml = ''; // Variable to store the HTML form for the selected calculator
 
+        // Based on the selected calculator type, generate the corresponding form
         switch(calculatorType) {
-    case "personal_usage":
-        formHtml = `
-            <h3>Personal Water Usage</h3>
+            case "personal_usage":
+                // HTML for Personal Water Usage calculator
+                formHtml = `
+                    <h3>Personal Water Usage</h3>
+                    <p><strong>Your Name:</strong> (Enter your name for personalized calculations)</p>
+                    <label for="user_name">Your Name:</label>
+                    <input type="text" id="user_name" name="user_name" placeholder="Enter your name" required>
 
-<p><strong>Your Name:</strong> (Enter your name for personalized calculations)</p>
-<label for="user_name">Your Name:</label>
-<input type="text" id="user_name" name="user_name" placeholder="Enter your name" required>
+                    <p><strong>Daily Water Usage:</strong> (Enter your total water usage per day in your preferred unit)</p>
+                    <label for="daily_usage">Enter your daily water usage:</label>
+                    <input type="number" id="daily_usage" name="daily_usage" step="any" placeholder="e.g., 100" required>
 
-<p><strong>Daily Water Usage:</strong> (Enter your total water usage per day in your preferred unit)</p>
-<label for="daily_usage">Enter your daily water usage:</label>
-<input type="number" id="daily_usage" name="daily_usage" step="any" placeholder="e.g., 100" required>
+                    <p><strong>Unit of Measurement:</strong> (Select whether you measure your water usage in liters or gallons)</p>
+                    <label for="usage_type">Unit of Measurement:</label>
+                    <select id="usage_type" name="usage_type" required>
+                        <option value="" disabled selected>Select a unit</option>
+                        <option value="liters">Liters</option>
+                        <option value="gallons">Gallons</option>
+                    </select>
 
-<p><strong>Unit of Measurement:</strong> (Select whether you measure your water usage in liters or gallons)</p>
-<label for="usage_type">Unit of Measurement:</label>
-<select id="usage_type" name="usage_type" required>
-    <option value="" disabled selected>Select a unit</option>
-    <option value="liters">Liters</option>
-    <option value="gallons">Gallons</option>
-</select>
+                    <p><strong>Water Savings Target:</strong> (Enter the percentage of water you want to save each day)</p>
+                    <label for="reduction_percentage">Target Reduction Percentage (%):</label>
+                    <input type="number" id="reduction_percentage" name="reduction_percentage" step="any" min="0" max="100" value="20" required>
 
-<p><strong>Water Savings Target:</strong> (Enter the percentage of water you want to save each day)</p>
-<label for="reduction_percentage">Target Reduction Percentage (%):</label>
-<input type="number" id="reduction_percentage" name="reduction_percentage" step="any" min="0" max="100" value="20" required>
+                    <button type="submit">Calculate Water Savings</button>
+                `;
+                break;
 
-<button type="submit">Calculate Water Savings</button>
+            case "household_usage":
+                formHtml = `
+                    <h3>Household Water Usage</h3>
+                    <p><strong>Household Name:</strong> (Enter the name of your household for personalized results)</p>
+                    <label for="household_name">Household Name:</label>
+                    <input type="text" id="household_name" name="household_name" placeholder="e.g., Smith Household" required>
 
-        `;
-        break;
+                    <p><strong>Daily Water Usage:</strong> (Enter your total household water usage per day)</p>
+                    <label for="household_daily_usage">Enter daily household water usage:</label>
+                    <input type="number" id="household_daily_usage" name="household_daily_usage" step="any" placeholder="e.g., 150" required>
 
-    case "household_usage":
-        formHtml = `
-            <h3>Household Water Usage</h3>
+                    <p><strong>Unit of Measurement:</strong> (Select the unit you use for measuring household water)</p>
+                    <label for="household_usage_type">Unit of Measurement:</label>
+                    <select id="household_usage_type" name="household_usage_type" required>
+                        <option value="" disabled selected>Select a unit</option>
+                        <option value="liters">Liters</option>
+                        <option value="gallons">Gallons</option>
+                        <option value="quarts">Quarts</option>
+                        <option value="pints">Pints</option>
+                    </select>
 
-<p><strong>Household Name:</strong> (Enter the name of your household for personalized results)</p>
-<label for="household_name">Household Name:</label>
-<input type="text" id="household_name" name="household_name" placeholder="e.g., Smith Household" required>
+                    <p><strong>Water Savings Target:</strong> (Enter the percentage of water you want to save each day)</p>
+                    <label for="reduction_percentage">Target Reduction Percentage (%):</label>
+                    <input type="number" id="reduction_percentage" name="reduction_percentage" step="any" min="0" max="100" value="25" required>
 
-<p><strong>Daily Water Usage:</strong> (Enter your total household water usage per day)</p>
-<label for="household_daily_usage">Enter daily household water usage:</label>
-<input type="number" id="household_daily_usage" name="household_daily_usage" step="any" placeholder="e.g., 150" required>
-
-<p><strong>Unit of Measurement:</strong> (Select the unit you use for measuring household water)</p>
-<label for="household_usage_type">Unit of Measurement:</label>
-<select id="household_usage_type" name="household_usage_type" required>
-    <option value="" disabled selected>Select a unit</option>
-    <option value="liters">Liters</option>
-    <option value="gallons">Gallons</option>
-    <option value="quarts">Quarts</option>
-    <option value="pints">Pints</option>
-</select>
-
-<p><strong>Water Savings Target:</strong> (Enter the percentage of water you want to save each day)</p>
-<label for="reduction_percentage">Target Reduction Percentage (%):</label>
-<input type="number" id="reduction_percentage" name="reduction_percentage" step="any" min="0" max="100" value="25" required>
-
-<button type="submit">Calculate Water Savings</button>
-
-        `;
-        break;
+                    <button type="submit">Calculate Water Savings</button>
+                `;
+                break;
 
         case "water_consumption_per_person":
     formHtml = `

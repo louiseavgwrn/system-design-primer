@@ -1,9 +1,12 @@
 <?php
+// Include the Animal class file
 include_once 'animal.php';
 
 class Game {
+    // Private property to hold an array of Animal objects
     private $animals;
 
+    // Constructor to initialize the $animals array with Animal objects
     public function __construct() {
         $this->animals = [
             new Animal('Loon', 'Loon.mp3', 'The loon is known for its eerie, haunting calls which can be heard echoing across northern lakes.', 'loon.jpg', 'Loons are large water birds found in North America.'),
@@ -23,26 +26,32 @@ class Game {
         ];
     }
 
+    // Method to return a random animal object from the $animals array
     public function getRandomAnimal() {
-        return $this->animals[array_rand($this->animals)];
+        return $this->animals[array_rand($this->animals)];  // Selects a random index from the $animals array
     }
 
+    // Method to check if the user's guess matches the animal name based on the sound
     public function checkGuess($userGuess, $sound) {
+        // Loop through all animals to find a match with the sound
         foreach ($this->animals as $animal) {
-            if (strtolower($animal->getSound()) === strtolower($sound)) {
+            if (strtolower($animal->getSound()) === strtolower($sound)) {  // Case-insensitive comparison of sound
+                // If sound matches, check if the guess matches the animal name
                 return strtolower($userGuess) === strtolower($animal->getName());
             }
         }
-        return false;
+        return false;  // Return false if no match is found
     }
 
+    // Method to retrieve animal information based on the sound
     public function getAnimalInfo($sound) {
         foreach ($this->animals as $animal) {
+            // Check if the sound matches and return the corresponding Animal object
             if ($animal->getSound() === $sound) {
                 return $animal;
             }
         }
-        return null;
+        return null;  // Return null if no matching sound is found
     }
 }
 ?>
