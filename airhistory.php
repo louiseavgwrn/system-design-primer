@@ -4,6 +4,7 @@ require 'dbconnection.php';
 
 $account_id = $_SESSION['account_id'] ?? null;
 
+// Check if the user is logged in
 if (!$account_id) {
     die("Error: User is not logged in.");
 }
@@ -12,8 +13,8 @@ $db = new Database();
 $conn = $db->getConnect();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Clear all history for this account
     if (isset($_POST['clear_all'])) {
-        // Clear all history for this account
         try {
             $deleteQuery = "DELETE FROM history WHERE account_id = :account_id";
             $deleteStmt = $conn->prepare($deleteQuery);
@@ -21,10 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-    } elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
-        // Delete selected rows
+    }
+
+    // Delete selected rows from history
+    elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
         try {
+            // Sanitize the selected IDs
             $selectedIds = implode(',', array_map('intval', $_POST['selected_ids']));
+
+            // Delete selected records based on IDs
             $deleteQuery = "DELETE FROM history WHERE id IN ($selectedIds) AND account_id = :account_id";
             $deleteStmt = $conn->prepare($deleteQuery);
             $deleteStmt->execute([':account_id' => $account_id]);
@@ -34,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Fetch user's history data
 try {
     $query = "SELECT * FROM history WHERE account_id = :account_id";
     $stmt = $conn->prepare($query);
@@ -43,6 +50,7 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
