@@ -1,21 +1,27 @@
 <?php
+// Start the session to access session variables (like user login status)
 session_start();
-require_once 'dbconnection.php';
-require_once 'plantcrud.php';
+require_once 'dbconnection.php'; // Includes the database connection script
+require_once 'plantcrud.php'; // Includes the plant CRUD operations script
 
+// Get the logged-in user's account_id from the session, if available
 $account_id = isset($_SESSION['account_id']) ? $_SESSION['account_id'] : null;
 
+// If no account_id is found, redirect to login page
 if (empty($account_id)) {
     header('Location: login.php'); 
     exit;
 }
 
+// Create a database connection
 $database = new Database();
 $db = $database->getConnect();
 
+// Instantiate the Plant object to interact with the plant data in the database
 $plant = new Plant($db);
-$plant->account_id = $account_id; 
+$plant->account_id = $account_id; // Set the current user's account ID to filter their plants
 
+// Call the read method to get plants associated with the current account
 $stmt = $plant->read();
 ?>
 
@@ -25,6 +31,7 @@ $stmt = $plant->read();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Data</title>
+    <link rel="Stylesheet" href="Style/landplant.css"
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

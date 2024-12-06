@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Data</title>
+    <link rel="stylesheet" href="Style/land_section.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-</head>
+
 
 <main>
-    <div class="section-container">
+    <div class="tabs-container">
 
         <button onclick="window.location.href='useracc.php'">Home</button>
         <button onclick="window.location.href='watersection.php'">Water Section</button>
@@ -29,8 +30,8 @@
     </header>
 
 
-
-    <section class="info-section">
+<div class="container">
+    <div class="section-box">
         <h3>🌿 Plant Care Tips 🌿</h3>
         <p>Taking care of plants requires dedication, but it's very rewarding. Here are some tips to keep your plants healthy:</p>
         <ul>
@@ -39,9 +40,9 @@
             <li>Ensure your plants have good drainage to avoid root rot.</li>
             <li>Regularly prune dead or yellowing leaves to encourage new growth.</li>
         </ul>
-    </section>
+    </div>
 
-    <section class="info-section">
+    <div class="section-box">
         <h3>🌱 Fun Plant Trivia 🌱</h3>
         <p>Plants are fascinating organisms. Here are some fun facts:</p>
         <ul>
@@ -49,9 +50,9 @@
             <li>The oldest living tree is a bristlecone pine in California, which is over 5,000 years old!</li>
             <li>Some plants, like the Venus flytrap, have evolved to catch and digest insects.</li>
         </ul>
-    </section>
+    </div>
 
-    <section class="info-section">
+    <div class="section-box">
         <h3>🌸 Suggestions for Choosing Plants 🌸</h3>
         <p>Here are some suggestions when choosing plants for your home or garden:</p>
         <ul>
@@ -59,9 +60,9 @@
             <li>If you're a beginner, start with easy-to-care-for plants like succulents or pothos.</li>
             <li>Choose plants that fit the size and lighting of your space, whether indoors or outdoors.</li>
         </ul>
-    </section>
+    </div>
 
-    <section class="info-section">
+    <div class="section-box">
         <h3>⚖️ Pros and Cons of Common Houseplants ⚖️</h3>
         <p>Here are some pros and cons of popular houseplants:</p>
         <ul>
@@ -84,7 +85,7 @@
                 </ul>
             </li>
         </ul>
-    </section>
+    </div>
 
 
 

@@ -3,7 +3,6 @@ include_once 'animalgame.php';
 
 $game = new Game();
 $randomAnimal = $game->getRandomAnimal();
-
 $randomSound = $randomAnimal->getSound();
 ?>
 

@@ -1,41 +1,58 @@
 <?php
+// Start the session to access session variables (e.g., result messages after processing)
 session_start();
 
-
+// Function to determine the unit time based on the usage frequency
 function getUnitTime($usageFrequency) {
+    // If usage is less than or equal to 7, it's considered a "day"
     if ($usageFrequency <= 7) {
         return "day";
-    } elseif ($usageFrequency <= 30) {
+    } 
+    // If usage is between 8 and 30, it's considered a "week"
+    elseif ($usageFrequency <= 30) {
         return "week";
-    } else {
+    } 
+    // Otherwise, it's considered a "month"
+    else {
         return "month";
     }
 }
 
-
+// Check if the form is submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
+    // Get the selected calculator type from the form
     $calculatorType = $_POST['calculator_type'];
 
+    // Start output buffering to capture the output
     ob_start();
-    
+
+    // Switch statement to handle different calculator types
     switch ($calculatorType) {
+        // Case for personal water usage calculation
         case 'personal_usage':
+            // Check if all necessary form data is provided
             if (isset($_POST['user_name']) && isset($_POST['daily_usage']) && isset($_POST['usage_type']) && isset($_POST['reduction_percentage'])) {
+                // Sanitize user input to prevent XSS attacks
                 $userName = htmlspecialchars($_POST['user_name']);
                 $dailyUsage = floatval($_POST['daily_usage']);
                 $usageType = $_POST['usage_type'];
                 $reductionPercentage = floatval($_POST['reduction_percentage']);
                 
+                // Conversion factor for gallons to liters
                 $conversionFactor = ($usageType == 'gallons') ? 3.78541 : 1;
+                
+                // Convert daily usage to liters
                 $usageInLiters = $dailyUsage * $conversionFactor;
                 
+                // Calculate the water savings and remaining usage after reduction
                 $savingsInLiters = $usageInLiters * ($reductionPercentage / 100);
                 $remainingUsageInLiters = $usageInLiters - $savingsInLiters;
                 
+                // Convert savings and remaining usage back to the preferred unit
                 $savingsInPreferredUnit = $savingsInLiters / $conversionFactor;
                 $remainingUsageInPreferredUnit = $remainingUsageInLiters / $conversionFactor;
                 
+                // Display the results
                 echo "<h3>Water Usage Results for $userName</h3>";
                 echo "<p>Your daily water usage is: " . number_format($dailyUsage, 2) . " $usageType.</p>";
                 echo "<p>By reducing your usage by $reductionPercentage%, you could save approximately " . 
@@ -43,17 +60,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<p>Your adjusted daily usage would be " . 
                      number_format($remainingUsageInPreferredUnit, 2) . " $usageType.</p>";
             } else {
+                // Error message if any required fields are missing
                 echo "<p>Error: Missing required fields.</p>";
             }
             break;
         
+        // Case for household water usage calculation
         case 'household_usage':
+            // Check if all necessary form data is provided
             if (isset($_POST['household_name']) && isset($_POST['household_daily_usage']) && isset($_POST['household_usage_type']) && isset($_POST['reduction_percentage'])) {
+                // Sanitize user input to prevent XSS attacks
                 $householdName = htmlspecialchars($_POST['household_name']);
                 $householdDailyUsage = floatval($_POST['household_daily_usage']);
                 $usageType = $_POST['household_usage_type'];
                 $reductionPercentage = floatval($_POST['reduction_percentage']);
                 
+                // Conversion factors for different units to liters
                 $conversionFactors = [
                     'liters' => 1,
                     'gallons' => 3.78541,
@@ -61,19 +83,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'pints' => 0.473176
                 ];
                 
+                // Check if the selected unit is valid and convert usage to liters
                 if (array_key_exists($usageType, $conversionFactors)) {
                     $usageInLiters = $householdDailyUsage * $conversionFactors[$usageType];
                 } else {
+                    // Error message if an invalid unit is selected
                     echo "<p>Invalid unit of measurement selected.</p>";
                     exit;
                 }
                 
+                // Calculate the water savings and remaining usage after reduction
                 $savingsInLiters = $usageInLiters * ($reductionPercentage / 100);
                 $remainingUsageInLiters = $usageInLiters - $savingsInLiters;
                 
+                // Convert savings and remaining usage back to the preferred unit
                 $savingsInPreferredUnit = $savingsInLiters / $conversionFactors[$usageType];
                 $remainingUsageInPreferredUnit = $remainingUsageInLiters / $conversionFactors[$usageType];
                 
+                // Display the results
                 echo "<h3>Household Water Usage Results for $householdName</h3>";
                 echo "<p>Your daily household water usage is: " . number_format($householdDailyUsage, 2) . " $usageType.</p>";
                 echo "<p>By reducing your usage by $reductionPercentage%, your household could save approximately " . 
@@ -81,10 +108,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<p>Your adjusted daily household usage would be " . 
                      number_format($remainingUsageInPreferredUnit, 2) . " $usageType.</p>";
             } else {
+                // Error message if any required fields are missing
                 echo "<p>Error: Missing required fields.</p>";
             }
             break;
-        
             
 
             case 'water_consumption_per_person':
