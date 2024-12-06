@@ -2,7 +2,6 @@
 session_start();
 require_once 'dbair.php';
 
-// Check if user is logged in
 $account_id = $_SESSION['account_id'] ?? null;
 if (!$account_id) {
     die("Error: User is not logged in.");
@@ -11,11 +10,11 @@ if (!$account_id) {
 $db = new Database();
 $conn = $db->getConnect();
 
-// Get the current date
+
 $currentDate = date('Y-m-d');
 
 try {
-    // Query to get the total quantity of trees planted by date for the logged-in user
+    
     $dateQuery = "SELECT DATE(plant_date) AS plant_date, 
                   SUM(quantity) AS trees_planted, 
                   DATEDIFF(:current_date, DATE(plant_date)) AS days_since 
@@ -39,7 +38,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Planting Tracking</title>
-    <link rel="stylesheet" href="Style/airtrack.css"> <!-- External CSS -->
+    <link rel="stylesheet" href="Style/airtrack.css">
 </head>
 <body>
 
@@ -55,7 +54,6 @@ try {
 <div class="container">
     <h1>Tree Planting Tracking</h1>
 
-    <!-- Date Tracking with Days Since -->
     <section class="tracking-section">
         <h2>Planted Trees by Date (with Days Since Planting)</h2>
         <table>
