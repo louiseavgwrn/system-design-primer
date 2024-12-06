@@ -1,6 +1,4 @@
 <?php
-
-
 class Plant {
     private $connect;
     private $table_name = "plant"; 

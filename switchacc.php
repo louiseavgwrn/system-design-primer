@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbswitch.php';
+require 'dbconnection.php';
 
 $db = new Database();
 $conn = $db->getConnect();

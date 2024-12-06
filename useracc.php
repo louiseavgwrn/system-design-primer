@@ -15,7 +15,7 @@ if (!$current_account_id) {
 }
 
 // Connect to the database
-require 'dbuser.php';
+require 'dbconnection.php';
 $database = new Database();
 $connect = $database->getConnect();
 

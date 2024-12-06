@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'dbplant.php';
+require_once 'dbconnection.php';
 require_once 'plantcrud.php';
 
 $account_id = isset($_SESSION['account_id']) ? $_SESSION['account_id'] : null;

@@ -1,5 +1,5 @@
 <?php
-require 'dbair.php';
+require 'dbconnection.php';
 
 $db = new Database();
 $conn = $db->getConnect();

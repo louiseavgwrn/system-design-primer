@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbuser.php';
+require 'dbconnection.php';
 
 $database = new Database();
 $connect = $database->getConnect(); 
