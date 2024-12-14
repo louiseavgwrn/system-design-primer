@@ -55,9 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Green Guardians</title>
     <!-- Link to an external stylesheet for styling the login page -->
-    <link rel="stylesheet" href="Style/login.css">
+    <link rel="stylesheet" href="Style/logins.css">
 </head>
 <body>
+<a href="javascript:history.back()" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H3.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
+        </svg>
+        Back
+    </a>
     <!-- Login form -->
     <form method="post" action="login.php">
         <h1>Login to Green Guardians</h1>

@@ -78,70 +78,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Metadata and title for the signup page -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up - Green Guardians</title>
-    <!-- Link to external stylesheet for styling -->
     <link rel="stylesheet" href="Style/signup.css">
 </head>
 <body>
-    <div class="form-container">
+    <div class="main-container">
+        <!-- Back button for navigation -->
+        <a href="javascript:history.back()" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H3.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
+            </svg>
+            Back
+        </a>
+        <div class="form-container">
         <h1>Sign up for Green Guardians</h1>
         <!-- Display error message if it exists -->
         <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
-        <!-- Signup form -->
         <form method="post" action="signup.php">
-            <!-- Full Name input -->
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
 
-            <!-- Email input -->
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
 
-            <!-- Username input -->
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
 
-            <!-- Password input -->
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
 
-            <!-- Confirm Password input -->
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
 
-            <!-- Phone number input (optional) -->
-            <label for="phone">Phone Number (Optional):</label>
-            <input type="text" id="phone" name="phone">
+                <label for="phone">Phone Number (Optional):</label>
+                <input type="text" id="phone" name="phone">
 
-            <!-- Date of birth input -->
-            <label for="date">Date of Birth:</label>
-            <input type="date" id="date" name="date" required>
+                <label for="date">Date of Birth:</label>
+                <input type="date" id="date" name="date" required>
 
-            <!-- Gender selection -->
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
 
-            <!-- Address input -->
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" required></textarea>
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea>
 
-            <!-- Signup button -->
-            <button type="submit">Signup</button>
-        </form>
+                <button type="submit">Signup</button>
+            </form>
 
-        <!-- Link to login page -->
-        <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <!-- Link to login page -->
+            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+        </div>
     </div>
 
-    <!-- Footer section -->
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
     </footer>
