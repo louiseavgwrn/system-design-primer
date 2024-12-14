@@ -1,0 +1,140 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('https://wallpapers.com/images/hd/vibrant-ecosystem-thriving-in-the-forest-uvp9lcfephecezwf.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #153616;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Title Styling */
+h1 {
+    text-align: center;
+    color: whitesmoke;
+    margin-top: 50px;
+    font-size: 2.5rem;
+}
+
+/* Profile Container Styling */
+.profile-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 20px;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 1.1rem;
+}
+
+/* Profile Container Title */
+.profile-container h2 {
+    text-align: center;
+    color: #1b5e20;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Profile Paragraph Styling */
+.profile-container p {
+    margin: 10px 0;
+    color: #444;
+}
+
+.profile-container p strong {
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(68, 68, 68, 0.9);
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.sidebar.active {
+    display: block;
+}
+
+.sidebar button,
+.close-btn {
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #f7fff8;
+    background-color: #1b5e20;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.sidebar button:hover,
+.close-btn:hover {
+    background-color: #245f27;
+}
+
+/* Sidebar Close Button Styling */
+.close-btn {
+    font-size: 20px;
+    text-align: center;
+    background-color: #d32f2f;
+}
+
+.close-btn:hover {
+    background-color: #c62828;
+}
+
+/* Profile and Home Button Styling */
+.home-btn,
+.profile-btn {
+    margin-left: 20px;
+    padding: 12px 20px;
+    background-color: #2e7d32;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.home-btn:hover,
+.profile-btn:hover {
+    background-color: #1b5e20;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+    background-color: #1b5e20;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+}

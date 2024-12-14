@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Stylesheet" href="Style/lifesection.css">
+    <link rel="Stylesheet" href="Style/lifesections.css">
     <title>Life Section - Living Animals</title>
 </head>
 <body>
@@ -53,30 +53,6 @@
         </section>
     </div>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <section id="animal-sound">
         <h2>Test Your Animal Sound Knowledge</h2>

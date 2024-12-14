@@ -56,7 +56,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Dashboard</title>
     <!-- Link to the external CSS file for styling -->
-    <link rel="stylesheet" href="Style/useracc.css">
+    <link rel="stylesheet" href="Style/useraccs.css">
 </head>
 <body>
 <header>
@@ -101,7 +101,6 @@ try {
 </div>
 
 <main>
-    <!-- Welcome message for the logged-in user -->
     <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>  
     <h2>Fall in Love with Biodiversity</h2>
     <p>
@@ -111,20 +110,22 @@ try {
         can contribute to the protection of this invaluable resource.
     </p>
 
-    <!-- Display user-specific data if available -->
-    <?php if (!empty($account_data)): ?>
-        <h3>Your Data:</h3>
-        <ul>
-            <?php foreach ($account_data as $data): ?>
-                <li>
-                    <strong><?php echo htmlspecialchars($data['data_field']); ?></strong> 
-                    (Added on: <?php echo htmlspecialchars($data['created_at']); ?>)
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>No data available for this account.</p>
-    <?php endif; ?>
+    <section>
+            <h3>1. Importance of Biodiversity</h3>
+            <p>Biodiversity ensures the stability and health of ecosystems by providing essential services such as air and water purification, pollination, climate regulation, and soil fertility. It is crucial for human survival and well-being, as it supports food production, medicine, and livelihoods. Protecting biodiversity helps maintain a balance in nature, ensuring that ecosystems can withstand and adapt to changes.</p>
+        </section>
+
+        <section>
+            <h3>2. Threats to Biodiversity</h3>
+            <p>Human activities like deforestation, habitat destruction, pollution, overfishing, and climate change have caused significant biodiversity loss. These threats disrupt ecosystems and lead to the extinction of species. It is essential to address these issues through sustainable practices, conservation efforts, and education to mitigate the adverse effects and protect biodiversity.</p>
+        </section>
+
+        <section>
+            <h3>3. How You Can Help</h3>
+            <p>Everyone can contribute to biodiversity conservation. Planting trees, reducing waste, supporting sustainable products, and creating wildlife-friendly spaces are simple steps that make a difference. Participating in local conservation programs, spreading awareness, and advocating for policies that protect biodiversity are impactful ways to ensure a better future for all living beings.</p>
+        </section>
+
+
 </main>
 
 <!-- JavaScript for sidebar toggle functionality -->

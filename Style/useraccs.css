@@ -1,0 +1,261 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(https://wallpaperaccess.com/full/2993267.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+header {
+   
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.logo img {
+    height: 50px;
+    border-radius: 50%;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links button, .dropdown-btn {
+    background: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.nav-links button:hover, .dropdown-btn:hover {
+    background: #a29bfe;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #dfe6e9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.dropdown-content a {
+    color: #2d3436;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #b2bec3;
+}
+
+.dropdown-content a:hover {
+    background-color: green;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Initially hide the sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Sidebar is hidden offscreen */
+    width: 350px;
+    height: 100%;
+    background: url(https://navdanyainternational.org/wp-content/uploads/2022/05/Thumbnail-Biodiverstiy-is-Life.png);
+    box-shadow: -4px 0px 12px rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: right 0.4s ease-in-out;
+    z-index: 1000;
+    overflow-y: auto;
+    color: white;
+}
+
+/* To show the sidebar when active */
+.sidebar.active {
+    right: 0; /* When active, the sidebar appears */
+}
+
+/* Sidebar button styles */
+.sidebar button {
+    background: #1abc9c;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    margin: 5px 0;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    text-align: left;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar button:hover {
+    background: #16a085;
+    transform: translateX(5px);
+}
+
+.sidebar .close-btn {
+    background: #e74c3c;
+    align-self: flex-end;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-bottom: auto;
+    border-radius: 50px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Header in Sidebar */
+.sidebar .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+}
+
+.sidebar .profile-header img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #1abc9c;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar .profile-header h2 {
+    font-size: 1.8rem;
+    color: #ecf0f1;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollable Links in Sidebar */
+.sidebar .link-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar .link-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 12px;
+    background: #3498db;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar .link-section a:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Sidebar Footer */
+.sidebar .footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* Hide the sidebar button by default */
+.sidebar-toggle {
+    display: none;
+}
+
+
+
+main {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+h2 {
+    font-size: 2.8rem;
+    color: limegreen;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid yellowgreen;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+section {
+    background: yellowgreen;
+    margin: 0;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h3 {
+    font-size: 1.8rem;
+    color: white;
+}
+
+section p {
+    font-size: 1rem;
+    color: #2d3436;
+}
+
+footer {
+    background: #2d3436;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -54,7 +54,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Green Guardians</title>
     <!-- Link to the external CSS file for styling -->
-    <link rel="stylesheet" href="Style/view_profile.css">
+    <link rel="stylesheet" href="Style/view_profiles.css">
 </head>
 <body>
     <!-- Header section with navigation buttons -->

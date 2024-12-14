@@ -8,15 +8,14 @@
 body {
     font-family: 'Arial', sans-serif;
     background: url(https://static.vecteezy.com/system/resources/previews/004/639/004/non_2x/wildlife-silhouette-background-free-vector.jpg) no-repeat center center/cover;
-    background-color: #F39C12; 
-    color: #333;
+    background-color: #F39C12;
+    color: whitesmoke;
     line-height: 1.6;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 .section-container {
     display: flex;
@@ -26,7 +25,7 @@ body {
 }
 
 .section-container button {
-    background-color: #E67E22; 
+    background-color: #E67E22;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -37,7 +36,7 @@ body {
 }
 
 .section-container button:hover {
-    background-color: #D35400; 
+    background-color: #D35400;
     transform: scale(1.1);
 }
 
@@ -51,7 +50,7 @@ body {
 }
 
 #introduction, #importance, #tips, #facts {
-    background-color: rgba(255, 255, 255, 0.85); 
+    background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -67,7 +66,7 @@ body {
 section h2 {
     font-size: 2.2em;
     margin-bottom: 15px;
-    color: #D35400; 
+    color: #D35400;
 }
 
 section p, section ul {
@@ -76,16 +75,30 @@ section p, section ul {
     line-height: 1.8;
 }
 
-
 #animal-sound {
-    background: linear-gradient(to right, #F39C12, #E67E22); 
-    color: white;
+    background: url(https://static.vecteezy.com/system/resources/previews/004/639/004/non_2x/wildlife-silhouette-background-free-vector.jpg) no-repeat center bottom/cover;
     padding: 50px 20px;
     border-radius: 15px;
     margin-top: 40px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    color: white;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
+
+#animal-sound::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 15px;
+    z-index: -1; /* Keeps the overlay behind the content */
+}
+
 
 #animal-sound button {
     background-color: #D35400; 
