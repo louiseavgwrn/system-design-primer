@@ -1,49 +1,48 @@
 <?php
-// Start or resume a session to maintain user state.
+// Start a session to track user data
 session_start();
 
-// Include the database connection file.
-require 'dbconnection.php'; 
+// Include the database connection file
+require 'dbconnection.php';
 
-// Initialize the database connection using the custom Database class.
+// Initialize the Database object and establish a connection
 $database = new Database();
-$connect = $database->getConnect(); 
+$connect = $database->getConnect();
 
-// Check if the form is submitted using the POST method.
+// Check if the form is submitted via POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect form inputs.
+    // Retrieve form data and store it in variables
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $phone = $_POST['phone'];
-    $date = $_POST['date'];  
+    $date = $_POST['date'];
     $gender = $_POST['gender'];
     $address = $_POST['address'];
 
-    // Validate if the passwords match.
+    // Check if passwords match
     if ($password !== $confirm_password) {
-        $error = "Passwords do not match.";
+        $error = "Passwords do not match."; // Error message for password mismatch
     } else {
-        // Hash the password for secure storage.
+        // Hash the password for secure storage
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        // Check if the username or email already exists in the database.
+        // Check if the username or email already exists in the database
         $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username OR email = :email");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        // If a match is found, return an error.
+        // If either username or email already exists, return an error
         if ($stmt->rowCount() > 0) {
-            $error = "Username or Email already exists.";
+            $error = "Username or Email already exists."; // Error message for existing username or email
         } else {
-            // Try to insert the new user into the database.
             try {
+                // Insert the new user details into the database
                 $stmt = $connect->prepare("INSERT INTO users (fullname, email, username, password, phone, date, gender, address) 
                                             VALUES (:fullname, :email, :username, :password, :phone, :date, :gender, :address)");
-                // Bind parameters to the query to prevent SQL injection.
                 $stmt->bindParam(':fullname', $fullname);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':username', $username);
@@ -52,27 +51,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bindParam(':date', $date);
                 $stmt->bindParam(':gender', $gender);
                 $stmt->bindParam(':address', $address);
-                $stmt->execute();
+                $stmt->execute(); // Execute the query to insert data
 
-                // Retrieve the ID of the newly created account.
-                $account_id = $connect->lastInsertId(); 
+                // Retrieve the last inserted account ID
+                $account_id = $connect->lastInsertId();
 
-                // Store user information in the session to maintain login state.
+                // Set session variables for the logged-in user
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
-                $_SESSION['account_id'] = $account_id; 
+                $_SESSION['account_id'] = $account_id;
 
-                // Redirect to the login page after successful signup.
+                // Redirect the user to the login page
                 header("Location: login.php");
-                exit;
+                exit; // Stop further execution
             } catch (PDOException $e) {
-                // Handle database errors gracefully.
+                // Handle any database errors and display a message
                 $error = "Database error: " . $e->getMessage();
             }
         }
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -85,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="main-container">
-        <!-- Back button for navigation -->
         <a href="javascript:history.back()" class="back-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H3.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
@@ -94,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </a>
         <div class="form-container">
         <h1>Sign up for Green Guardians</h1>
-        <!-- Display error message if it exists -->
         <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
         <form method="post" action="signup.php">
@@ -131,8 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button type="submit">Signup</button>
             </form>
-
-            <!-- Link to login page -->
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </div>
     </div>

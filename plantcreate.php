@@ -1,36 +1,39 @@
 <?php
+// Start the session to track user information
 session_start();
+
+// Include the database connection and plant CRUD operations files
 require_once 'dbconnection.php';
 require_once 'plantcrud.php';
 
+// Retrieve the account ID from the session, if set
 $account_id = isset($_SESSION['account_id']) ? $_SESSION['account_id'] : null;
 
-// Check if the form is submitted via POST
+// Check if the form is submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate if account_id is set
+    // If the user is not logged in, return an error response
     if (empty($account_id)) {
-        echo json_encode(['status' => 'error', 'message' => 'User is not logged in.']);
-        exit;
+        echo json_encode(['status' => 'error', 'message' => 'User is not logged in.']); // Return error message
+        exit; // Stop further execution
     }
 
-    // Establish the database connection
+    // Initialize the database connection
     $database = new Database();
     $db = $database->getConnect();
 
-    // Create a Plant object
+    // Create a new Plant object for CRUD operations
     $plant = new Plant($db);
 
-    // Clean input data to avoid SQL injection and ensure data safety
-    $plant->name = htmlspecialchars(trim($_POST['name']));
-    $plant->scientific_name = htmlspecialchars(trim($_POST['scientific_name']));
-    $plant->region = htmlspecialchars(trim($_POST['region']));
-    $plant->type = isset($_POST['type']) ? htmlspecialchars(trim($_POST['type'])) : '';  // Ensure 'type' is set if available
-    $plant->description = htmlspecialchars(trim($_POST['description']));
-    $plant->account_id = $account_id;// Associate the plant with the logged-in user's account
+    // Sanitize and assign form data to the Plant object properties
+    $plant->name = htmlspecialchars(trim($_POST['name'])); // Sanitize and trim the plant name
+    $plant->scientific_name = htmlspecialchars(trim($_POST['scientific_name'])); // Sanitize and trim scientific name
+    $plant->region = htmlspecialchars(trim($_POST['region'])); // Sanitize and trim the region
+    $plant->type = isset($_POST['type']) ? htmlspecialchars(trim($_POST['type'])) : ''; // Sanitize and trim plant type
+    $plant->description = htmlspecialchars(trim($_POST['description'])); // Sanitize and trim the description
+    $plant->account_id = $account_id; // Set the account ID for the plant
 
     // Try to insert the plant into the database
     if ($plant->create()) {
-        // Success: SweetAlert notification for success
         echo "
         <!DOCTYPE html>
         <html lang='en'>

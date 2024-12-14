@@ -1,87 +1,88 @@
 <?php
-// Start or resume the session to track user state.
+// Start a session to manage user account data
 session_start();
 
-// Include database connection file.
+// Include the database connection file
 require 'dbconnection.php';
 
-// Create a new Database instance and get the connection.
+// Initialize the Database object and establish a connection
 $db = new Database();
 $conn = $db->getConnect();
 
-// Initialize session variables for managing accounts if not already set.
+// Check and initialize session variables for managing logged-in accounts
 if (!isset($_SESSION['logged_in_accounts'])) {
-    $_SESSION['logged_in_accounts'] = []; // Array to store logged-in accounts.
-    $_SESSION['current_account'] = null; // Currently active account username.
-    $_SESSION['account_id'] = null;      // Currently active account ID.
+    $_SESSION['logged_in_accounts'] = []; // Stores usernames of logged-in accounts
+    $_SESSION['current_account'] = null; // Tracks the current active account
+    $_SESSION['account_id'] = null; // Tracks the ID of the current account
 }
 
-// Function to fetch account details based on username.
+// Function to fetch account details based on the username
 function fetchAccount($username)
 {
-    global $conn; // Use the global database connection.
-
-    // Prepare and execute the SQL query.
-    $stmt = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
-    $stmt->execute(['username' => $username]);
-    return $stmt->fetch(PDO::FETCH_ASSOC); // Return the fetched result as an associative array.
+    global $conn; // Use the global database connection
+    $stmt = $conn->prepare("SELECT id, username FROM users WHERE username = :username"); // Prepare the query
+    $stmt->execute(['username' => $username]); // Execute with the provided username
+    return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch and return the result as an associative array
 }
 
-// Function to add an account to the session and set it as the current account.
+// Function to add a new account to the logged-in accounts list
 function addAccount($username)
 {
-    $account = fetchAccount($username); // Fetch account details.
+    $account = fetchAccount($username); // Fetch account details
 
     if ($account) {
-        // Check if the account is not already logged in.
+        // If the account is not already logged in, add it to the session list
         if (!in_array($account['username'], $_SESSION['logged_in_accounts'])) {
-            $_SESSION['logged_in_accounts'][] = $account['username']; // Add to logged-in accounts list.
+            $_SESSION['logged_in_accounts'][] = $account['username'];
         }
-        // Set as the current account.
+        // Set the account as the current active account
         $_SESSION['current_account'] = $account['username'];
         $_SESSION['account_id'] = $account['id'];
-        return "Account added and set as current: $account[username]";
+        return "Account added and set as current: $account[username]"; // Return success message
     } else {
-        return "Account not found: $username";
+        return "Account not found: $username"; // Return error if account is not found
     }
 }
 
-// Function to switch to a different logged-in account.
+// Function to switch between logged-in accounts
 function switchAccount($username)
 {
-    // Check if the account is already logged in.
+    // Check if the specified username is already logged in
     if (in_array($username, $_SESSION['logged_in_accounts'])) {
-        $account = fetchAccount($username); // Fetch account details.
-        $_SESSION['current_account'] = $account['username']; // Set as current account.
-        $_SESSION['account_id'] = $account['id'];
-        return "Switched to account: $username";
+        $account = fetchAccount($username); // Fetch account details
+        $_SESSION['current_account'] = $account['username']; // Update the current active account
+        $_SESSION['account_id'] = $account['id']; // Update the current account ID
+        return "Switched to account: $username"; // Return success message
     } else {
-        return "Account not logged in: $username";
+        return "Account not logged in: $username"; // Return error if account is not logged in
     }
 }
 
-// Handle form submissions.
+// Initialize a status message to provide feedback on user actions
 $status_message = "";
+
+// Handle form submissions based on the request method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_account'])) {
-        // Handle adding a new account.
-        $username = trim($_POST['username'] ?? '');
+        // Handle the addition of a new account
+        $username = trim($_POST['username'] ?? ''); // Retrieve and trim the username
         if ($username) {
-            $status_message = addAccount($username);
+            $status_message = addAccount($username); // Add the account and set status message
         } else {
-            $status_message = "Please enter a username.";
+            $status_message = "Please enter a username."; // Prompt for missing username
         }
     } elseif (isset($_POST['switch_account'])) {
-        // Handle switching accounts.
-        $username = $_POST['switch_account'];
+        // Handle switching to another account
+        $username = $_POST['switch_account']; // Retrieve the username to switch to
         if ($username) {
-            $status_message = switchAccount($username);
+            $status_message = switchAccount($username); // Switch the account and set status message
         } else {
-            $status_message = "Please select an account to switch to.";
+            $status_message = "Please select an account to switch to."; // Prompt for missing username
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

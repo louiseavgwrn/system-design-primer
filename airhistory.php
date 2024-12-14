@@ -1,55 +1,64 @@
 <?php
+// Start the session to manage user authentication
 session_start();
+
+// Include the database connection file
 require 'dbconnection.php';
 
+// Retrieve the account ID from the session, if set
 $account_id = $_SESSION['account_id'] ?? null;
 
-// Check if the user is logged in
+// If the user is not logged in, stop further execution and show an error
 if (!$account_id) {
     die("Error: User is not logged in.");
 }
 
+// Initialize the Database object and establish a connection
 $db = new Database();
 $conn = $db->getConnect();
 
+// Check if the form is submitted via POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Clear all history for this account
+    // Check if the "clear_all" button is clicked
     if (isset($_POST['clear_all'])) {
         try {
+            // Prepare and execute a query to delete all history records for the current user
             $deleteQuery = "DELETE FROM history WHERE account_id = :account_id";
             $deleteStmt = $conn->prepare($deleteQuery);
             $deleteStmt->execute([':account_id' => $account_id]);
         } catch (PDOException $e) {
+            // Display any error that occurs during the deletion process
             echo "Error: " . $e->getMessage();
         }
-    }
-
-    // Delete selected rows from history
-    elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
+    // Check if the "delete_selected" button is clicked and there are selected IDs
+    } elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
         try {
-            // Sanitize the selected IDs
+            // Sanitize the selected IDs by converting them into a comma-separated list of integers
             $selectedIds = implode(',', array_map('intval', $_POST['selected_ids']));
-
-            // Delete selected records based on IDs
+            // Prepare and execute a query to delete selected history records for the current user
             $deleteQuery = "DELETE FROM history WHERE id IN ($selectedIds) AND account_id = :account_id";
             $deleteStmt = $conn->prepare($deleteQuery);
             $deleteStmt->execute([':account_id' => $account_id]);
         } catch (PDOException $e) {
+            // Display any error that occurs during the deletion process
             echo "Error: " . $e->getMessage();
         }
     }
 }
 
-// Fetch user's history data
 try {
+    // Prepare and execute a query to fetch all history records for the current user
     $query = "SELECT * FROM history WHERE account_id = :account_id";
     $stmt = $conn->prepare($query);
     $stmt->execute([':account_id' => $account_id]);
+    // Fetch the history data as an associative array
     $history_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
+    // Display any error that occurs during the data retrieval process
     echo "Error: " . $e->getMessage();
 }
 ?>
+
 
 
 <!DOCTYPE html>

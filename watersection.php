@@ -71,17 +71,14 @@
 </div>
     
 <?php
-// Start the session to access session variables (e.g., result messages after processing)
 session_start();
 
-// Check if there are any water results stored in the session and display them
 if (isset($_SESSION['water_results'])) {
-    echo $_SESSION['water_results']; // Display the water results message
-    unset($_SESSION['water_results']); // Clear the session data for water results after displaying
+    echo $_SESSION['water_results'];
+    unset($_SESSION['water_results']); 
 }
 ?>
 
-<!-- Form Box: Contains the form for selecting a water usage calculator -->
 <div class="form-box">    
     <form action="waterprocess.php" method="POST">
         <label for="calculator_type">Select Calculator:</label>
@@ -99,27 +96,23 @@ if (isset($_SESSION['water_results'])) {
             <option value="water_efficiency">Water Efficiency</option>
             <option value="rainwater_harvesting">Rainwater Harvesting Potential</option>
         </select>
-        <!-- Container where the specific form for the selected calculator will be shown -->
+    
         <div id="form_container"></div>
     </form>
 </div>
 
 <script>
-    // Function to dynamically load the correct form based on the selected calculator type
+    
     function showCalculatorForm() {
-        const formContainer = document.getElementById("form_container"); // Get the container to display the form
-        const calculatorType = document.getElementById("calculator_type").value; // Get the selected calculator type
-        formContainer.innerHTML = ""; // Clear the previous form content
+        const formContainer = document.getElementById("form_container"); 
+        const calculatorType = document.getElementById("calculator_type").value; 
+        formContainer.innerHTML = ""; 
 
-        // If no calculator type is selected, exit the function
         if (calculatorType === "") return;
 
-        let formHtml = ''; // Variable to store the HTML form for the selected calculator
-
-        // Based on the selected calculator type, generate the corresponding form
+        let formHtml = ''; 
         switch(calculatorType) {
             case "personal_usage":
-                // HTML for Personal Water Usage calculator
                 formHtml = `
                     <h3>Personal Water Usage</h3>
                     <p><strong>Your Name:</strong> (Enter your name for personalized calculations)</p>

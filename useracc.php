@@ -1,80 +1,76 @@
 <?php
-// Start or resume the session to maintain user state.
+// Start a session to track user data
 session_start();
 
-// Check if the user is logged in. If not, redirect to the login page.
+// Check if the user is logged in. If not, redirect to the login page
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location: login.php');
-    exit;
+    header('Location: login.php'); // Redirect to login page
+    exit; // Stop further script execution
 }
 
-// Retrieve the current user's account ID from the session.
+// Retrieve the account ID from the session
 $current_account_id = $_SESSION['account_id'] ?? null;
 
-// Validate that the account ID exists in the session.
+// Check if the account ID is missing and terminate the script if so
 if (!$current_account_id) {
-    die("Error: Account ID not found in session.");
+    die("Error: Account ID not found in session."); // Display error and stop execution
 }
 
-// Include the database connection file.
+// Include the database connection file and establish a connection
 require 'dbconnection.php';
-$database = new Database();
-$connect = $database->getConnect();
+$database = new Database(); // Create an instance of the Database class
+$connect = $database->getConnect(); // Retrieve the database connection
 
 try {
-    // Fetch the username of the logged-in user from the database.
+    // Prepare and execute a query to fetch the username for the current account
     $stmt = $connect->prepare("SELECT username FROM users WHERE id = :account_id");
-    $stmt->bindParam(':account_id', $current_account_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':account_id', $current_account_id, PDO::PARAM_INT); // Bind the account ID parameter
+    $stmt->execute(); // Execute the query
+    $user = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
 
-    // If the user record is not found, terminate the script.
+    // Check if the user exists in the database
     if (!$user) {
-        die("User not found.");
+        die("User not found."); // Display error if no user is found
     }
 
-    // Store the username for display purposes.
+    // Store the username in a variable for later use
     $username = $user['username'];  
 
-    // Fetch additional data associated with the user's account.
+    // Prepare and execute a query to fetch user data for the current account
     $stmt = $connect->prepare("SELECT data_field, created_at FROM user_data WHERE account_id = :account_id");
-    $stmt->bindParam(':account_id', $current_account_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $account_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':account_id', $current_account_id, PDO::PARAM_INT); // Bind the account ID parameter
+    $stmt->execute(); // Execute the query
+    $account_data = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all results as an associative array
 } catch (PDOException $e) {
-    // Handle any database errors and terminate the script.
-    die("Database error: " . htmlspecialchars($e->getMessage()));
+    // Handle database-related errors gracefully
+    die("Database error: " . htmlspecialchars($e->getMessage())); // Display sanitized error message
 }
 ?>
+
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Set up the page metadata and title -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Dashboard</title>
-    <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="Style/useraccs.css">
 </head>
 <body>
 <header>
-    <!-- Navigation bar for the dashboard -->
     <nav>
-        <!-- Logo section -->
+    
         <div class="logo">
             <h1>Green Guardians</h1>
             <img src="https://p7.hiclipart.com/preview/845/955/587/earth-ecology-illustration-cartoon-fresh-green-earth.jpg" alt="Logo">
         </div>
 
-        <!-- Navigation links -->
         <div class="nav-links">
             <button onclick="window.location.href='useracc.php'">Home</button>
             <button onclick="window.location.href='useraboutus.php'">About Us</button>
             <button onclick="window.location.href='usercontactus.php'">Contact Us</button>
-            
-            <!-- Dropdown menu for additional sections -->
+           
             <div class="dropdown">
                 <button class="dropdown-btn">Sections</button>
                 <div class="dropdown-content">
@@ -85,13 +81,12 @@ try {
                 </div>
             </div>
             
-            <!-- Profile account button -->
+        
             <button class="profile-btn" onclick="toggleSidebar()">Profile Account</button>
         </div>
     </nav>
 </header>
 
-<!-- Sidebar for user profile and account actions -->
 <div id="sidebar" class="sidebar">
     <button onclick="window.location.href='profile.php'">View Profile</button>
     <button onclick="window.location.href='switchacc.php'">Switch Account</button>
@@ -127,8 +122,6 @@ try {
 
 
 </main>
-
-<!-- JavaScript for sidebar toggle functionality -->
 <script>
     function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");

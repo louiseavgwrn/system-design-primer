@@ -10,7 +10,7 @@ class Plant {
     public $region;
     public $type;
     public $description;
-    public $account_id; // Linked to the logged-in user's account ID
+    public $account_id; 
 
     // Constructor accepts the database connection
     public function __construct($db) {

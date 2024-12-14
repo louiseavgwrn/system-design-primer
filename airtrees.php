@@ -8,8 +8,8 @@ $tree_data = [
         "co2_absorption" => 48.0, 
         "growth_rate" => 0.5,
         "climate" => "Temperate", 
-        "average_size" => 30.0, // this is in meters
-        "pollutant_absorption" => 12.0  // Estimate in kg per year
+        "average_size" => 30.0,
+        "pollutant_absorption" => 12.0  
     ],
     "Pine" => [
         "co2_absorption" => 35.0, 
@@ -397,7 +397,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <br><br>
 
         <label for="years">Simulate growth for how many years?</label>
-        <?php //I put required min to make sure user have input?>
         <input type="number" name="years" id="years" required min="1" step="1" value="<?php echo htmlspecialchars($years ?? ''); ?>">
         <br><br>
 

@@ -29,9 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plant->id = $plant_id;
     $plant->account_id = $account_id;
 
-    // Try to delete the plant
     if ($plant->delete()) {
-        // Success: Show SweetAlert for successful deletion
         echo "
         <!DOCTYPE html>
         <html lang='en'>
@@ -56,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>";
     } else {
-        // Error: Show SweetAlert for failure
         echo "
         <!DOCTYPE html>
         <html lang='en'>

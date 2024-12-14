@@ -1,69 +1,69 @@
 <?php
-// Start or resume the session to maintain user state.
+// Start a session to manage user authentication status
 session_start();
 
-// Include the database connection script.
+// Include the database connection file
 require 'dbconnection.php';
 
-// Check if the user is logged in. If not, redirect them to the login page.
+// Check if the user is logged in, otherwise redirect to the login page
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
-    exit;
+    header("Location: login.php"); // Redirect to login page
+    exit; // Stop further script execution
 }
 
-// Determine the current username. Use 'current_account' from the session if available, else fallback to 'username'.
+// Determine the current username, either from the session or as the logged-in account
 if (isset($_SESSION['current_account'])) {
-    $current_username = $_SESSION['current_account'];
+    $current_username = $_SESSION['current_account']; // Use the current account username
 } else {
-    $current_username = $_SESSION['username'];
+    $current_username = $_SESSION['username']; // Use the default username if no current account set
 }
 
-// Initialize the database connection.
+// Initialize the Database object and establish a connection
 $database = new Database();
 $connect = $database->getConnect();
 
 try {
-    // Prepare and execute a query to fetch user information based on the username.
+    // Prepare a query to fetch user details based on the username
     $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $current_username, PDO::PARAM_STR);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':username', $current_username, PDO::PARAM_STR); // Bind the username parameter
+    $stmt->execute(); // Execute the query
+    $user = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
 
-    // If no user is found, display an error message and terminate the script.
+    // Check if the user exists in the database
     if (!$user) {
-        echo "User not found.";
-        exit;
+        echo "User not found."; // Display error if user is not found
+        exit; // Stop further execution
     }
 
-    // Handle empty phone numbers by assigning a default value.
+    // If the phone number is empty, set it to 'N/A'
     if (empty($user['phone'])) {
-        $user['phone'] = 'N/A';
+        $user['phone'] = 'N/A'; // Set default phone value if not provided
     }
 } catch (PDOException $e) {
-    // Catch and display database errors safely.
-    die("Database error: " . htmlspecialchars($e->getMessage()));
+    // Handle any database-related errors gracefully
+    die("Database error: " . htmlspecialchars($e->getMessage())); // Display sanitized error message
 }
 ?>
+
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta tags for responsive design and character encoding -->
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Green Guardians</title>
-    <!-- Link to the external CSS file for styling -->
+   
     <link rel="stylesheet" href="Style/view_profiles.css">
 </head>
 <body>
-    <!-- Header section with navigation buttons -->
+   
     <header>
         <button class="home-btn" onclick="window.location.href='useracc.php'">Home</button>
         <button class="profile-btn" onclick="toggleSidebar()">Profile Account</button>
     </header>
 
-    <!-- Sidebar for additional navigation options -->
     <div id="sidebar" class="sidebar">
         <button onclick="window.location.href='profile.php'">View Profile</button>
         <button onclick="window.location.href='switchacc.php'">Switch Account</button>
@@ -72,12 +72,11 @@ try {
         <button class="close-btn" onclick="toggleSidebar()">Close</button>
     </div>
 
-    <!-- Main content area -->
+
     <main>
-        <!-- Display a personalized welcome message -->
+       
         <h1>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h1>
 
-        <!-- Profile information section -->
         <div class="profile-container">
             <h2>Your Information:</h2>
             <p><strong>Full Name:</strong> <?php echo htmlspecialchars($user['fullname']); ?></p>
@@ -90,7 +89,7 @@ try {
         </div>
     </main>
 
-    <!-- JavaScript for toggling the sidebar -->
+ 
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
@@ -98,7 +97,7 @@ try {
         }
     </script>
 
-    <!-- Footer section -->
+   
     <footer>
         <p>&copy; 2024 Green Guardians | Promoting Biodiversity and Sustainable Practices</p>
     </footer>
