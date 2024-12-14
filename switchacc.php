@@ -90,22 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Switch Accounts</title>
-    <!-- Link to external CSS for styling -->
     <link rel="stylesheet" href="Style/switchacc.css">
 </head>
 <body>
     <div class="container">
-        <!-- Page title -->
         <h1>Switch Accounts</h1>
 
-        <!-- Display status messages if any -->
         <?php if ($status_message): ?>
             <div class="status-message">
                 <p><?php echo htmlspecialchars($status_message); ?></p>
             </div>
         <?php endif; ?>
 
-        <!-- Form for adding an existing account -->
         <div class="form-box">
             <h2>Add Existing Account</h2>
             <form method="POST" action="switchacc.php">
@@ -115,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
 
-        <!-- Form for switching to an existing account -->
         <div class="form-box">
             <h2>Switch Account</h2>
             <form method="POST" action="switchacc.php">
@@ -136,13 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
 
-        <!-- Display the current account -->
         <div class="current-account-box">
             <h2>Current Account:</h2>
             <p><?php echo htmlspecialchars($_SESSION['current_account'] ?? 'None'); ?></p>
         </div>
 
-        <!-- Link to go back to the main dashboard -->
         <div class="back-button">
             <a href="useracc.php">Back to Main</a>
         </div>
