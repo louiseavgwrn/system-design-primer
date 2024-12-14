@@ -2,8 +2,9 @@
 // Start the session to manage user authentication
 session_start();
 
-// Include the database connection file
+// Include the required classes
 require 'dbconnection.php';
+require 'userhistory.php';
 
 // Retrieve the account ID from the session, if set
 $account_id = $_SESSION['account_id'] ?? null;
@@ -17,49 +18,21 @@ if (!$account_id) {
 $db = new Database();
 $conn = $db->getConnect();
 
+// Initialize the UserHistory object with the database connection and account ID
+$userHistory = new UserHistory($conn, $account_id);
+
 // Check if the form is submitted via POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if the "clear_all" button is clicked
     if (isset($_POST['clear_all'])) {
-        try {
-            // Prepare and execute a query to delete all history records for the current user
-            $deleteQuery = "DELETE FROM history WHERE account_id = :account_id";
-            $deleteStmt = $conn->prepare($deleteQuery);
-            $deleteStmt->execute([':account_id' => $account_id]);
-        } catch (PDOException $e) {
-            // Display any error that occurs during the deletion process
-            echo "Error: " . $e->getMessage();
-        }
-    // Check if the "delete_selected" button is clicked and there are selected IDs
+        $userHistory->clearAllHistory();
     } elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
-        try {
-            // Sanitize the selected IDs by converting them into a comma-separated list of integers
-            $selectedIds = implode(',', array_map('intval', $_POST['selected_ids']));
-            // Prepare and execute a query to delete selected history records for the current user
-            $deleteQuery = "DELETE FROM history WHERE id IN ($selectedIds) AND account_id = :account_id";
-            $deleteStmt = $conn->prepare($deleteQuery);
-            $deleteStmt->execute([':account_id' => $account_id]);
-        } catch (PDOException $e) {
-            // Display any error that occurs during the deletion process
-            echo "Error: " . $e->getMessage();
-        }
+        $userHistory->deleteSelectedHistory($_POST['selected_ids']);
     }
 }
 
-try {
-    // Prepare and execute a query to fetch all history records for the current user
-    $query = "SELECT * FROM history WHERE account_id = :account_id";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([':account_id' => $account_id]);
-    // Fetch the history data as an associative array
-    $history_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    // Display any error that occurs during the data retrieval process
-    echo "Error: " . $e->getMessage();
-}
+// Fetch all history records for the logged-in user
+$history_data = $userHistory->fetchHistory();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,9 +54,9 @@ try {
 </main>
 
 <div class="actions">
-        <button type="submit" name="clear_all">Clear All History</button>
-        <button type="submit" name="delete_selected">Delete Selected</button>
-    </div>
+    <button type="submit" name="clear_all">Clear All History</button>
+    <button type="submit" name="delete_selected">Delete Selected</button>
+</div>
 
 <h1>Planting History</h1>
 <form method="POST">
