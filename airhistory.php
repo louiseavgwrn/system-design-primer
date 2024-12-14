@@ -1,31 +1,41 @@
 <?php
-session_start();
+session_start(); // Start the session to access session variables
 
-require 'dbconnection.php';
-require 'userhistory.php';
+require 'dbconnection.php'; // Include the database connection file
+require 'userhistory.php'; // Include the UserHistory class file
 
+// Retrieve the account ID from the session
 $account_id = $_SESSION['account_id'] ?? null;
 
+// Check if the user is logged in
 if (!$account_id) {
-    die("Error: User is not logged in.");   
+    die("Error: User is not logged in."); // Terminate script if no account ID is found
 }
 
+// Initialize the database connection
 $db = new Database();
 $conn = $db->getConnect();
 
+// Instantiate the UserHistory class with the database connection and account ID
 $userHistory = new UserHistory($conn, $account_id);
 
+// Check if the request method is POST to handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the clear all history button was clicked
     if (isset($_POST['clear_all'])) {
-        $userHistory->clearAllHistory();
-    } elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
-        $selectedIds = array_map('intval', $_POST['selected_ids']);
-        $userHistory->deleteSelectedHistory($selectedIds);
+        $userHistory->clearAllHistory(); // Clear all history for the user
+    } 
+    // Check if the delete selected button was clicked and selected IDs are provided
+    elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
+        $selectedIds = array_map('intval', $_POST['selected_ids']); // Sanitize selected IDs
+        $userHistory->deleteSelectedHistory($selectedIds); // Delete the selected history records
     }
 }
 
+// Fetch the user's history data
 $history_data = $userHistory->fetchHistory();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
