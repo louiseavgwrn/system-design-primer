@@ -1,36 +1,29 @@
 <?php
-// Start the session to manage user authentication
 session_start();
 
-// Include the required classes
 require 'dbconnection.php';
 require 'userhistory.php';
 
-// Retrieve the account ID from the session, if set
 $account_id = $_SESSION['account_id'] ?? null;
 
-// If the user is not logged in, stop further execution and show an error
 if (!$account_id) {
-    die("Error: User is not logged in.");
+    die("Error: User is not logged in.");   
 }
 
-// Initialize the Database object and establish a connection
 $db = new Database();
 $conn = $db->getConnect();
 
-// Initialize the UserHistory object with the database connection and account ID
 $userHistory = new UserHistory($conn, $account_id);
 
-// Check if the form is submitted via POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['clear_all'])) {
         $userHistory->clearAllHistory();
     } elseif (isset($_POST['delete_selected']) && !empty($_POST['selected_ids'])) {
-        $userHistory->deleteSelectedHistory($_POST['selected_ids']);
+        $selectedIds = array_map('intval', $_POST['selected_ids']);
+        $userHistory->deleteSelectedHistory($selectedIds);
     }
 }
 
-// Fetch all history records for the logged-in user
 $history_data = $userHistory->fetchHistory();
 ?>
 
@@ -43,7 +36,6 @@ $history_data = $userHistory->fetchHistory();
     <title>Planting History</title>
 </head>
 <body>
-
 <main>
     <div class="section-container">
         <button class="btn-home" onclick="window.location.href='useracc.php'">Home</button>
@@ -53,13 +45,13 @@ $history_data = $userHistory->fetchHistory();
     </div>
 </main>
 
-<div class="actions">
-    <button type="submit" name="clear_all">Clear All History</button>
-    <button type="submit" name="delete_selected">Delete Selected</button>
-</div>
-
 <h1>Planting History</h1>
 <form method="POST">
+    <div class="actions">
+        <button type="submit" name="clear_all">Clear All History</button>
+        <button type="submit" name="delete_selected">Delete Selected</button>
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -101,6 +93,5 @@ $history_data = $userHistory->fetchHistory();
         </tbody>
     </table>
 </form>
-
 </body>
 </html>
