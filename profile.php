@@ -5,12 +5,6 @@ session_start();
 // Include the database connection script.
 require 'dbconnection.php';
 
-// Check if the user is logged in. If not, redirect them to the login page.
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
-    exit;
-}
-
 // Determine the current username. Use 'current_account' from the session if available, else fallback to 'username'.
 if (isset($_SESSION['current_account'])) {
     $current_username = $_SESSION['current_account'];
@@ -22,29 +16,17 @@ if (isset($_SESSION['current_account'])) {
 $database = new Database();
 $connect = $database->getConnect();
 
-try {
-    // Prepare and execute a query to fetch user information based on the username.
-    $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $current_username, PDO::PARAM_STR);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Prepare and execute a query to fetch user information based on the username.
+$stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
+$stmt->bindParam(':username', $current_username, PDO::PARAM_STR);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // If no user is found, display an error message and terminate the script.
-    if (!$user) {
-        echo "User not found.";
-        exit;
-    }
-
-    // Handle empty phone numbers by assigning a default value.
-    if (empty($user['phone'])) {
-        $user['phone'] = 'N/A';
-    }
-} catch (PDOException $e) {
-    // Catch and display database errors safely.
-    die("Database error: " . htmlspecialchars($e->getMessage()));
+// Handle empty phone numbers by assigning a default value.
+if (empty($user['phone'])) {
+    $user['phone'] = 'N/A';
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

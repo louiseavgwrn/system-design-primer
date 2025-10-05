@@ -4,7 +4,8 @@ body {
     font-family: 'Arial', sans-serif;
     background: url('https://png.pngtree.com/background/20230412/original/pngtree-natural-forest-with-beautiful-mountains-and-clear-waters-picture-image_2396850.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #333;
+    color: #353535;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
